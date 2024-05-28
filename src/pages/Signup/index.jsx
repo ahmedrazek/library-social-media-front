@@ -39,8 +39,9 @@ export default function Signup() {
   };
   const bgStyle = {
     backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no repeat",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right",
   };
   if (redirect) return <Navigate to={"/timeline"} />;
 

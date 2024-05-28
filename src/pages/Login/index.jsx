@@ -34,10 +34,10 @@ export default function Login() {
   if (redirect) return <Navigate to={"/timeline"} />;
   return (
     <div className="relative h-screen w-full">
-      <div className="absolute bg-green-900 w-1/2 -z-10 h-full"></div>
+      <div className="absolute hidden md:block lg:block bg-green-900 w-1/2 -z-10 h-full"></div>
       <div className="flex justify-center items-center h-screen ">
-        <div className="flex mx-auto justify-between  border-2 border-gray-400 w-10/12 rounded-xl py-4 px-40 gap-4 ">
-          <div className=" flex flex-col gap-12 items-center w-5/12 text-white">
+        <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  border-2 border-gray-400 w-10/12 rounded-xl py-4 px-40 gap-4 ">
+          <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white">
             <h1 className=" text-4xl">Logo </h1>
             <img src={image} alt="" />
             <p className="text-xl">
