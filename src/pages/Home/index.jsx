@@ -1,8 +1,11 @@
 
 import { Link } from 'react-router-dom'; // Make sure to import Link
+import About from '../../components/Aboutus';
+import Footer from './../../components/Footer/index';
 
 const Home = () => {
     return(
+        <>
         <div className="container mx-auto p-4">
             <nav className="flex justify-between items-center">
                 <ul className="flex space-x-4">
@@ -25,7 +28,12 @@ const Home = () => {
                     </li>
                 </ul>
             </nav>
+         
+
         </div>
+        <About/>
+        <Footer/>
+        </>
     );
 }
 
