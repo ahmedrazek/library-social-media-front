@@ -38,7 +38,7 @@ export default function Login() {
       <div className="flex justify-center items-center h-screen ">
         <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  border-2 border-gray-400 w-10/12 rounded-xl py-4 px-40 gap-4 ">
           <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white">
-            <h1 className=" text-4xl">Logo </h1>
+            <h1 className=" text-4xl self-start">BookNet </h1>
             <img src={image} alt="" />
             <p className="text-xl">
               connect with{" "}
@@ -60,14 +60,14 @@ export default function Login() {
                   name="email"
                   id="email"
                   placeholder=" "
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-800 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-primary appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
                   {...register("email", {
                     required: "* Required",
                   })}
                 />
                 <label
                   htmlFor="email"
-                  className="flex gap-2 peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                  className="flex gap-2 peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ export default function Login() {
                     type={showPassword ? "text" : "password"}
                     name="password"
                     id="password"
-                    className="block py-2.5  px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-800 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                    className="block py-2.5  px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-primary appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
                     placeholder=" "
                     {...register("password", {
                       required: "* Required",
@@ -100,7 +100,7 @@ export default function Login() {
                   />
                   <label
                     htmlFor="password"
-                    className="flex gap-2 peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    className="flex gap-2 peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ export default function Login() {
                   </p>
                 )}
               </div>
-              <button className="text-white bg-green-800 py-3 rounded-lg font-semibold">
+              <button className="text-white bg-primary py-3 rounded-lg font-semibold">
                 Create Account
               </button>
               <div className="flex justify-between">
@@ -170,7 +170,7 @@ export default function Login() {
             </form>
             <a
               href="#"
-              className="text-green-800  py-3 rounded-lg font-bold text-center border border-green-800"
+              className="text-primary  py-3 rounded-lg font-bold text-center border border-primary"
             >
               Google account
             </a>
