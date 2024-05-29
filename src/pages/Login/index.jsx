@@ -38,7 +38,7 @@ export default function Login() {
       <div className="flex justify-center items-center h-screen ">
         <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  border-2 border-gray-400 w-10/12 rounded-xl py-4 px-40 gap-4 ">
           <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white">
-            <h1 className=" text-4xl self-start">BookNet </h1>
+            <h1 className=" text-6xl self-start">BookNet </h1>
             <img src={image} alt="" />
             <p className="text-xl">
               connect with{" "}
@@ -157,8 +157,8 @@ export default function Login() {
                   </p>
                 )}
               </div>
-              <button className="text-white bg-primary py-3 rounded-lg font-semibold">
-                Create Account
+              <button className="text-white shadow-lg bg-primary py-3 rounded-lg font-semibold hover:bg-white hover:text-primary hover:border-primary hover:border">
+                Login
               </button>
               <div className="flex justify-between">
                 <div>
@@ -170,7 +170,7 @@ export default function Login() {
             </form>
             <a
               href="#"
-              className="text-primary  py-3 rounded-lg font-bold text-center border border-primary"
+              className="text-primary  py-3 rounded-lg font-bold text-center border border-primary hover:bg-primary hover:text-white  shadow-lg"
             >
               Google account
             </a>

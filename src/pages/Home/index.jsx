@@ -1,3 +1,4 @@
+
 import "./Home.module.css";
 import { Link } from "react-router-dom"; // Make sure to import Link
 import heroImage from "../../assets/heroImage.png";
@@ -147,5 +148,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;
