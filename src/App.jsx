@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar";
 import Login from './pages/Login/index';
 import Signup from './pages/Signup/index';
 import NotFound from './pages/NotFound/index';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 function App() {

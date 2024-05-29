@@ -1,5 +1,7 @@
 import "./Home.module.css";
 import { Link } from "react-router-dom"; // Make sure to import Link
+import About from '../../components/Aboutus';
+import Footer from './../../components/Footer/index';
 import heroImage from "../../assets/heroImage.png";
 import { FaHandshake } from "react-icons/fa";
 import { FaGlobe } from "react-icons/fa";
@@ -45,6 +47,7 @@ const Home = () => {
     },
   ];
   return (
+        <>
     <div className="container mx-auto p-4">
       <nav className="flex justify-between items-center">
         <ul className="flex items-center space-x-4">
@@ -97,6 +100,8 @@ const Home = () => {
           </li>
         </ul>
       </nav>
+         
+
       <main>
         <div className=" hero-section grid grid-cols-2 items-stretch justify-between gap-3 mt-10">
           <div className="">
@@ -145,6 +150,9 @@ const Home = () => {
        
       </section>
     </div>
+        <About/>
+        <Footer/>
+        </>
   );
 };
 
