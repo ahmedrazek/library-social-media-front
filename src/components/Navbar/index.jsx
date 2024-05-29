@@ -32,7 +32,8 @@ export default function Navbar() {
     location.pathname == "/login" ||
     location.pathname == "/signup" ||
     location.pathname == "/" ||
-    location.pathname == "/Home"
+    location.pathname == "/Home" ||
+    location.pathname == "/forgotPassword"
   )
     return null;
   // return <div>index</div>;
