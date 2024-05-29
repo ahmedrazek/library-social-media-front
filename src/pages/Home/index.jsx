@@ -1,4 +1,3 @@
-
 import "./Home.module.css";
 import { Link } from "react-router-dom"; // Make sure to import Link
 import heroImage from "../../assets/heroImage.png";
@@ -47,7 +46,7 @@ const Home = () => {
   ];
   return (
     <div className="container mx-auto p-4">
-      <nav className="flex justify-between items-center">
+      <nav className="flex justify-between items-center mb-20">
         <ul className="flex items-center space-x-4">
           <li>
             <Link
@@ -131,7 +130,9 @@ const Home = () => {
       </main>
       <section className="" id="services">
         <div id="services" className="container mx-auto py-12">
-          <h2 className="text-26  text-center text-primary font-bold mb-12">Our Services</h2>
+          <h2 className="text-26  text-center text-primary font-bold mb-12">
+            Our Services
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
             {services.map((service, index) => (
               <ServiceCard
@@ -143,11 +144,9 @@ const Home = () => {
             ))}
           </div>
         </div>
-       
       </section>
     </div>
   );
 };
-
 
 export default Home;
