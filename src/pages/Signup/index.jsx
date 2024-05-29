@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { NavLink, Navigate } from "react-router-dom";
 import { setUser } from "../../store/userSlice";
+import backgroundImage from "../../assets/WhatsApp Image 2024-05-28 at 21.03.32_19ee6517.jpg";
 
 export default function Signup() {
   const [redirect, setRedirect] = useState();
@@ -36,11 +37,17 @@ export default function Signup() {
       console.log(error);
     }
   };
+  const bgStyle = {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right",
+  };
   if (redirect) return <Navigate to={"/timeline"} />;
 
   return (
     <>
-      <div>
+      <div style={bgStyle}>
         <div className="md:w-7/12 w-8/12 lg:w-4/12 mx-auto lg:ml-60 mt-36 flex flex-col gap-12">
           <h2 className=" font-bold text-2xl">Get Started Now</h2>
           <form
