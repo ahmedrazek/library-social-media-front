@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { NavLink, Navigate } from "react-router-dom";
 import { setUser } from "../../store/userSlice";
-import backgroundImage from "../../assets/WhatsApp Image 2024-05-28 at 21.03.32_19ee6517.jpg";
+import backgroundImage from "../../assets/signupImage.jpg";
 
 export default function Signup() {
   const [redirect, setRedirect] = useState();
