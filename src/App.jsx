@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login/index";
 import Signup from "./pages/Signup/index";
 import NotFound from "./pages/NotFound/index";
+
 function App() {
   axios.defaults.baseURL = "http://localhost:9000/";
   axios.defaults.withCredentials = true;
