@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // Make sure to import Link
 
 const Home = () => {
     return(
-        <div className="container mx-auto p-4">
+        <div className=" mx-auto p-4">
             <nav className="flex justify-between items-center">
                 <ul className="flex space-x-4">
                     <li>

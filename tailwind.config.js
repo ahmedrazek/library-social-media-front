@@ -17,13 +17,3 @@ export default {
   },
   plugins: [],
 };
-// Hex
-//       primary:"295E4E",
-//       secondary:"EAF5F8",
-//       green:"34A853",
-//       green_light:"C9FCCB",
-//       dark:"191919",
-//       dark_light:"333333",
-//       light:"F2F2F2",
-//       gray_light:"999999",
-//       white:"ffffff"
