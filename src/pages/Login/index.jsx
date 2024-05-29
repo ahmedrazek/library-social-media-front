@@ -1,5 +1,5 @@
 import { useState } from "react";
-import image from "../../assets/image 1.png";
+import image from "../../assets/loginImage.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
