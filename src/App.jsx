@@ -7,25 +7,26 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login/index";
 import Signup from "./pages/Signup/index";
 import NotFound from "./pages/NotFound/index";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import { ResetPassword } from "./pages/ResetPassword";
+import Timeline from "./pages/Timeline";
+
 
 function App() {
   axios.defaults.baseURL = "http://localhost:9000/";
   axios.defaults.withCredentials = true;
   const router = createBrowserRouter([
+    { path: "/", element: <Home /> },
     {
-      path: "",
+      path: "user",
       element: <PageLayout />,
-      children: [
-        { path: "/", element: <Home /> },
-        { path: "home", element: <Home /> },
-        { path: "navbar", element: <Navbar /> },
-        { path: "login", element: <Login /> },
-        { path: "signup", element: <Signup /> },
-        { path: "forgotPassword", element: <ForgotPassword /> },
-        { path: "resetPassword", element: <ResetPassword /> },
-        { path: "*", element: <NotFound /> },
-      ],
+      children: [{ path: "timeline", element: <Timeline /> }],
     },
+    { path: "login", element: <Login /> },
+    { path: "signup", element: <Signup /> },
+    { path: "forgotPassword", element: <ForgotPassword /> },
+    { path: "resetPassword", element: <ResetPassword /> },
+    { path: "*", element: <NotFound /> },
   ]);
   return (
     <>
