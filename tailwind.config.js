@@ -11,7 +11,7 @@ export default {
     },
     extend: {
       colors: {
-        primary: "rgb(33,75,62,100%)",
+        primary: "rgb(41,94,78,100%)",
         secondary: "rgb(234,245,248,100%)",
         greenMain: "rgb(52,168,83,100%)",
         green_light: "rgb(201,252,203,100%)",
@@ -20,6 +20,15 @@ export default {
         lightMain: "#F2F2F2",
         gray_light: "#999999",
         white: "#ffffff",
+      },
+      fontSize: {
+        '12': '0.75rem',
+        '16': '1rem', 
+        '18': '1.125rem',
+        '20': '1.25rem', 
+        '26': '1.6rem', 
+        '32': '2rem', 
+        '44': '2.75rem', 
       },
     },
   },
