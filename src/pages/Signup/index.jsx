@@ -47,8 +47,9 @@ export default function Signup() {
 
   return (
     <>
-      <div style={bgStyle}>
-        <div className="md:w-7/12 w-8/12 lg:w-4/12 mx-auto lg:ml-60 mt-36 flex flex-col gap-12">
+      <div className=" container mx-auto my-10 lg:flex lg:flex-row justify-center items-center  gap-5 " >
+       
+        <div className=" sm:w-12/12 md:w-7/12 w-8/1 lg:w-4/6 sm:mx-5 flex flex-col gap-12">
           <h2 className=" font-bold text-2xl">Get Started Now</h2>
           <form
             action=""
@@ -304,6 +305,9 @@ export default function Signup() {
               Login
             </NavLink>
           </div>
+        </div>
+         <div className="h-full">
+          <img src={backgroundImage} alt="signupPhoto" className="h-full"/>
         </div>
       </div>
     </>
