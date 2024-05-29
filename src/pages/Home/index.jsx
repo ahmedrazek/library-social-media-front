@@ -6,6 +6,8 @@ import { FaHandshake } from "react-icons/fa";
 import { FaGlobe } from "react-icons/fa";
 import { FaBook } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
+import About from '../../components/Aboutus/index'
+import Footer from '../../components/Footer/index'
 const ServiceCard = ({ title, description, icon }) => {
   return (
     <div className="bg-secondary rounded-lg p-6 flex items-center rounded-l-full">
