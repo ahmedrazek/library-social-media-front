@@ -1,7 +1,6 @@
+
 import "./Home.module.css";
 import { Link } from "react-router-dom"; // Make sure to import Link
-import About from '../../components/Aboutus';
-import Footer from './../../components/Footer/index';
 import heroImage from "../../assets/heroImage.png";
 import { FaHandshake } from "react-icons/fa";
 import { FaGlobe } from "react-icons/fa";
@@ -155,5 +154,6 @@ const Home = () => {
         </>
   );
 };
+
 
 export default Home;
