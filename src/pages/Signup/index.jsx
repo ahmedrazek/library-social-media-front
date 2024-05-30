@@ -37,12 +37,12 @@ export default function Signup() {
       console.log(error);
     }
   };
-  const bgStyle = {
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "right",
-  };
+  // const bgStyle = {
+  //   backgroundImage: `url(${backgroundImage})`,
+  //   backgroundSize: "contain",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundPosition: "right",
+  // };
   if (redirect) return <Navigate to={"/timeline"} />;
 
   return (

@@ -1,4 +1,7 @@
+
+import { BsFillSendFill } from "react-icons/bs";
 const Footer = () => {
+
   return (
     <div className="bg-primary text-white p-10  max-width mt-10">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -39,7 +42,8 @@ const Footer = () => {
             <div className="w-full flex mt-4">
               <input type="text" placeholder="Send Message" className="w-full p-2 rounded-l-lg text-gray-800" />
               <span className="bg-green-600 p-3 rounded-r-lg">
-                <i className="fas fa-paper-plane text-white"></i>
+                <BsFillSendFill />
+                {/* <i className="fas fa-paper-plane text-white"></i> */}
               </span>
             </div>
           </div>
