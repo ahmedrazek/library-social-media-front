@@ -15,7 +15,7 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
+  { name: "BookNet", href: "#", current: true },
   { name: "Team", href: "#", current: false },
   { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
@@ -38,7 +38,7 @@ export default function Navbar() {
     return null;
   // return <div>index</div>;
   return (
-    <Disclosure as="nav" className="bg-primary text-secondary">
+    <Disclosure as="nav" >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -64,14 +64,14 @@ export default function Navbar() {
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  <div className="flex items-center space-x-4">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-green text-white"
+                            ? "bg-green text-primary  font-bold"
                             : "text-gray_light hover:bg-secondary hover:text-primary",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
