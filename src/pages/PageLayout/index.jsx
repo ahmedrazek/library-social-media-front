@@ -7,8 +7,10 @@ const PageLayout = () => {
   
   return (
     <div>
+        
         <Navbar/>
         <Outlet/>
+     
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
-import { Navigate } from "react-router-dom";
+import { Navigate,Link } from "react-router-dom";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -175,7 +175,7 @@ export default function Login() {
               Google account
             </a>
             <p className="text-center">
-              Don't have an account? <a href="#">Sign Up</a>
+              Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>
           </div>
         </div>

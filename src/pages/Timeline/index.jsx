@@ -7,6 +7,7 @@ export default function Timeline() {
     <div>
       <h1>User name : {user.name}</h1>
       <h2>USer email : {user.email}</h2>
+      
     </div>
   );
 }
