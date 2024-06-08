@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound/index";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
 import Timeline from "./pages/Timeline";
+import Book from "./pages/Book/Book";
 
 
 function App() {
@@ -20,7 +21,11 @@ function App() {
     {
       path: "user",
       element: <PageLayout />,
-      children: [{ path: "timeline", element: <Timeline /> }],
+      children: 
+      [
+        { path: "timeline", element: <Timeline /> },
+        { path: "books", element: <Book /> }
+      ],
     },
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },

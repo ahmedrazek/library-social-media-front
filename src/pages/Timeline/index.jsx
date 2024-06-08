@@ -30,6 +30,7 @@ export default function Timeline() {
   }
 
   return (
+<<<<<<< HEAD
     <>
       <div className="flex flex-col gap-12 items-center pt-20 bg-secondary">
         {posts &&
@@ -37,5 +38,12 @@ export default function Timeline() {
       </div>
       ;
     </>
+=======
+    <div>
+      {/* <h1>User name : {user.name}</h1>
+      <h2>USer email : {user.email}</h2>
+       */}
+    </div>
+>>>>>>> e8abc6248d1aa433d765782f0f82415555affc17
   );
 }

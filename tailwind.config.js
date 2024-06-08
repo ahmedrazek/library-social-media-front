@@ -24,6 +24,7 @@ export default {
         dark_light: "rgb(51,51,51,100%)",
         lightMain: "#F2F2F2",
         gray_light: "#999999",
+        yallow_light: "FFCB14",
         white: "#ffffff",
       },
       fontSize: {
