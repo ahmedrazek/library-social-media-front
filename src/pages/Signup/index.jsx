@@ -37,13 +37,12 @@ export default function Signup() {
       console.log(error);
     }
   };
-  
-  if (redirect) return <Navigate to={"/timeline"} />;
+
+  if (redirect) return <Navigate to={"/user/timeline"} />;
 
   return (
     <>
-      <div className=" container mx-auto my-10 lg:flex lg:flex-row justify-center items-center  gap-5 " >
-       
+      <div className=" container mx-auto my-10 lg:flex lg:flex-row justify-center items-center  gap-5 ">
         <div className=" sm:w-12/12 md:w-7/12 w-8/1 lg:w-4/6 sm:mx-5 flex flex-col gap-12">
           <h2 className=" font-bold text-2xl">Get Started Now</h2>
           <form
@@ -301,8 +300,8 @@ export default function Signup() {
             </NavLink>
           </div>
         </div>
-         <div className="h-full">
-          <img src={backgroundImage} alt="signupPhoto" className="h-full"/>
+        <div className="h-full">
+          <img src={backgroundImage} alt="signupPhoto" className="h-full" />
         </div>
       </div>
     </>
