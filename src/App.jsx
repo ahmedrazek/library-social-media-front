@@ -11,7 +11,13 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
 import Timeline from "./pages/Timeline";
 import Book from "./pages/Book/Book";
+
 import Profile from "./pages/Book/Profile";
+=======
+import Noresult from "./components/NoResult/NoResult";
+import BookDetails from "./pages/BookDetails/BookDetails";
+import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
+
 
 
 function App() {
@@ -26,13 +32,19 @@ function App() {
       [
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
+
         { path: "profile", element: <Profile /> }
+
+      {path:"favorite" , element:<FavoriteBooks/>},
+        { path: "details/:id", element: <BookDetails/> }
+
       ],
     },
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
     { path: "forgotPassword", element: <ForgotPassword /> },
     { path: "resetPassword", element: <ResetPassword /> },
+    {path:"noresult" , element:<Noresult/>},
     { path: "*", element: <NotFound /> },
   ]);
   return (
