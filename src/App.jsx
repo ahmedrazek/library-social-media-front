@@ -9,7 +9,7 @@ import Signup from "./pages/Signup/index";
 import NotFound from "./pages/NotFound/index";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
-import Timeline from "./pages/Timeline";
+import Timeline from "./pages/Timeline/index";
 
 
 function App() {
