@@ -11,6 +11,7 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
 import Timeline from "./pages/Timeline";
 import Book from "./pages/Book/Book";
+import Profile from "./pages/Book/Profile";
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
       children: 
       [
         { path: "timeline", element: <Timeline /> },
-        { path: "books", element: <Book /> }
+        { path: "books", element: <Book /> },
+        { path: "profile", element: <Profile /> }
       ],
     },
     { path: "login", element: <Login /> },
