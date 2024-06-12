@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import { FiUpload, FiX } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
@@ -67,7 +67,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="max-w-xl mx-auto mt-24" >
       <div className="relative bg-white p-4 rounded shadow-md flex items-start">
         <img
           src="/avatar.jpg"
