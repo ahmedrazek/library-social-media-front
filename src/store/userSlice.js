@@ -1,3 +1,5 @@
+
+import { createSlice } from "@reduxjs/toolkit";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -8,6 +10,7 @@ export const fetchUserProfile = createAsyncThunk(
     return res.data;
   }
 );
+
 const initialState = {
   user: null,
   status: "idle",
