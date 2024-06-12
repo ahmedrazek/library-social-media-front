@@ -5,6 +5,7 @@ export default function Timeline() {
   console.log(user);
   return (
     <div>
+    
       {/* <h1>User name : {user.name}</h1>
       <h2>USer email : {user.email}</h2>
        */}
