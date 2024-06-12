@@ -26,19 +26,23 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const location = useLocation();
-  console.log(location);
-  if (
-    location.pathname == "/login" ||
-    location.pathname == "/signup" ||
-    location.pathname == "/" ||
-    location.pathname == "/Home" ||
-    location.pathname == "/forgotPassword"
-  )
-    return null;
+  // const location = useLocation();
+  // console.log(location);
+  // if (
+  //   location.pathname == "/login" ||
+  //   location.pathname == "/signup" ||
+  //   location.pathname == "/" ||
+  //   location.pathname == "/Home" ||
+  //   location.pathname == "/forgotPassword"
+  // )
+  //   return null;
   // return <div>index</div>;
   return (
+<<<<<<< HEAD
+    <Disclosure as="nav">
+=======
     <Disclosure as="nav" className='bg-secondary'>
+>>>>>>> e8abc6248d1aa433d765782f0f82415555affc17
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

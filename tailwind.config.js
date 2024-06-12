@@ -1,13 +1,18 @@
+import flowbite from "flowbite/plugin";
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
+  ],
   theme: {
     fontFamily: {
       // 'sans': ['ui-sans-serif', 'system-ui', ...],
       // 'serif': ['ui-serif', 'Georgia', ...],
       // 'mono': ['ui-monospace', 'SFMono-Regular', ...],
-      
-      'mainFontFamily': ["Robot"]
+
+      mainFontFamily: ["Robot"],
     },
     extend: {
       colors: {
@@ -23,17 +28,17 @@ export default {
         white: "#ffffff",
       },
       fontSize: {
-        '12': '0.75rem',
-        '16': '1rem', 
-        '18': '1.125rem',
-        '20': '1.25rem', 
-        '26': '1.6rem', 
-        '32': '2rem', 
-        '44': '2.75rem', 
+        12: "0.75rem",
+        16: "1rem",
+        18: "1.125rem",
+        20: "1.25rem",
+        26: "1.6rem",
+        32: "2rem",
+        44: "2.75rem",
       },
     },
   },
-  plugins: [],
+  plugins: [flowbite],
 };
 // Hex
 //       primary:"295E4E",
