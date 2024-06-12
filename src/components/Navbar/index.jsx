@@ -38,11 +38,10 @@ export default function Navbar() {
   //   return null;
   // return <div>index</div>;
   return (
-<<<<<<< HEAD
-    <Disclosure as="nav">
-=======
-    <Disclosure as="nav" className='bg-secondary'>
->>>>>>> e8abc6248d1aa433d765782f0f82415555affc17
+    <Disclosure
+      as="nav"
+      className="bg-secondary fixed w-full top-0 start-0 z-40 shadow-xl"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

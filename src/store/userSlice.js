@@ -22,6 +22,7 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
+      state.status = "idle";
     },
   },
   extraReducers: (builder) => {
