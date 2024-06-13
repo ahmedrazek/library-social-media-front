@@ -27,7 +27,7 @@ import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
 
 
 
-function App() {
+function App() {  
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
