@@ -3,8 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import CreatePost from "../../components/CreatePost/CreatePost";
 
-export default function Timeline() {
+function Timeline() {
   const [posts, setPosts] = useState();
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.user.user);
@@ -32,6 +33,7 @@ export default function Timeline() {
   }
   return (
     <>
+      <CreatePost/>
       <div className="bg-white h-screen md:ml-80 mt-10">
         <div className="flex flex-col gap-12 items-center pt-20 bg-white">
           {posts &&
@@ -88,3 +90,5 @@ export default function Timeline() {
     </>
   );
 }
+
+export default Timeline;
