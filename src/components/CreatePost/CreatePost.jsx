@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import axios from 'axios';
-import { FiUpload, FiX } from 'react-icons/fi';
-import { FaStar } from 'react-icons/fa';
+import React, { useState } from "react";
+import axios from "axios";
+import { FiUpload, FiX } from "react-icons/fi";
+import { FaStar } from "react-icons/fa";
 
 const CreatePost = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [popupType, setPopupType] = useState('');
-  const [postText, setPostText] = useState('');
+  const [popupType, setPopupType] = useState("");
+  const [postText, setPostText] = useState("");
   const [includeImage, setIncludeImage] = useState(false);
-  const [imageURL, setImageURL] = useState('');
-  const [selectedBook, setSelectedBook] = useState('');
+  const [imageURL, setImageURL] = useState("");
+  const [selectedBook, setSelectedBook] = useState("");
   const [reviewRating, setReviewRating] = useState(0);
 
   const handleFormSubmit = (type) => {
@@ -19,34 +19,34 @@ const CreatePost = () => {
 
   const handlePopupClose = () => {
     setShowPopup(false);
-    setPopupType('');
+    setPopupType("");
   };
 
   const handlePostFormSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('description', postText);
-    formData.append('type', popupType);
+    formData.append("description", postText);
+    formData.append("type", popupType);
     if (includeImage && imageURL) {
-      formData.append('image', imageURL);
+      formData.append("image", imageURL);
     }
     if (selectedBook) {
-      formData.append('book', selectedBook);
+      formData.append("book", selectedBook);
     }
     if (reviewRating) {
-      formData.append('rating', reviewRating);
+      formData.append("rating", reviewRating);
     }
 
     try {
-      const response = await axios.post('http://localhost:9000/posts', formData);
-      console.log('Post created', response.data);
-      setPostText('');
-      setImageURL('');
+      const response = await axios.post("/posts", formData);
+      console.log("Post created", response.data);
+      setPostText("");
+      setImageURL("");
       setShowPopup(false);
-      setPopupType('');
+      setPopupType("");
       setIncludeImage(false);
-      setSelectedBook('');
+      setSelectedBook("");
       setReviewRating(0);
     } catch (error) {
       console.error(error);
@@ -59,7 +59,7 @@ const CreatePost = () => {
   };
 
   const handleRemoveImage = () => {
-    setImageURL('');
+    setImageURL("");
   };
 
   const handleStarClick = (rating) => {
@@ -67,8 +67,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-24" >
-      <div className="relative bg-white p-4 rounded shadow-md flex items-start">
+    <div className="w-11/12 lg:w-5/12 mx-auto pt-24">
+      <div className="relative rounded-xl bg-white p-4  shadow-md flex items-start">
         <img
           src="/avatar.jpg"
           alt="Profile"
@@ -76,32 +76,33 @@ const CreatePost = () => {
         />
         <form className="flex-grow">
           <textarea
-            className="w-full border rounded-full p-2 mb-2 resize-none"
+            className="w-full border border-gray-200 focus:border-0 rounded-full p-2 mb-2 resize-none"
             name="postText"
             placeholder="Add a post"
             rows={1}
-            style={{ height: '45px' }}
-            onFocus={() => handleFormSubmit('post')}
+            style={{ height: "45px" }}
+            value=""
+            onFocus={() => handleFormSubmit("post")}
           />
           <div className="flex justify-around mb-2">
             <button
               type="button"
-              onClick={() => handleFormSubmit('quote')}
-              className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 border-none rounded-full"
+              onClick={() => handleFormSubmit("quote")}
+              className="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 border-none rounded-full"
             >
               Add Quote
             </button>
             <button
               type="button"
-              onClick={() => handleFormSubmit('post')}
-              className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 border-none rounded-full"
+              onClick={() => handleFormSubmit("post")}
+              className="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 border-none rounded-full"
             >
               Add Post
             </button>
             <button
               type="button"
-              onClick={() => handleFormSubmit('review')}
-              className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 border-none rounded-full"
+              onClick={() => handleFormSubmit("review")}
+              className="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 border-none rounded-full"
             >
               Add Review
             </button>
@@ -112,12 +113,12 @@ const CreatePost = () => {
         <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-4 rounded shadow-md relative">
             <h2 className="text-lg font-bold mb-4">
-              {popupType === 'quote' && 'Add Quote'}
-              {popupType === 'post' && 'Add Post'}
-              {popupType === 'review' && 'Add Review'}
+              {popupType === "quote" && "Add Quote"}
+              {popupType === "post" && "Add Post"}
+              {popupType === "review" && "Add Review"}
             </h2>
             <form onSubmit={handlePostFormSubmit}>
-              {popupType === 'quote' ? (
+              {popupType === "quote" ? (
                 <div className="quote-style p-4 mb-4 border-l-4 border-gray-400">
                   <textarea
                     className="w-full border rounded p-2 mb-2 resize-none"
@@ -140,7 +141,7 @@ const CreatePost = () => {
                   cols={50}
                 />
               )}
-              {popupType === 'post' && (
+              {popupType === "post" && (
                 <>
                   <label className="flex items-center mb-2">
                     <input
@@ -153,7 +154,10 @@ const CreatePost = () => {
                   </label>
                   {includeImage && (
                     <div className="mb-2 flex items-center">
-                      <label htmlFor="fileInput" className="cursor-pointer flex items-center text-primary">
+                      <label
+                        htmlFor="fileInput"
+                        className="cursor-pointer flex items-center text-primary"
+                      >
                         <FiUpload className="mr-2" /> Upload Image
                       </label>
                       <input
@@ -167,7 +171,12 @@ const CreatePost = () => {
                   )}
                   {imageURL && (
                     <div className="relative mb-2">
-                      <img src={URL.createObjectURL(imageURL)} alt="Uploaded" className="max-w-full mb-2 mr-2" style={{ height: 'auto', width: '200px' }} />
+                      <img
+                        src={URL.createObjectURL(imageURL)}
+                        alt="Uploaded"
+                        className="max-w-full mb-2 mr-2"
+                        style={{ height: "auto", width: "200px" }}
+                      />
                       <button
                         className="hover:text-red-500 absolute top-1 right-1 bg-primary text-white rounded-full"
                         onClick={handleRemoveImage}
@@ -178,9 +187,11 @@ const CreatePost = () => {
                   )}
                 </>
               )}
-              {popupType === 'quote' && (
+              {popupType === "quote" && (
                 <div className="mb-2">
-                  <label htmlFor="bookSelect" className="block mb-1">Select Book</label>
+                  <label htmlFor="bookSelect" className="block mb-1">
+                    Select Book
+                  </label>
                   <select
                     id="bookSelect"
                     value={selectedBook}
@@ -194,9 +205,11 @@ const CreatePost = () => {
                   </select>
                 </div>
               )}
-              {popupType === 'review' && (
+              {popupType === "review" && (
                 <div className="mb-2">
-                  <label htmlFor="bookSelectReview" className="block mb-1">Select Book</label>
+                  <label htmlFor="bookSelectReview" className="block mb-1">
+                    Select Book
+                  </label>
                   <select
                     id="bookSelectReview"
                     value={selectedBook}
@@ -228,17 +241,28 @@ const CreatePost = () => {
                 className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 rounded"
                 type="submit"
               >
-                {popupType === 'quote' && 'Add Quote'}
-                {popupType === 'post' && 'Add Post'}
-                {popupType === 'review' && 'Add Review'}
+                {popupType === "quote" && "Add Quote"}
+                {popupType === "post" && "Add Post"}
+                {popupType === "review" && "Add Review"}
               </button>
             </form>
             <button
               className="absolute top-0 right-0 m-2 p-2 text-gray-600 hover:text-gray-800"
               onClick={handlePopupClose}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>

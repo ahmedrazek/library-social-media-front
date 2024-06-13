@@ -139,7 +139,7 @@ const PostCard = ({ postId, removePost }) => {
   return (
     <>
       {/* // CARD */}
-      <div className="flex flex-col p-4 rounded-xl gap-3  w-[22rem] md:w-[38rem] shadow-lg bg-secondary">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 shadow-md bg-white">
         {/* USER INFO  */}
         <div className="flex justify-between items-center">
           <div className="flex gap-2">

@@ -12,6 +12,7 @@ function Timeline() {
   const status = useSelector((state) => state.user.status);
   const getPosts = async () => {
     const res = await axios.get("/posts");
+    console.log(res.data);
     setPosts(res.data);
     setLoading(false);
   };
@@ -33,9 +34,9 @@ function Timeline() {
   }
   return (
     <>
-      <CreatePost/>
-      <div className="bg-white h-screen md:ml-80 mt-10">
-        <div className="flex flex-col gap-12 items-center pt-20 bg-white">
+      <div className="bg-secondary h-screen lg:ml-20 ">
+        <CreatePost />
+        <div className="flex flex-col gap-6 items-center pt-20 bg-secondary">
           {posts &&
             posts.map((post) => (
               <PostCard
@@ -45,6 +46,7 @@ function Timeline() {
               />
             ))}
         </div>
+        <div className=" hidden lg:block w-64 bg-primary fixed right-4 top-28 z-30 h-5/6 pt-20 ps-2 rounded-2xl shadow-lg"></div>
       </div>
       {loading && (
         <div className="bg-secondary h-screen flex justify-center items-center">
