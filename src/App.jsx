@@ -12,8 +12,8 @@ import { ResetPassword } from "./pages/ResetPassword";
 import Timeline from "./pages/Timeline";
 import Book from "./pages/Book/Book";
 
-import Profile from "./pages/Book/Profile";
-=======
+// import Profile from "./pages/Book/Profile";
+
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
 import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
@@ -32,9 +32,6 @@ function App() {
       [
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
-
-        { path: "profile", element: <Profile /> }
-
       {path:"favorite" , element:<FavoriteBooks/>},
         { path: "details/:id", element: <BookDetails/> }
 
