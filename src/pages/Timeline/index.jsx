@@ -33,6 +33,7 @@ function Timeline() {
     return <Navigate to="/login" />;
   }
   return (
+
     <>
       <div className="bg-secondary h-screen lg:ml-20 ">
         <CreatePost />
@@ -90,6 +91,7 @@ function Timeline() {
         </div>
       )}
     </>
+
   );
 }
 

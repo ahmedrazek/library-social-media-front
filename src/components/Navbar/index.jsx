@@ -54,6 +54,7 @@ export default function Navbar() {
   }
 
   return (
+
     <>
       <nav className="bg-white border-gray-200 shadow-lg z-50 fixed top-0 start-0 w-full">
         <div className="flex items-center flex-wrap justify-between mx-auto p-4">
@@ -72,6 +73,7 @@ export default function Navbar() {
               <div className="w-8 h-8 rounded-full bg-black"></div>
               <span className="sr-only">Open user menu</span>
             </button>
+
 
             <button
               type="button"

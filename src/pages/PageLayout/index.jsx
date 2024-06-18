@@ -1,9 +1,11 @@
+
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import { Link, Navigate, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
+
 
 const PageLayout = () => {
   const [redirect, setRedirect] = useState("");
@@ -22,6 +24,7 @@ const PageLayout = () => {
   }
   return (
     <div>
+
       <Navbar />
       <div>
         <aside className=" hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20 ps-2">
