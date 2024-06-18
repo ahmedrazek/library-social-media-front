@@ -1,68 +1,87 @@
+
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
-// import { useParams, useNavigate } from "react-router-dom";
-// import { fetchBookById, fetchBooks } from "../../store/bookSlice";
+// import { useParams, useNavigate, Link } from "react-router-dom";
+// //import { fetchBookById } from "../../store/bookSlice";
+// //import { addToFavorites, removeFromFavorites, fetchFavoriteBooks } from "../../store/favoritesSlice";
+// //import { fetchUserProfile } from "../../store/userSlice";
 // import Category from "../../components/Category/Category";
-// import { FaHeart, FaSearch, FaStar } from "react-icons/fa"; // Assuming you're using this icon
+// import { FaHeart, FaStar } from "react-icons/fa";
 // import RatingPopup from "../../components/RatingPopup";
-// import favoritesSlice, { addToFavorites, removeFromFavorites } from "../../store/favoritesSlice";
+// //import { createAsyncThunk } from "@reduxjs/toolkit";
+// import axios from "axios";
 
 // const BookDetails = () => {
-//   const dispatch = useDispatch();
-//   const { id } = useParams(); // Assuming you're using React Router for routing
+//   //const dispatch = useDispatch();
+//   const { id: bookId } = useParams();
+//   const user = useSelector((state) => state.user.user);
+//   //const userId = user?._id;
 //   const bookDetails = useSelector((state) => state.book.bookDetails);
-//   const books = useSelector((state) => state.book.books);
 //   const bookStatus = useSelector((state) => state.book.status);
-//   const [searchInput, setSearchInput] = useState("");
-//   const [selectedCategory, setSelectedCategory] = useState("");
+//   //const favoriteBooks = useSelector((state) => state.favorites.books);
 //   const [rating, setRating] = useState("");
-//   const [showPopup, setShowPopup] = useState(false); // State for showing the popup
-//   const navigate = useNavigate(); // useNavigate for navigation
+//   const [showPopup, setShowPopup] = useState(false);
+//   const navigate = useNavigate();
+  
 
-//   // Load rating from localStorage when the component mounts
+//   const addToFavorites =  async () => {
+//     //console.log(userId,bookId);
+//     const response = await axios.post(`http://localhost:9000/books/addFavoriteBook/${user._id}/${id}`,{
+      
+//     });
+//     console.log(response)
+//     return response.data;
+//   };
+
+//   //const isFavorite = favoriteBooks.some((favBook) => favBook._id === bookId);
+//   const isFavorite = bookDetails?._id === bookId;
+//   const handleFavoriteClick = () => {
+//     if (!isFavorite) {
+//       addToFavorites()
+//       //dispatch(removeFromFavorites({ userId, bookId }));
+//     } else {
+//       console.log('ekhras')
+//       //dispatch(addToFavorites({ userId, bookId }));
+//     }
+//   };
+
 //   useEffect(() => {
-//     const storedRating = localStorage.getItem(`rating_${id}`);
+//     const storedRating = localStorage.getItem(`rating_${bookId}`);
 //     if (storedRating) {
 //       setRating(parseInt(storedRating));
 //     }
-//   }, [id]);
+//   }, [bookId]);
 
-//   useEffect(() => {
-//     dispatch(fetchBookById(id));
-//   }, [dispatch, id]);
-
-//   const handleSearchChange = (event) => {
-//     setSearchInput(event.target.value);
-//   };
+//   // useEffect(() => {
+//   //   dispatch(fetchBookById(bookId));
+//   //   if (userId) {
+//   //     dispatch(fetchFavoriteBooks(userId));
+//   //     dispatch(fetchUserProfile());
+//   //   }
+//   // }, [dispatch, bookId, userId]);
 
 //   const handleCategoryClick = (category) => {
-//     setSelectedCategory(category);
-//     navigate(`/user/books?category=${category}`); // Navigate to the books page with the selected category as a query parameter
+//     navigate(`/user/books?category=${category}`);
 //   };
 
 //   const handleAddRating = (newRating) => {
 //     setRating(newRating);
-//     // Save rating to localStorage
-//     localStorage.setItem(`rating_${id}`, newRating);
+//     localStorage.setItem(`rating_${bookId}`, newRating);
 //   };
 
-//   const filteredBooks = books.filter(
-//     (book) =>
-//       (selectedCategory ? book.category === selectedCategory : true) &&
-//       book.title.toLowerCase().startsWith(searchInput.toLowerCase().slice(0, 5))
-//   );
-
-//   console.log("Book Details:", bookDetails);
-//   console.log("Filtered Books:", filteredBooks);
 //   const handleDownload = () => {
-//     const downloadLink = document.createElement("a");
-//     downloadLink.href = `http://localhost:9000/image/${bookDetails.data.Pdf}`;
-//     downloadLink.download = `${bookDetails.data.title}.pdf`;
-//     downloadLink.click();
+//     if (bookDetails?.data?.Pdf) {
+//       const downloadLink = document.createElement("a");
+//       downloadLink.href = `http://localhost:9000/image/${bookDetails.data.Pdf}`;
+//       downloadLink.download = `${bookDetails.data.title}.pdf`;
+//       downloadLink.click();
+//     } else {
+//       console.error("PDF URL not available");
+//     }
 //   };
+
 //   const handleRead = () => {
-//     if (bookDetails.data.Pdf) {
-//       console.log("heelo pdf", bookDetails.data);
+//     if (bookDetails?.data?.Pdf) {
 //       window.open(
 //         `http://localhost:9000/image/${bookDetails.data.Pdf}`,
 //         "_blank"
@@ -71,22 +90,14 @@
 //       console.error("PDF URL not available");
 //     }
 //   };
-//   if (!bookDetails) {
+
+//   if (bookStatus === 'loading') {
 //     return <div>Loading...</div>;
 //   }
-//   const favorite = useSelector(state => state.favorite.books);
- 
-//   const isFavorite = favoritesSlice.some(favorite => favorite.id === bookDetails.id);
-//   const handleToggleFavorite = () => {
-//     if (isFavorite) {
-//       dispatch(removeFromFavorites(bookDetails));
-//     } else {
-//       dispatch(addToFavorites(bookDetails));
-//     }
-//   }
+
 //   return (
 //     <div className="grid grid-cols-4 gap-20 container mb-8">
-//       <div className="bg-primary h-[40rem] ml-0">SideLeft</div>
+//       <div className=" h-[40rem] ml-0">SideLeft</div>
 //       <div className="col-span-2">
 //         <div className="book-content bg-transparent border border-gray-300 rounded-md my-10 h-auto">
 //           <div className="rating-favorite flex flex-row justify-between items-baseline mb-3 px-6 pt-5 pb-3">
@@ -101,22 +112,22 @@
 //                 </div>
 //               )}
 //             </div>
-//             <FaHeart className="text-2xl text-dark_light hover:text-red-400 " onClick={handleToggleFavorite}/>
-//             <button onClick={handleToggleFavorite} className={`btn btn-secondary m-2 `}>
-//             {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-//         </button>
+//             <FaHeart
+//               className={`text-2xl cursor-pointer ${isFavorite ? 'text-red-500' : 'text-dark_light'}`}
+//               onClick={handleFavoriteClick}
+//             />
 //           </div>
 //           <div className="flex space-x-3  m-3">
 //             <div>
 //               <img
-//                 src={`http://localhost:9000/image/${bookDetails.data.cover}`}
+//                 src={`http://localhost:9000/image/${bookDetails?.data?.cover}`}
 //                 alt="BookImage"
 //                 className="w-full h-40 object-cover mb-3"
 //               />
 //             </div>
 //             <div>
-//               <h1>{bookDetails.data.title}</h1>
-//               <h1>{bookDetails.data.category}</h1>
+//               <h1>{bookDetails?.data?.title}</h1>
+//               <h1>{bookDetails?.data?.category}</h1>
 //             </div>
 //           </div>
 //           <div className="flex justify-start space-x-3  m-3 ">
@@ -136,9 +147,9 @@
 //             </div>
 //             <button
 //               className="border border-green-800 rounded-md py-2 px-4 text-green-800 flex items-center gap-2 hover:bg-green-800 hover:text-white transition duration-300"
-//               onClick={handleDownload} // Call handleDownload when the button is clicked
+//               onClick={handleDownload}
 //             >
-//               Download
+//               Download.
 //             </button>
 //             <button
 //               className="border border-green-800 rounded-md py-2 px-4 text-green-800 flex items-center gap-2 hover:bg-green-800 hover:text-white transition duration-300"
@@ -152,7 +163,12 @@
 //           </div>
 //           <div className="my-16 px-4">
 //             <h2 className="text-primary font-extrabold  py-2">Summary</h2>
-//             {bookDetails.data.description}
+//             {bookDetails?.data?.description}
+//           </div>
+//           <div className="favorite-link px-6 pb-5">
+//             <Link to="/favorite" className="text-blue-500 hover:underline">
+//               View your favorite books
+//             </Link>
 //           </div>
 //         </div>
 //       </div>
@@ -165,6 +181,9 @@
 
 // export default BookDetails;
 
+
+
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
@@ -172,10 +191,11 @@ import { fetchBookById, fetchBooks } from "../../store/bookSlice";
 import Category from "../../components/Category/Category";
 import { FaHeart, FaSearch, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
-import { addToFavorite } from '../../store/favoritesSlice';
+import  axios  from 'axios';
 
 
-const BookDetails =({userId,bookId}) => {
+
+const BookDetails =() => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const bookDetails = useSelector((state) => state.book.bookDetails);
@@ -185,8 +205,26 @@ const BookDetails =({userId,bookId}) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [rating, setRating] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const user = useSelector((state) => state.user.user); // Retrieve user data
+  const userId = user?._id; // Extract user ID
   const navigate = useNavigate();
+  const addToFavorites = async () => {
+    try {
+      const response = await axios.post(`http://localhost:9000/books/addFavoriteBook/${userId}/${id}`);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+    }
+  };
 
+  const isFavorite = bookDetails?._id === id;
+  const handleFavoriteClick = () => {
+    if (!isFavorite) {
+      addToFavorites();
+    } else {
+      console.log('Book is already in favorites');
+    }
+  };
   useEffect(() => {
     const storedRating = localStorage.getItem(`rating_${id}`);
     if (storedRating) {
@@ -244,16 +282,13 @@ const BookDetails =({userId,bookId}) => {
     return <div>Loading...</div>;
   }
 
-  const addToMyFavoriteBooks = async () => {
-  
-     dispatch(addToFavorite({ userId, bookId }));
-  };
+
 
   
 
   return (
     <div className="grid grid-cols-4 gap-20 container mb-8">
-      <div className="bg-primary h-[40rem] ml-0">SideLeft</div>
+      <div className=" h-[40rem] ml-0">SideLeft</div>
       <div className="col-span-2">
         <div className="book-content bg-transparent border border-gray-300 rounded-md my-10 h-auto">
           <div className="rating-favorite flex flex-row justify-between items-baseline mb-3 px-6 pt-5 pb-3">
@@ -269,8 +304,8 @@ const BookDetails =({userId,bookId}) => {
               )}
             </div>
              <FaHeart
-              className={`text-2xl  "text-dark_light"}  cursor-pointer`}
-              onClick={addToMyFavoriteBooks}
+             className={`text-2xl cursor-pointer ${isFavorite ? 'text-red-500' : 'text-dark_light'}`}
+             onClick={handleFavoriteClick}
             />
           </div>
           <div className="flex space-x-3  m-3">
@@ -331,3 +366,5 @@ const BookDetails =({userId,bookId}) => {
 };
 
 export default BookDetails;
+
+

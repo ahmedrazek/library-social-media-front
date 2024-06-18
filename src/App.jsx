@@ -40,7 +40,10 @@ function App() {
       element: <PageLayout />,
       children: [
         { path: "timeline", element: <Timeline /> },
-        { path: "books", element: <Book /> }
+        { path: "books", element: <Book/> },
+        {path:"favorite" , element:<FavoriteBooks/>},
+        { path: "details/:id", element: <BookDetails/> }
+        
       ],
     },
     { path: "login", element: <Login /> },

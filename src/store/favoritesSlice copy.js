@@ -5,11 +5,10 @@ import axios from 'axios';
 export const fetchFavoriteBooks = createAsyncThunk(
   'favorites/fetchFavoriteBooks',
   async (userId) => {
-    const response = await axios.get(`http://localhost:9000/users/single/${userId}`);
+    const response = await axios.get(`http://localhost:9000/${userId}`);
     return response.data;
   }
 );
-
 
 const favoritesSlice = createSlice({
   name: 'favorites',
