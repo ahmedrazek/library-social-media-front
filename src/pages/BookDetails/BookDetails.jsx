@@ -10,7 +10,12 @@ import { fetchBookById, fetchBooks } from "../../store/bookSlice";
 import Category from "../../components/Category/Category";
 import { FaHeart, FaSearch, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
+<<<<<<< HEAD
+
+import axios from 'axios'
+=======
 import  axios  from 'axios';
+>>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
 
 
 
@@ -20,10 +25,16 @@ const BookDetails =() => {
   const bookDetails = useSelector((state) => state.book.bookDetails);
   const books = useSelector((state) => state.book.books);
   const bookStatus = useSelector((state) => state.book.status);
+  const user = useSelector((state) => state.user.user);
   const [searchInput, setSearchInput] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [rating, setRating] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+<<<<<<< HEAD
+  const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
+  
+=======
   const user = useSelector((state) => state.user.user); // Retrieve user data
   const userId = user?._id; // Extract user ID
   const navigate = useNavigate();
@@ -44,16 +55,55 @@ const BookDetails =() => {
       console.log('Book is already in favorites');
     }
   };
+>>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
   useEffect(() => {
     const storedRating = localStorage.getItem(`rating_${id}`);
     if (storedRating) {
       setRating(parseInt(storedRating));
     }
   }, [id]);
+  const getTokenUserId = () => {
+    const token = getCookie("token"); // Replace "token" with the name of your cookie
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      return decodedToken.userId;
+    }
+    return null; // Handle the case where the token is not found
+  };
 
   useEffect(() => {
     dispatch(fetchBookById(id));
+    checkIfFavorite();
   }, [dispatch, id]);
+
+  const checkIfFavorite = async () => {
+    const userId = getTokenUserId();
+    if (!userId) return;
+
+    try {
+      const response = await axios.get(`/favorites/${userId}`);
+      const favoriteBooks = response.data;
+      setIsFavorite(favoriteBooks.some(book => book._id === id));
+    } catch (error) {
+      console.error("Error checking favorite status", error);
+    }
+  };
+
+  const handleFavoriteClick = async () => {
+    const userId = getTokenUserId();
+    if (!userId) return;
+
+    try {
+      if (isFavorite) {
+        await axios.post(`/removeFavoriteBook/${userId}/${id}`);
+      } else {
+        await axios.post(`/addFavoriteBook/${userId}/${id}`);
+      }
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.error("Error updating favorite status", error);
+    }
+  };
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -101,9 +151,12 @@ const BookDetails =() => {
     return <div>Loading...</div>;
   }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
 
-  
+ 
 
   return (
     <div className="grid grid-cols-4 gap-20 container mb-8">
@@ -123,8 +176,13 @@ const BookDetails =() => {
               )}
             </div>
              <FaHeart
+<<<<<<< HEAD
+               className={`text-2xl ${isFavorite ? "text-red-500" : "text-dark_light"} cursor-pointer`}
+                onClick={handleFavoriteClick}
+=======
              className={`text-2xl cursor-pointer ${isFavorite ? 'text-red-500' : 'text-dark_light'}`}
              onClick={handleFavoriteClick}
+>>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
             />
           </div>
           <div className="flex space-x-3  m-3">

@@ -24,7 +24,7 @@ import Profile from "./pages/Profile";
 
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
-import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
+
 
 
 

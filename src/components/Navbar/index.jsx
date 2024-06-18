@@ -179,6 +179,10 @@ export default function Navbar() {
                 </Link>
               </li>
             </ul>
+            <div className="search-bar-container relative flex flex-col min-w-[200px] px-10 items-center justify-center">
+              <SearchBar setSearchResults={setSearchResults} searchResults={searchResults} />
+              <SearchResultsList searchResults={searchResults} setSearchResults={setSearchResults} />
+            </div>
           </div>
         </div>
 

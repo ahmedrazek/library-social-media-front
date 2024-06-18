@@ -101,7 +101,7 @@ const PageLayout = () => {
             </ul>
           </div>
         </aside>
-        <Outlet />
+        <Outlet className='mt-8'/>
       </div>
     </div>
   );
