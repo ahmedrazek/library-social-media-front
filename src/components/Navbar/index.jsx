@@ -1,188 +1,214 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
 
-import { Fragment } from "react";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-} from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-
-const navigation = [
-  { name: "BookNet", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
+import { logout } from "../../store/userSlice";
+import { FaBell } from "react-icons/fa";
 
 export default function Navbar() {
-  const location = useLocation();
-  console.log(location);
-  if (
-    location.pathname == "/login" ||
-    location.pathname == "/signup" ||
-    location.pathname == "/" ||
-    location.pathname == "/Home" ||
-    location.pathname == "/forgotPassword"
-  )
-    return null;
-  // return <div>index</div>;
-  return (
-    <Disclosure as="nav" className='bg-secondary'>
-      {({ open }) => (
-        <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <DisclosureButton className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </DisclosureButton>
-              </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex items-center space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-green text-primary  font-bold"
-                            : "text-gray_light hover:bg-secondary hover:text-primary",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+  const [showUser, setShowUser] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [redirect, setRedirect] = useState("");
+  const [openedNotifications, setOpenedNotifications] = useState({});
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
 
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </MenuButton>
-                  </div>
-                  <Transition
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <MenuItem>
-                        {({ focus }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              focus ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </MenuItem>
-                      <MenuItem>
-                        {({ focus }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              focus ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </MenuItem>
-                      <MenuItem>
-                        {({ focus }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              focus ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </MenuItem>
-                    </MenuItems>
-                  </Transition>
-                </Menu>
+  const fetchNotifications = async () => {
+    if (user && user._id) {
+      try {
+        const response = await axios.get(`http://localhost:9000/notification/${user._id}`);
+        console.log(response.data);
+        setNotifications(response.data);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    }
+  };
+
+  const handleNotificationClick = (id) => {
+    setOpenedNotifications((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const setLogout = async () => {
+    try {
+      await axios.post("/users/logout");
+      dispatch(logout());
+      console.log("logout");
+      setRedirect("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (showNotifications) {
+      fetchNotifications();
+    }
+  }, [showNotifications]);
+
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <>
+      <nav className="bg-white border-gray-200 shadow-lg z-50 fixed top-0 start-0 w-full">
+        <div className="flex items-center flex-wrap justify-between mx-auto p-4">
+          <Link to="/">
+            <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
+              BookNet
+            </span>
+          </Link>
+          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button
+              type="button"
+              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 relative"
+              id="user-menu-button"
+              onClick={() => setShowUser(!showUser)}
+            >
+              <div className="w-8 h-8 rounded-full bg-black"></div>
+              <span className="sr-only">Open user menu</span>
+            </button>
+
+            <button
+              type="button"
+              className="relative"
+              onClick={() => setShowNotifications(!showNotifications)}
+            >
+              <FaBell className="text-2xl text-yellow-400" />
+              <span className="sr-only">View notifications</span>
+            </button>
+
+            <div
+              className={
+                showUser
+                  ? "z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-10 right-4"
+                  : "z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              }
+              id="user-dropdown"
+            >
+              <div className="px-4 py-3">
+                <span className="block text-sm text-gray-900 dark:text-white">
+                  {user && user.name}
+                </span>
+                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                  {user && user.email}
+                </span>
               </div>
+              <ul className="py-2" aria-labelledby="user-menu-button">
+                <li>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Profile
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <button
+                    onClick={setLogout}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Sign out
+                  </button>
+                </li>
+              </ul>
             </div>
+
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              type="button"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
           </div>
 
-          <DisclosurePanel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <DisclosureButton
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
+          <div
+            className={
+              showMenu
+                ? "items-center justify-between w-full md:flex md:w-auto md:order-1"
+                : "items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            }
+            id="navbar-user"
+          >
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                  aria-current="page"
                 >
-                  {item.name}
-                </DisclosureButton>
-              ))}
+                  Home
+                </a>
+              </li>
+              <li>
+                <Link
+                  to="/user/books"
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Books
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {showNotifications && (
+          <div className="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-14 right-10 w-72">
+            <div className="px-4 py-3">
+              <span className="block text-sm text-gray-900 dark:text-white">Notifications</span>
             </div>
-          </DisclosurePanel>
-        </>
-      )}
-    </Disclosure>
+            <ul className="py-2" aria-labelledby="notification-button">
+              {notifications.length > 0 ? (
+                notifications.map((notification) => (
+                  <li
+                    key={notification._id}
+                    onClick={() => handleNotificationClick(notification._id)}
+                    className={`block px-4 py-2 text-sm ${
+                      openedNotifications[notification._id]
+                        ? "text-gray-700 bg-gray-100 dark:text-gray-200 dark:bg-gray-600"
+                        : "text-gray-700 dark:text-gray-200 bg-blue-100 dark:bg-blue-600"
+                    }`}
+                  >
+                    {notification.message}
+                  </li>
+                ))
+              ) : (
+                <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">
+                  No notifications
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
+      </nav>
+    </>
   );
 }

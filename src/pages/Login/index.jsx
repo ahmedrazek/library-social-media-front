@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
-import { Navigate,Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,14 +24,13 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post("/users/login", data);
-      console.log(res);
       dispatch(setUser(res.data.user));
       setRedirect(true);
     } catch (error) {
       console.log(error);
     }
   };
-  if (redirect) return <Navigate to={"/timeline"} />;
+  if (redirect) return <Navigate to={"/user/timeline"} />;
   return (
     <div className="relative h-screen w-full">
       <div className="absolute hidden md:block lg:block bg-primary w-1/2 -z-10 h-full"></div>

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import "./Home.module.css";
-import { Link } from "react-router-dom"; // Make sure to import Link
+import { Link, Navigate } from "react-router-dom"; // Make sure to import Link
 import heroImage from "../../assets/heroImage.png";
 import { FaHandshake, FaGlobe, FaBook, FaArrowUp } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
-import About from '../../components/Aboutus/index';
-import Footer from '../../components/Footer/index';
+import About from "../../components/Aboutus/index";
+import Footer from "../../components/Footer/index";
+import { useSelector } from "react-redux";
 
 const ServiceCard = ({ title, description, icon }) => {
   return (
@@ -21,7 +23,7 @@ const ServiceCard = ({ title, description, icon }) => {
 
 const Home = () => {
   const [showScroll, setShowScroll] = useState(false);
-
+  const user = useSelector((state) => state.user.user);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -65,7 +67,9 @@ const Home = () => {
       icon: <FaPeopleGroup className="text-44 text-secondary" />,
     },
   ];
-
+  if (user) {
+    return <Navigate to="/user/timeline" />;
+  }
   return (
     <>
       <div className="container mx-auto p-4">
