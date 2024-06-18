@@ -1,9 +1,11 @@
+
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import { Link, Navigate, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
+
 
 const PageLayout = () => {
   const [redirect, setRedirect] = useState("");
@@ -22,7 +24,8 @@ const PageLayout = () => {
   }
   return (
     <div>
-      <Navbar className='mb-10' />
+
+      <Navbar />
       <div>
         <aside className=" hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20 ps-2">
           <div>
@@ -63,7 +66,7 @@ const PageLayout = () => {
                 >
                   <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
                 </svg>
-                <Link>Books</Link>{" "}
+                <Link to={"/user/books"}>Books</Link>{" "}
               </li>
               <li className="flex gap-2">
                 <svg
@@ -78,7 +81,7 @@ const PageLayout = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <Link>My Favorites</Link>{" "}
+                <Link to={"/user/favorite"}>My Favorites</Link>{" "}
               </li>
               <li className="flex gap-2">
                 <svg
