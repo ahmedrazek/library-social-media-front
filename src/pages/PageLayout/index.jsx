@@ -22,7 +22,7 @@ const PageLayout = () => {
   }
   return (
     <div>
-      <Navbar />
+      <Navbar className='mb-10' />
       <div>
         <aside className=" hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20 ps-2">
           <div>
@@ -98,7 +98,7 @@ const PageLayout = () => {
             </ul>
           </div>
         </aside>
-        <Outlet />
+        <Outlet className='mt-8'/>
       </div>
     </div>
   );

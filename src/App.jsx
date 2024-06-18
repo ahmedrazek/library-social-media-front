@@ -19,10 +19,10 @@ import Book from "./pages/Book/Book";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserProfile } from "./store/userSlice";
-import Profile from "./pages/Profile";
+
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
-import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
+
 
 
 
@@ -40,7 +40,9 @@ function App() {
       element: <PageLayout />,
       children: [
         { path: "timeline", element: <Timeline /> },
-        { path: "books", element: <Book /> }
+        { path: "books", element: <Book /> },
+        {path:'details/:id', element:<BookDetails/>}
+       
       ],
     },
     { path: "login", element: <Login /> },
