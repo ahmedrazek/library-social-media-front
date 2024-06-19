@@ -21,14 +21,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserProfile } from "./store/userSlice";
 import Profile from "./pages/Profile";
-
+import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
 
-
-
-
-function App() {  
+function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
@@ -44,17 +41,16 @@ function App() {
         { path: "timeline", element: <Timeline /> },
 
         { path: "books", element: <Book /> },
-      {path:"favorite" , element:<FavoriteBooks/>},
+        { path: "favorite", element: <FavoriteBooks /> },
 
-        { path: "details/:id", element: <BookDetails/> }
-        
+        { path: "details/:id", element: <BookDetails /> },
       ],
     },
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
     { path: "forgotPassword", element: <ForgotPassword /> },
     { path: "resetPassword", element: <ResetPassword /> },
-    {path:"noresult" , element:<Noresult/>},
+    { path: "noresult", element: <Noresult /> },
     { path: "*", element: <NotFound /> },
   ]);
   useEffect(() => {

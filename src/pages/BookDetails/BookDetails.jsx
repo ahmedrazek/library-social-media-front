@@ -1,8 +1,3 @@
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
@@ -10,37 +5,26 @@ import { fetchBookById, fetchBooks } from "../../store/bookSlice";
 import Category from "../../components/Category/Category";
 import { FaHeart, FaSearch, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
-<<<<<<< HEAD
+import axios from "axios";
 
-import axios from 'axios'
-=======
-import  axios  from 'axios';
->>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
-
-
-
-const BookDetails =() => {
+const BookDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const bookDetails = useSelector((state) => state.book.bookDetails);
   const books = useSelector((state) => state.book.books);
   const bookStatus = useSelector((state) => state.book.status);
-  const user = useSelector((state) => state.user.user);
   const [searchInput, setSearchInput] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [rating, setRating] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-<<<<<<< HEAD
-  const [isFavorite, setIsFavorite] = useState(false);
-  const navigate = useNavigate();
-  
-=======
   const user = useSelector((state) => state.user.user); // Retrieve user data
   const userId = user?._id; // Extract user ID
   const navigate = useNavigate();
   const addToFavorites = async () => {
     try {
-      const response = await axios.post(`http://localhost:9000/books/addFavoriteBook/${userId}/${id}`);
+      const response = await axios.post(
+        `http://localhost:9000/books/addFavoriteBook/${userId}/${id}`
+      );
       console.log(response.data);
     } catch (error) {
       console.error("Error adding to favorites:", error);
@@ -48,14 +32,13 @@ const BookDetails =() => {
   };
 
   const isFavorite = bookDetails?._id === id;
-  const handleFavoriteClick = () => {
-    if (!isFavorite) {
-      addToFavorites();
-    } else {
-      console.log('Book is already in favorites');
-    }
-  };
->>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
+  // const handleFavoriteClick = () => {
+  //   if (!isFavorite) {
+  //     addToFavorites();
+  //   } else {
+  //     console.log('Book is already in favorites');
+  //   }
+  // };
   useEffect(() => {
     const storedRating = localStorage.getItem(`rating_${id}`);
     if (storedRating) {
@@ -83,7 +66,7 @@ const BookDetails =() => {
     try {
       const response = await axios.get(`/favorites/${userId}`);
       const favoriteBooks = response.data;
-      setIsFavorite(favoriteBooks.some(book => book._id === id));
+      setIsFavorite(favoriteBooks.some((book) => book._id === id));
     } catch (error) {
       console.error("Error checking favorite status", error);
     }
@@ -151,13 +134,6 @@ const BookDetails =() => {
     return <div>Loading...</div>;
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
-
- 
-
   return (
     <div className="grid grid-cols-4 gap-20 container mb-8">
       <div className=" h-[40rem] ml-0">SideLeft</div>
@@ -175,14 +151,11 @@ const BookDetails =() => {
                 </div>
               )}
             </div>
-             <FaHeart
-<<<<<<< HEAD
-               className={`text-2xl ${isFavorite ? "text-red-500" : "text-dark_light"} cursor-pointer`}
-                onClick={handleFavoriteClick}
-=======
-             className={`text-2xl cursor-pointer ${isFavorite ? 'text-red-500' : 'text-dark_light'}`}
-             onClick={handleFavoriteClick}
->>>>>>> a71b22dcd77061499943d45dc0c228d3003586f8
+            <FaHeart
+              className={`text-2xl cursor-pointer ${
+                isFavorite ? "text-red-500" : "text-dark_light"
+              }`}
+              onClick={handleFavoriteClick}
             />
           </div>
           <div className="flex space-x-3  m-3">
@@ -243,5 +216,3 @@ const BookDetails =() => {
 };
 
 export default BookDetails;
-
-

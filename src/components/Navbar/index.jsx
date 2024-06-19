@@ -1,17 +1,18 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { logout } from "../../store/userSlice";
 import { FaBell } from "react-icons/fa";
-
+import SearchBar from "../SearchBar/SearchBar";
+import SearchResultsList from "../SearchResultsList/SearchResultsList";
 export default function Navbar() {
   const [showUser, setShowUser] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [redirect, setRedirect] = useState("");
+  const [searchResults, setSearchResults] = useState();
   const [openedNotifications, setOpenedNotifications] = useState({});
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -19,7 +20,9 @@ export default function Navbar() {
   const fetchNotifications = async () => {
     if (user && user._id) {
       try {
-        const response = await axios.get(`http://localhost:9000/notification/${user._id}`);
+        const response = await axios.get(
+          `http://localhost:9000/notification/${user._id}`
+        );
         console.log(response.data);
         setNotifications(response.data);
       } catch (error) {
@@ -54,7 +57,6 @@ export default function Navbar() {
   }
 
   return (
-
     <>
       <nav className="bg-white border-gray-200 shadow-lg z-50 fixed top-0 start-0 w-full">
         <div className="flex items-center flex-wrap justify-between mx-auto p-4">
@@ -73,7 +75,6 @@ export default function Navbar() {
               <div className="w-8 h-8 rounded-full bg-black"></div>
               <span className="sr-only">Open user menu</span>
             </button>
-
 
             <button
               type="button"
@@ -180,8 +181,14 @@ export default function Navbar() {
               </li>
             </ul>
             <div className="search-bar-container relative flex flex-col min-w-[200px] px-10 items-center justify-center">
-              <SearchBar setSearchResults={setSearchResults} searchResults={searchResults} />
-              <SearchResultsList searchResults={searchResults} setSearchResults={setSearchResults} />
+              <SearchBar
+                setSearchResults={setSearchResults}
+                searchResults={searchResults}
+              />
+              <SearchResultsList
+                searchResults={searchResults}
+                setSearchResults={setSearchResults}
+              />
             </div>
           </div>
         </div>
@@ -189,7 +196,9 @@ export default function Navbar() {
         {showNotifications && (
           <div className="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-14 right-10 w-72">
             <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">Notifications</span>
+              <span className="block text-sm text-gray-900 dark:text-white">
+                Notifications
+              </span>
             </div>
             <ul className="py-2" aria-labelledby="notification-button">
               {notifications.length > 0 ? (

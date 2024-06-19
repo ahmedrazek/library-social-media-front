@@ -51,9 +51,9 @@
 // };
 
 // export default FavoriteBooks;
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFavoriteBooks } from '../../store/favoritesSlice';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFavoriteBooks } from "../../store/favoritesSlice";
 
 const FavoriteBooks = () => {
   const dispatch = useDispatch();
@@ -61,10 +61,11 @@ const FavoriteBooks = () => {
   const userId = user?._id; // Extract user ID
 
   useEffect(() => {
+    console.log(user);
     if (userId) {
       dispatch(fetchFavoriteBooks(userId));
     }
-  }, [dispatch, userId]);
+  }, []);
 
   const favoriteBooks = useSelector((state) => state.favorites.books);
 
@@ -82,11 +83,12 @@ const FavoriteBooks = () => {
   return (
     <div>
       <h2>Favorite Books</h2>
-      {favoriteBooks && favoriteBooks.map((book) => (
-        <div key={book.id}>
-          <p>{book.title}</p>
-        </div>
-      ))}
+      {favoriteBooks &&
+        favoriteBooks.map((book) => (
+          <div key={book.id}>
+            <p>{book.title}</p>
+          </div>
+        ))}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-
+/* eslint-disable react/prop-types */
 
 // import React from 'react';
 // import { useNavigate } from 'react-router-dom';
@@ -8,10 +8,10 @@
 
 //   const handleClick = (item) => {
 //     if (item.type === 'user') {
-//       navigate(`/user/profile/${item.id}`); 
+//       navigate(`/user/profile/${item.id}`);
 
 //     } else if (item.type === 'book') {
-//       navigate(`/user/details/${item.id}`); 
+//       navigate(`/user/details/${item.id}`);
 //     }
 //   };
 
@@ -32,37 +32,39 @@
 
 // export default SearchResultsList;
 
-
-
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 const SearchResultsList = ({ searchResults, setSearchResults }) => {
   const navigate = useNavigate();
 
   const handleClick = (item) => {
-    if (item.type === 'user') {
+    if (item.type === "user") {
       navigate(`/user/profile/${item.id}`);
-    } else if (item.type === 'book') {
+    } else if (item.type === "book") {
       navigate(`/user/details/${item.id}`);
     }
     // Clear search results after navigation
     setSearchResults([]);
   };
 
-  if (searchResults.length === 0) {
+  if (searchResults && searchResults.length === 0) {
     return null;
   }
 
   return (
-    <div className='results-list absolute w-full bg-secondary flex flex-col shadow-sm rounded-sm top-24 cursor-pointer max-h-64 overflow-y-scroll z-50'>
-      {searchResults.map((result, id) => (
-        <div key={id} className="p-2 border-b border-gray-300 hover:bg-white" onClick={() => handleClick(result)}>
-          {result.name ? result.name : result.title}
-        </div>
-      ))}
+    <div className="results-list absolute w-full bg-secondary flex flex-col shadow-sm rounded-sm top-24 cursor-pointer max-h-64 overflow-y-scroll z-50">
+      {searchResults &&
+        searchResults.map((result, id) => (
+          <div
+            key={id}
+            className="p-2 border-b border-gray-300 hover:bg-white"
+            onClick={() => handleClick(result)}
+          >
+            {result.name ? result.name : result.title}
+          </div>
+        ))}
     </div>
   );
 };
 
 export default SearchResultsList;
-
