@@ -44,6 +44,7 @@ const BookDetails = () => {
     if (storedRating) {
       setRating(parseInt(storedRating));
     }
+    console.log(user);
   }, [id]);
   const getTokenUserId = () => {
     const token = getCookie("token"); // Replace "token" with the name of your cookie
@@ -135,7 +136,7 @@ const BookDetails = () => {
   }
 
   return (
-    <div className="grid grid-cols-4 gap-20 container mb-8">
+    <div className="grid grid-cols-4 gap-20 container mb-8 mt-20">
       <div className=" h-[40rem] ml-0">SideLeft</div>
       <div className="col-span-2">
         <div className="book-content bg-transparent border border-gray-300 rounded-md my-10 h-auto">

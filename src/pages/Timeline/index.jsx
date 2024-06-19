@@ -16,6 +16,7 @@ function Timeline() {
     setPosts(res.data);
     setLoading(false);
   };
+
   const removePost = (id) => {
     axios.delete(`/posts/${id}`);
     getPosts();
@@ -33,9 +34,8 @@ function Timeline() {
     return <Navigate to="/login" />;
   }
   return (
-
     <>
-      <div className="bg-secondary h-screen lg:ml-20 ">
+      <div className="bg-secondary h-screen lg:ml-18 ">
         <CreatePost />
         <div className="flex flex-col gap-6 items-center pt-20 bg-secondary">
           {posts &&
@@ -47,7 +47,83 @@ function Timeline() {
               />
             ))}
         </div>
-        <div className=" hidden lg:block w-64 bg-primary fixed right-4 top-28 z-30 h-5/6 pt-20 ps-2 rounded-2xl shadow-lg"></div>
+        <div className=" hidden lg:block w-72 bg-primary fixed right-4 top-28 z-30 h-[44rem] pt-6 px-4 rounded-2xl shadow-lg">
+          <h1 className="text-xl text-white font-bold mb-8 text-center">
+            Who to follow
+          </h1>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+          <div className="flex text-white justify-between items-center mb-10">
+            <div className="h-10 w-10 rounded-full bg-black"></div>
+            <div>
+              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
+            </div>
+            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
+              Follow
+            </button>
+          </div>
+        </div>
       </div>
       {loading && (
         <div className="bg-secondary h-screen flex justify-center items-center">
@@ -91,7 +167,6 @@ function Timeline() {
         </div>
       )}
     </>
-
   );
 }
 

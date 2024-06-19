@@ -48,7 +48,7 @@ const Book = () => {
   );
 
   return (
-    <div className="grid grid-cols-4 gap-20 container mb-8 ml-96">
+    <div className="grid grid-cols-4 gap-20 container mb-8 lg:ml-96 mt-20">
       {/* <div className='bg-primary h-[40rem] ml-0'><Sidebar/></div> */}
       <div className="col-span-2">
         <div className="bg-transparent mt-20 relative">

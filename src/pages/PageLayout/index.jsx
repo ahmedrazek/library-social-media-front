@@ -1,11 +1,9 @@
-
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import { Link, Navigate, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
-
 
 const PageLayout = () => {
   const [redirect, setRedirect] = useState("");
@@ -24,13 +22,12 @@ const PageLayout = () => {
   }
   return (
     <div>
-
       <Navbar />
       <div>
         <aside className=" hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20 ps-2">
           <div>
-            <ul className="text-secondary flex flex-col gap-8 text-xl  ml-4">
-              <li className="flex gap-2">
+            <ul className="text-secondary flex flex-col text-xl w-8/12 ">
+              <li className="flex w-full gap-2 px-4 py-4 hover:bg-white hover:bg-opacity-30 hover:rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -40,9 +37,9 @@ const PageLayout = () => {
                   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
                   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
                 </svg>
-                <Link>Home</Link>{" "}
+                <Link to="/">Home</Link>{" "}
               </li>
-              <li className="flex gap-2">
+              <li className="flex w-full gap-2 p-4 hover:bg-white hover:bg-opacity-30 hover:rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -55,9 +52,9 @@ const PageLayout = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <Link>Profile</Link>{" "}
+                <Link to="/user/profile">Profile</Link>{" "}
               </li>
-              <li className="flex gap-2">
+              <li className="flex gap-2 w-full p-4 hover:bg-white hover:bg-opacity-30 hover:rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -68,7 +65,7 @@ const PageLayout = () => {
                 </svg>
                 <Link to={"/user/books"}>Books</Link>{" "}
               </li>
-              <li className="flex gap-2">
+              <li className="flex gap-2 w-full p-4 hover:bg-white hover:bg-opacity-30 hover:rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -81,9 +78,9 @@ const PageLayout = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <Link to={"/user/favorite"}>My Favorites</Link>{" "}
+                <Link to={"/user/favorite"}>Favorites</Link>{" "}
               </li>
-              <li className="flex gap-2">
+              <li className="flex gap-2 w-full p-4 hover:bg-white hover:bg-opacity-30 hover:rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -96,12 +93,12 @@ const PageLayout = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <Link>Settings</Link>{" "}
+                <Link to="/user/settings">Settings</Link>{" "}
               </li>
             </ul>
           </div>
         </aside>
-        <Outlet className='mt-8'/>
+        <Outlet className="mt-8" />
       </div>
     </div>
   );
