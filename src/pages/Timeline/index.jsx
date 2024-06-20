@@ -23,7 +23,6 @@ function Timeline() {
   };
   useEffect(() => {
     getPosts();
-    console.log(user, status);
   }, []);
   // if (loading) {
   //   return (

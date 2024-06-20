@@ -24,6 +24,9 @@ import Profile from "./pages/Profile";
 import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
+import { UserPosts } from "./components/UserPosts";
+import { Following } from "./components/Following";
+import { Followers } from "./components/Followers";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,11 +42,18 @@ function App() {
       element: <PageLayout />,
       children: [
         { path: "timeline", element: <Timeline /> },
-
         { path: "books", element: <Book /> },
         { path: "favorite", element: <FavoriteBooks /> },
-
         { path: "details/:id", element: <BookDetails /> },
+        {
+          path: "profile",
+          element: <Profile />,
+          children: [
+            { path: "posts", element: <UserPosts /> },
+            { path: "following", element: <Following /> },
+            { path: "followers", element: <Followers /> },
+          ],
+        },
       ],
     },
     { path: "login", element: <Login /> },
@@ -63,7 +73,7 @@ function App() {
   }, [dispatch, user, status]);
   if (status === "loading") {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center h-screen">
         <div role="status">
           <svg
             aria-hidden="true"
