@@ -4,19 +4,22 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { logout } from "../../store/userSlice";
 import { FaBell } from "react-icons/fa";
+
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResultsList from "../SearchResultsList/SearchResultsList";
+
+
 export default function Navbar() {
   const [showUser, setShowUser] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [redirect, setRedirect] = useState("");
-  const [searchResults, setSearchResults] = useState();
+
   const [openedNotifications, setOpenedNotifications] = useState({});
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
-
+  const [searchResults,setSearchResults]=useState([])
   const fetchNotifications = async () => {
     if (user && user._id) {
       try {

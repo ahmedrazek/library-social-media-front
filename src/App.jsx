@@ -1,8 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import {
-  BrowserRouter,
-  Navigate,
+ 
   RouterProvider,
   createBrowserRouter,
   redirect,
@@ -16,7 +15,6 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
 import Timeline from "./pages/Timeline";
 import Book from "./pages/Book/Book";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserProfile } from "./store/userSlice";
@@ -24,6 +22,10 @@ import Profile from "./pages/Profile";
 import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
+import MyFavorites from './pages/MyFavorites/MyFavorites';
+import FavoriteBooks from './pages/FavoriteBooks/FavoriteBooks'
+import SavedPosts from './pages/SavedPosts/SavedPosts'
+
 import { UserPosts } from "./components/UserPosts";
 import { Following } from "./components/Following";
 import { Followers } from "./components/Followers";
@@ -43,19 +45,15 @@ function App() {
       children: [
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
-        { path: "favorite", element: <FavoriteBooks /> },
-        { path: "details/:id", element: <BookDetails /> },
-        {
-          path: "profile",
-          element: <Profile />,
-          children: [
-            { path: "posts", element: <UserPosts /> },
-            { path: "following", element: <Following /> },
-            { path: "followers", element: <Followers /> },
-          ],
-        },
+         {path:"favorite" , element:<MyFavorites/>,children:[
+          {path:'books', element:<FavoriteBooks/>},
+          {path:'posts', element:<SavedPosts/>}
+         ]},
+        { path: "details/:id", element: <BookDetails/> }
+        
       ],
     },
+   
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
     { path: "forgotPassword", element: <ForgotPassword /> },

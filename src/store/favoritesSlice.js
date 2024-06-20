@@ -1,15 +1,17 @@
-// store/favoritesSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchFavoriteBooks = createAsyncThunk(
   'favorites/fetchFavoriteBooks',
-  async (userId) => {
-    const response = await axios.get(`http://localhost:9000/users/single/${userId}`);
-    return response.data;
+  async (userId, thunkAPI) => {
+    try {
+      const response = await axios.get(`http://localhost:9000/users/${userId}/favoriteBooks`);
+      return response.data.favouriteBooks; // Assuming response contains favouriteBooks array
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
   }
 );
-
 
 const favoritesSlice = createSlice({
   name: 'favorites',

@@ -14,7 +14,7 @@ const Book = () => {
   const [searchInput, setSearchInput] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const location = useLocation();
-
+  
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const category = query.get("category");
@@ -95,7 +95,7 @@ const Book = () => {
           )}
         </div>
       </div>
-      <div className="bg-transparent border border-gray-300 rounded-md mt-20 h-[35rem]">
+      <div className='bg-transparent border border-gray-300 rounded-md mt-20 h-auto'>
         <Category handleCategoryClick={handleCategoryClick} />
       </div>
     </div>
