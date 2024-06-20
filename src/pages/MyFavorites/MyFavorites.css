@@ -1,0 +1,299 @@
+/* ul, li {
+    list-style: none outside none;
+  }
+  
+  .nav-menu {
+    display: block;
+    background: #74adaa;
+    width:452px;
+    margin: 20px auto 20px;
+  }
+  .nav-menu > li {
+    display: inline;
+    float:left;     
+    border-right:1px solid #94c0be;
+    position: relative;
+  }
+  .nav-menu > li:last-child {
+    border-right: none;
+  }
+  .nav-menu li a {
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    font-family: 'sansationregular';
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    text-transform: capitalize;
+    overflow: visible;
+    line-height: 20px;
+    font-size: 20px;
+    padding: 15px 30px 15px 31px;     
+  }
+  
+
+  .three-d {
+    -webkit-perspective: 200px;
+    -moz-perspective: 200px;
+    -ms-perspective: 200px;
+    -o-perspective: 200px;
+    perspective: 200px;
+    -webkit-transition: all .07s linear;
+    -moz-transition: all .07s linear;
+    -ms-transition: all .07s linear;
+    -o-transition: all .07s linear;
+    transition: all .07s linear;
+    position: relative;
+  }
+  
+  .three-d:not(.active):hover {
+    cursor: pointer;
+  }
+  
+  .three-d:not(.active):hover .three-d-box, 
+  .three-d:not(.active):focus .three-d-box {
+    -wekbit-transform: translateZ(-25px) rotateX(90deg);
+    -moz-transform: translateZ(-25px) rotateX(90deg);
+    -o-transform: translateZ(-25px) rotateX(90deg);
+    -ms-transform: translateZ(-25px) rotateX(90deg);
+    transform: translateZ(-25px) rotateX(90deg);
+  }
+  
+  .three-d-box {
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    -webkit-transform: translatez(-25px);
+    -moz-transform: translatez(-25px);
+    -ms-transform: translatez(-25px);
+    -o-transform: translatez(-25px);
+    transform: translatez(-25px);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    -ms-pointer-events: none;
+    -o-pointer-events: none;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .front {
+    -webkit-transform: rotatex(0deg) translatez(25px);
+    -moz-transform: rotatex(0deg) translatez(25px);
+    -ms-transform: rotatex(0deg) translatez(25px);
+    -o-transform: rotatex(0deg) translatez(25px);
+    transform: rotatex(0deg) translatez(25px);
+  }
+  
+  .back {
+    -webkit-transform: rotatex(-90deg) translatez(25px);
+    -moz-transform: rotatex(-90deg) translatez(25px);
+    -ms-transform: rotatex(-90deg) translatez(25px);
+    -o-transform: rotatex(-90deg) translatez(25px);
+    transform: rotatex(-90deg) translatez(25px);
+    color: #FFE7C4;
+  }
+  
+  .front, .back {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #74adaa;
+    padding: 15px 30px 15px 31px; 
+    color: white;
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    -ms-pointer-events: none;
+    -o-pointer-events: none;
+    pointer-events: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .nav-menu li .active .front,
+  .nav-menu li .active .back,
+  .nav-menu li a:hover .front,
+  .nav-menu li a:hover .back {
+    background-color: #51938f;
+    -webkit-background-size: 5px 5px;
+    background-size: 5px 5px;
+    background-position: 0 0, 30px 30px;
+    background-image: -webit-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+    background-image: -moz-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+    background-image: -ms-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+    background-image: -o-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+    background-image: linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+  }
+  .nav-menu ul {
+    position: absolute;
+    left: -40px;
+    text-align: left;
+    line-height: 40px;
+    font-size: 14px;
+    width: 200px;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    -webkit-transform-origin: 0px 0px;
+    -moz-transform-origin: 0px 0px;
+    -ms-transform-origin: 0px 0px;
+    -o-transform-origin: 0px 0px;
+    transform-origin: 0px 0px;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    -ms-transform: rotateX(-90deg);
+    -o-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .nav-menu > li:hover ul {
+    display: block;
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  } */
+
+  /* MyFavorites.module.css */
+
+ul {
+  list-style: none outside none;
+}
+
+.favorites-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px; 
+}
+
+
+.nav-container {
+  margin-bottom: 30px; 
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: #74adaa; */
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.nav-menu > li:last-child {
+  border-right: none;
+}
+
+.nav-menu li a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+  font-family: 'sansationregular';
+  font-smoothing: antialiased;
+  text-transform: capitalize;
+  overflow: visible;
+  line-height: 20px;
+  font-size: 20px;
+  padding: 15px 30px 15px 31px;
+}
+
+.three-d {
+  perspective: 200px;
+  transition: all 0.07s linear;
+  position: relative;
+}
+
+.three-d:not(.active):hover {
+  cursor: pointer;
+}
+
+.three-d:not(.active):hover .three-d-box,
+.three-d:not(.active):focus .three-d-box {
+  transform: translateZ(-25px) rotateX(90deg);
+}
+
+.three-d-box {
+  transition: all 0.3s ease-out;
+  transform: translatez(-25px);
+  transform-style: preserve-3d;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.front {
+  transform: rotatex(0deg) translatez(25px);
+}
+
+.back {
+  transform: rotatex(-90deg) translatez(25px);
+  color: #FFE7C4;
+}
+
+.front, .back {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #74adaa;
+  padding: 15px 30px 15px 31px;
+  color: white;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.nav-menu li .active .front,
+.nav-menu li .active .back,
+.nav-menu li a:hover .front,
+.nav-menu li a:hover .back {
+  background-color: #51938f;
+  background-size: 5px 5px;
+  background-position: 0 0, 30px 30px;
+  background-image: linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+}
+
+.nav-menu ul {
+  position: absolute;
+  left: -40px;
+  text-align: left;
+  line-height: 40px;
+  font-size: 14px;
+  width: 200px;
+  transition: all 0.3s ease-in;
+  transform-origin: 0px 0px;
+  transform: rotateX(-90deg);
+  backface-visibility: hidden;
+}
+
+.nav-menu > li:hover ul {
+  display: block;
+  transform: rotateX(0deg);
+}

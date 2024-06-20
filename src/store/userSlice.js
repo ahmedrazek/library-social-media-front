@@ -5,7 +5,7 @@ import axios from "axios";
 export const fetchUserProfile = createAsyncThunk(
   "user/fetchUserProfile",
   async () => {
-    const res = await axios.get("/users");
+    const res = await axios.get("/users/profile");
     return res.data;
   }
 );
