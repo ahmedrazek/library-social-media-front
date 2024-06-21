@@ -23,7 +23,6 @@ import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
 import MyFavorites from './pages/MyFavorites/MyFavorites';
-import FavoriteBooks from './pages/FavoriteBooks/FavoriteBooks'
 import SavedPosts from './pages/SavedPosts/SavedPosts'
 
 import { UserPosts } from "./components/UserPosts";
