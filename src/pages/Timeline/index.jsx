@@ -8,21 +8,22 @@ import CreatePost from "../../components/CreatePost/CreatePost";
 function Timeline() {
   const [posts, setPosts] = useState();
   const [loading, setLoading] = useState(true);
+
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
   const getPosts = async () => {
     const res = await axios.get("/posts");
-    console.log(res.data);
     setPosts(res.data);
     setLoading(false);
   };
-
   const removePost = (id) => {
     axios.delete(`/posts/${id}`);
     getPosts();
   };
+
   useEffect(() => {
     getPosts();
+    console.log(user, status);
   }, []);
   // if (loading) {
   //   return (
