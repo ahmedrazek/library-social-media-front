@@ -643,7 +643,7 @@ export default function Navbar() {
 
     return () => {
       socket.disconnect();
-      console.log('Disconnected from socket server');
+      console.log('disconnected from socket server');
     };
   }, [user]); // Ensure user is a dependency if it changes
 
@@ -656,7 +656,7 @@ export default function Navbar() {
           setNewNotification(true);
         }
       } catch (error) {
-        console.error("Error fetching notifications:", error);
+        console.error("error fetching notifications:", error);
       }
     }
   };
