@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,20 +24,19 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post("/users/login", data);
-      console.log(res);
       dispatch(setUser(res.data.user));
       setRedirect(true);
     } catch (error) {
       console.log(error);
     }
   };
-  if (redirect) return <Navigate to={"/timeline"} />;
+  if (redirect) return <Navigate to={"/user/timeline"} />;
   return (
     <div className="relative h-screen w-full">
       <div className="absolute hidden md:block lg:block bg-primary w-1/2 -z-10 h-full"></div>
       <div className="flex justify-center items-center h-screen ">
-        <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  border-2 border-gray-400 w-10/12 rounded-xl py-4 px-40 gap-4 ">
-          <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white">
+        <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  shadow-2xl shadow-black  w-10/12 rounded-xl py-20 px-40 gap-4 ">
+          <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white ">
             <h1 className=" text-6xl self-start">BookNet </h1>
             <img src={image} alt="" />
             <p className="text-xl">
@@ -175,7 +174,7 @@ export default function Login() {
               Google account
             </a>
             <p className="text-center">
-              Don't have an account? <a href="#">Sign Up</a>
+              Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>
           </div>
         </div>

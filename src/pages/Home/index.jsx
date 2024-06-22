@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import "./Home.module.css";
-import { Link } from "react-router-dom"; // Make sure to import Link
+import { Link, Navigate } from "react-router-dom"; // Make sure to import Link
 import heroImage from "../../assets/heroImage.png";
 import { FaHandshake, FaGlobe, FaBook, FaArrowUp } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
-import About from '../../components/Aboutus/index';
-import Footer from '../../components/Footer/index';
+import About from "../../components/Aboutus/index";
+import Footer from "../../components/Footer/index";
+import { useSelector } from "react-redux";
 
 const ServiceCard = ({ title, description, icon }) => {
   return (
-    <div className="bg-secondary rounded-lg p-6 flex items-center">
+    <div className="bg-secondary rounded-bl-full rounded-tl-full p-6 flex items-center">
       <div className="mr-4 rounded-full p-6 bg-primary">{icon}</div>
       <div>
         <h3 className="text-lg font-medium">{title}</h3>
@@ -21,7 +23,7 @@ const ServiceCard = ({ title, description, icon }) => {
 
 const Home = () => {
   const [showScroll, setShowScroll] = useState(false);
-
+  const user = useSelector((state) => state.user.user);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -65,7 +67,9 @@ const Home = () => {
       icon: <FaPeopleGroup className="text-44 text-secondary" />,
     },
   ];
-
+  if (user) {
+    return <Navigate to="/user/timeline" />;
+  }
   return (
     <>
       <div className="container mx-auto p-4">
@@ -166,7 +170,8 @@ const Home = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
               {services.map((service, index) => (
-                <ServiceCard
+                <ServiceCard 
+              
                   key={index}
                   title={service.title}
                   description={service.description}

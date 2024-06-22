@@ -1,5 +1,6 @@
 
 import { BsFillSendFill } from "react-icons/bs";
+import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 const Footer = () => {
 
   return (
@@ -34,10 +35,20 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <h3 className="font-semibold mb-2">Contact us</h3>
             <div className="flex space-x-4 mb-4">
-              <a href="#" className=" text-xl p-2 hover:bg-green-500 hover:text-primary hover:rounded"><i className="fab fa-twitter"></i></a>
-              <a href="#" className=" text-xl p-2 hover:bg-green-500 hover:text-primary hover:rounded"><i className="fab fa-facebook"></i></a>
-              <a href="#" className=" text-xl p-2 hover:bg-green-500 hover:text-primary hover:rounded"><i className="fab fa-instagram"></i></a>
-              <a href="#" className=" text-xl p-2 hover:bg-green-500 hover:text-primary hover:rounded"><i className="fab fa-linkedin"></i></a>
+          
+              <a href="#" className="text-xl p-2 hover:bg-green-500 hover:text-primary hover:rounded-full hover:text-secondary">
+                <FaTwitter />
+              </a>
+              <a href="#" className="text-xl p-2 hover:bg-green-500  hover:text-primary hover:rounded-full hover:text-secondary">
+                <FaFacebook />
+              </a>
+              <a href="#" className="text-xl p-2 hover:bg-green-500 hover:text-primary hover:rounded-full hover:text-secondary">
+                <FaInstagram />
+              </a>
+              <a href="#" className="text-xl p-2 hover:bg-green-500 hover:text-primary hover:rounded-full hover:text-secondary">
+                <FaLinkedin />
+              </a>
+
             </div>
             <div className="w-full flex mt-4">
               <input type="text" placeholder="Send Message" className="w-full p-2 rounded-l-lg text-gray-800" />
