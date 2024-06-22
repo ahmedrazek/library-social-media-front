@@ -44,7 +44,7 @@ function App() {
       children: [
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
-         {path:"favorite" , element:<MyFavorites/>,children:[
+        {path:"favorite" , element:<MyFavorites/>,children:[
           {path:'books', element:<FavoriteBooks/>},
           {path:'posts', element:<SavedPosts/>}
          ]},

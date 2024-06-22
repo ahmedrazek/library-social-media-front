@@ -6,7 +6,7 @@ const MyFavorites = () => {
   return (
     <div className="favorites-container">
       <div id="nav" className="nav-container">
-        <ul className="nav-menu clearfix unstyled">
+        <ul className="nav-menu clearfix unstyled justify-center">
           <li>
             <NavLink
               to="/user/favorite/books"
