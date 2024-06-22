@@ -49,7 +49,7 @@ function App() {
           path: "profile",
           element: <Profile />,
           children: [
-            { path: "posts", element: <UserPosts /> },
+            { path: "posts", element: <UserPosts />, index: true },
             { path: "following", element: <Following /> },
             { path: "followers", element: <Followers /> },
           ],
