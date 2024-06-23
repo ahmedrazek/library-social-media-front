@@ -101,10 +101,6 @@ const BookDetails =() => {
     return <div>Loading...</div>;
   }
 
-
-
-  
-
   return (
     <div className="grid grid-cols-4 gap-20 container mb-8">
       <div className=" h-[40rem] ml-0">SideLeft</div>
