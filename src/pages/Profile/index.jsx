@@ -8,7 +8,7 @@ const Profile = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div className="mt-32   ml-60 mr-10">
+    <div className="mt-32   ml-72 mr-10">
       <div
         className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative "
         style={{ backgroundImage: `url(${user.cover ? user.cover : ""})` }}
@@ -28,7 +28,7 @@ const Profile = () => {
           </h1>
         </div>
         <div>
-          <button className="text-primary bg-white px-4 py-2 text-md rounded-full absolute right-10 -bottom-28 border-2 border-primary font-semibold">
+          <button className="text-primary bg-white px-4 py-2 text-md rounded-full absolute right-10 -bottom-28 border hover:border-2 border-primary font-semibold">
             Edit Profile
           </button>
         </div>

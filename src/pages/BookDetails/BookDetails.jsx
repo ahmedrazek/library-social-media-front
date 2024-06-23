@@ -4,15 +4,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { fetchBookById } from "../../store/bookSlice";
 import { FaHeart, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
-import axios from 'axios';
-import Sidebar from './../../components/Sidebar/Sidebar';
+import axios from "axios";
+import Sidebar from "../../components/Sidebar";
 
 const BookDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const bookDetails = useSelector((state) => state.book.bookDetails);
   const user = useSelector((state) => state.user.user); // Retrieve user data
-  const userId = user?._id; 
+  const userId = user?._id;
   const navigate = useNavigate();
   const [rating, setRating] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -39,7 +39,7 @@ const BookDetails = () => {
     }
     console.log(user);
   }, [id]);
-  
+
   useEffect(() => {
     dispatch(fetchBookById(id));
   }, [dispatch, id]);
@@ -68,7 +68,9 @@ const BookDetails = () => {
 
   return (
     <div className="grid grid-cols-4 gap-20 container mb-8 h-full">
-      <div className='bg-primary h-[40rem] ml-0'><Sidebar/></div>
+      <div className="bg-primary h-[40rem] ml-0">
+        <Sidebar />
+      </div>
       <div className="col-span-2 mt-30">
         <div className="book-content bg-transparent border border-gray-300 rounded-md my-10 h-auto">
           <div className="rating-favorite flex flex-row justify-between items-baseline mb-3 px-6 pt-5 pb-3">

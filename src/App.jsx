@@ -27,6 +27,7 @@ import SavedPosts from "./pages/SavedPosts/SavedPosts";
 import { UserPosts } from "./components/UserPosts";
 import { Following } from "./components/Following";
 import { Followers } from "./components/Followers";
+import { UserProfile } from "./pages/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,15 @@ function App() {
           element: <Profile />,
           children: [
             { path: "posts", element: <UserPosts />, index: true },
+            { path: "following", element: <Following /> },
+            { path: "followers", element: <Followers /> },
+          ],
+        },
+        {
+          path: "userProfile/:id",
+          element: <UserProfile />,
+          children: [
+            { path: "posts", element: <UserPosts /> },
             { path: "following", element: <Following /> },
             { path: "followers", element: <Followers /> },
           ],
