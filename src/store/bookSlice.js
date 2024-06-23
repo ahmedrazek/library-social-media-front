@@ -88,6 +88,7 @@ export const fetchBookById = createAsyncThunk(
 const initialState = {
   books: [],
   bookDetails: null,
+favoriteBooks: [],
   status: "idle",
   error: null,
 };
@@ -95,7 +96,16 @@ const initialState = {
 const bookSlice = createSlice({
   name: "book",
   initialState,
-  reducers: {},
+  reducers: {
+    updateFavoriteStatus(state, action) {
+      const { bookId, isFavorite } = action.payload;
+      if (isFavorite) {
+        state.favoriteBooks.push(bookId);
+      } else {
+        state.favoriteBooks = state.favoriteBooks.filter(id => id !== bookId);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.pending, (state) => {
@@ -123,6 +133,7 @@ const bookSlice = createSlice({
   },
 });
 
+export const {  updateFavoriteStatus } = bookSlice.actions;
 export default bookSlice.reducer;
 
 
