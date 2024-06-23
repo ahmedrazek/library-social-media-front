@@ -36,6 +36,7 @@ function App() {
   const error = useSelector((state) => state.user.error);
   axios.defaults.baseURL = "http://localhost:9000/";
   axios.defaults.withCredentials = true;
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
   const router = createBrowserRouter([
     { path: "/", element: <Home /> },
     {

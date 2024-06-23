@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiUpload, FiX } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
@@ -11,6 +11,21 @@ const CreatePost = () => {
   const [imageURL, setImageURL] = useState("");
   const [selectedBook, setSelectedBook] = useState("");
   const [reviewRating, setReviewRating] = useState(0);
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get("/books");
+        console.log("Fetched books:", response.data.Data); 
+        setBooks(response.data.Data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+    // console.log(books);
+    fetchBooks();
+  }, []);
 
   const handleFormSubmit = (type) => {
     setPopupType(type);
@@ -68,7 +83,7 @@ const CreatePost = () => {
 
   return (
     <div className="w-11/12 lg:w-6/12 mx-auto pt-24">
-      <div className="relative rounded-xl bg-white p-4  shadow-md flex items-start">
+      <div className="relative rounded-xl bg-white p-4 shadow-md flex items-start">
         <img
           src="/avatar.jpg"
           alt="Profile"
@@ -199,9 +214,12 @@ const CreatePost = () => {
                     className="w-full border rounded p-2"
                   >
                     <option value="">Choose a book</option>
-                    <option value="Book 1">Book 1</option>
-                    <option value="Book 2">Book 2</option>
-                    <option value="Book 3">Book 3</option>
+                    {Array.isArray(books) &&
+                      books.map((book) => (
+                        <option key={book._id} value={book.title}>
+                          {book.title}
+                        </option>
+                      ))}
                   </select>
                 </div>
               )}
@@ -217,9 +235,12 @@ const CreatePost = () => {
                     className="w-full border rounded p-2 mb-2"
                   >
                     <option value="">Choose a book</option>
-                    <option value="Book 1">Book 1</option>
-                    <option value="Book 2">Book 2</option>
-                    <option value="Book 3">Book 3</option>
+                    {Array.isArray(books) &&
+                      books.map((book) => (
+                        <option key={book._id} value={book.title}>
+                          {book.title}
+                        </option>
+                      ))}
                   </select>
                   <div className="flex items-center mb-2">
                     <label className="mr-2">Rating</label>

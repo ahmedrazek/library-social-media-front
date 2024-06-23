@@ -687,9 +687,9 @@ export default function Navbar() {
     }
   };
 
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
+  // useEffect(() => {
+  //   fetchNotifications();
+  // }, [user]);
 
   useEffect(() => {
     if (showNotifications) {
