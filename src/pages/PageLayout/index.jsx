@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar";
 import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
 
-import Sidebar from "./../../components/Sidebar/Sidebar";
+import Sidebar from "../../components/Sidebar/index";
 const PageLayout = () => {
   return (
     <div>
@@ -9,7 +9,7 @@ const PageLayout = () => {
       <div className="">
         <Sidebar />
 
-        <Sidebar />
+
 
         <div className="mt-20">
           <Outlet className="space-y-20 " />
