@@ -54,7 +54,7 @@ const PostCard = ({ postId, removePost }) => {
   const addComment = async () => {
     try {
       const commentBody = { userId: user._id, postId, description: comment };
-      const res = await axios.post("/comment", commentBody);
+      const res = await axios.post("/comments", commentBody);
       console.log(res);
       getPost();
       setComment("");
