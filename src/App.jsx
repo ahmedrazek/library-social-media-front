@@ -45,6 +45,15 @@ function App() {
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
         {
+          path: "favorite",
+          element: <MyFavorites />,
+          children: [
+            { path: "books", element: <FavoriteBooks /> },
+            { path: "posts", element: <SavedPosts /> },
+          ],
+        },
+        { path: "details/:id", element: <BookDetails /> },
+        {
           path: "profile",
           element: <Profile />,
           children: [
