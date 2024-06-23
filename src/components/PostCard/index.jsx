@@ -1,20 +1,23 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { differenceInMinutes } from "date-fns";
 import axios from "axios";
 import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+
+// eslint-disable-next-line react/prop-types
 const PostCard = ({ postId, removePost }) => {
   const [showPhotos, setShowPhoto] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [like, setLike] = useState(false);
   const [date, setDate] = useState("");
-
   const [post, setPost] = useState(null);
   const [likesNum, setLikesNum] = useState(0);
   const [comment, setComment] = useState("");
+  const [saved, setSaved] = useState(false); 
   const user = useSelector((state) => state.user.user);
+
   const calculateDate = (createdAt) => {
     const postDate = differenceInMinutes(
       new Date(Date.now()),
@@ -36,6 +39,13 @@ const PostCard = ({ postId, removePost }) => {
       calculateDate(res.data.createdAt);
       setLike(res.data.likes.some((like) => like._id === user._id));
       setLikesNum(res.data.likes.length);
+
+      const savedState = localStorage.getItem(`saved-${postId}`);
+      if (savedState !== null) {
+        setSaved(JSON.parse(savedState));
+      } else {
+        setSaved(res.data.savedPosts?.includes(postId));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -52,21 +62,45 @@ const PostCard = ({ postId, removePost }) => {
       console.log(error);
     }
   };
-  const toggleLike = () => {
-    if (!like) {
-      axios.post(`/posts/like/${user._id}/${post._id}`);
-      setLike(true);
-      setLikesNum(likesNum + 1);
-    }
-    if (like) {
-      axios.post(`/posts/dislike/${user._id}/${post._id}`);
-      setLike(false);
-      setLikesNum(likesNum - 1);
+
+  const toggleLike = async () => {
+    try {
+      if (!like) {
+        await axios.post(`/posts/like/${user._id}/${post._id}`);
+        setLike(true);
+        setLikesNum(likesNum + 1);
+      } else {
+        await axios.post(`/posts/dislike/${user._id}/${post._id}`);
+        setLike(false);
+        setLikesNum(likesNum - 1);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
+
+  const savePost = async () => {
+    try {
+      if (saved) {
+        const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
+        setSaved(false);
+        localStorage.setItem(`saved-${postId}`, JSON.stringify(false)); 
+        console.log("Post unsaved:", res.data);
+      } else {
+        const res = await axios.post(`/posts/save/${user._id}/${postId}`);
+        setSaved(true);
+        localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
+        console.log("Post saved:", res.data);
+      }
+    } catch (error) {
+      console.error("Error saving or unsaving the post", error);
+    }
+  };
+
   useEffect(() => {
     getPost();
   }, []);
+
   if (!post) return null;
   if (showPhotos) {
     return (
@@ -90,7 +124,7 @@ const PostCard = ({ postId, removePost }) => {
                 />
                 <path
                   fillRule="evenodd"
-                  d="M4.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L6.31 12l6.97-6.97a.75.75 0 0 0-1.06-1.06l-7.5 7.5Z"
+                  d="M4.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L11.69 12l-6.97-6.97a.75.75 0 0 0-1.06-1.06l7.5 7.5Z"
                   clipRule="evenodd"
                 />
               </svg>
@@ -104,12 +138,12 @@ const PostCard = ({ postId, removePost }) => {
               >
                 <path
                   fillRule="evenodd"
-                  d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                  d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
                   clipRule="evenodd"
                 />
                 <path
                   fillRule="evenodd"
-                  d="M19.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                  d="M19.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
                   clipRule="evenodd"
                 />
               </svg>
@@ -138,17 +172,12 @@ const PostCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      {/* // CARD */}
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 shadow-md bg-white">
-        {/* USER INFO  */}
-        <div className="flex justify-between items-center">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-6/12 shadow-xl bg-white">
+        <div className="flex justify-between  items-center">
           <div className="flex gap-2">
-            {/* USER PHOTO  */}
             <div className=" w-12 h-12 rounded-full bg-black">
               {post.userId?.photo && <img src={post.userId.photo} alt="" />}
-              {/* <img src={post.userId.photo} alt="" /> */}
             </div>
-            {/* USER NAME&INFO  */}
             <div>
               <div className="flex gap-2 items-center">
                 <h2 className="font-semibold">{post.userId?.name}</h2>
@@ -157,6 +186,7 @@ const PostCard = ({ postId, removePost }) => {
               <p className=" text-xs text-gray-500">{date} ago</p>
             </div>
           </div>
+          <div className="flex justify-between gap-8">
           {user._id == post.userId?._id ? (
             <button
               className="text-primary"
@@ -176,17 +206,31 @@ const PostCard = ({ postId, removePost }) => {
               </svg>
             </button>
           ) : null}
+          <button onClick={savePost} className="text-primary flex items-center gap-1">
+              {saved ? (
+                <>
+                  <FaBookmark className="w-5 h-5" />
+                  <span>Saved</span>
+                </>
+              ) : (
+                <>
+                  <FaRegBookmark className="w-5 h-5" />
+                  <span>Save</span>
+                </>
+              )}
+             </button>
+          </div>
         </div>
         {/* POST DESC  */}
         <div className="px-2">
           <p>{post.description}</p>
         </div>
         {/* POST GALLERY  */}
-        {post.photo && (
+        {post.imageURL && (
           <div className="h-[28rem]  w-full">
             <img
-              src={post.photo}
-              alt=""
+              src={`http://localhost:9000/postcard/${post.imageURL}`}
+              alt="Post"
               className=" object-contain rounded-2xl h-full w-full"
             />
           </div>

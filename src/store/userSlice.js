@@ -1,11 +1,10 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
 export const fetchUserProfile = createAsyncThunk(
   "user/fetchUserProfile",
   async () => {
-    const res = await axios.get("/users");
+    const res = await axios.get("/users/profile");
     return res.data;
   }
 );
@@ -21,7 +20,7 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
-      state.userId = action.payload._id; 
+      state.userId = action.payload._id;
     },
     logout: (state) => {
       state.user = null;
@@ -46,6 +45,3 @@ const userSlice = createSlice({
 });
 export const { setUser, logout } = userSlice.actions;
 export default userSlice.reducer;
-
-
-

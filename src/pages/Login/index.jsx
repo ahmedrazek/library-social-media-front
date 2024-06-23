@@ -35,8 +35,8 @@ export default function Login() {
     <div className="relative h-screen w-full">
       <div className="absolute hidden md:block lg:block bg-primary w-1/2 -z-10 h-full"></div>
       <div className="flex justify-center items-center h-screen ">
-        <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  border-2 border-gray-400 w-10/12 rounded-xl py-4 px-40 gap-4 ">
-          <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white">
+        <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  shadow-2xl shadow-black  w-10/12 rounded-xl py-20 px-40 gap-4 ">
+          <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white ">
             <h1 className=" text-6xl self-start">BookNet </h1>
             <img src={image} alt="" />
             <p className="text-xl">
