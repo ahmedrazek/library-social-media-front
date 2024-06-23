@@ -17,10 +17,10 @@ const FavoriteBooks = () => {
            axios.get(`http://localhost:9000/books/${bookId}`) );
 
            const booksResponses = await Promise.all(bookDetailsPromises);
-           console.log(booksResponses);
+          
 
         const books = booksResponses.map(response => response.data);
-        console.log(books)
+        
         setFavoriteBooks(books);
       } catch (error) {
         console.error("Error fetching favorite books", error);
