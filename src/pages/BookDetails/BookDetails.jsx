@@ -157,7 +157,7 @@ import { fetchBookById, updateFavoriteStatus } from "../../store/bookSlice";
 import { FaHeart, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
 import axios from "axios";
-import Sidebar from "./../../components/Sidebar/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 const BookDetails = () => {
   const dispatch = useDispatch();
