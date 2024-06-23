@@ -8,7 +8,8 @@ const Sidebar = () => {
     <aside className="hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20 ps-2">
       <div className="">
         <ul className="text-secondary flex flex-col justify-center items-start gap-4 text-2xl font-semibold px-6">
-          <NavLink
+         
+        <NavLink
             to="/user/timeline"
             className={({ isActive }) =>
               isActive ? "active-link w-full" : "hover:w-full"

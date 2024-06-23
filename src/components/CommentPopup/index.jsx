@@ -15,7 +15,7 @@ export default function CommentPopup({
   getPost,
 }) {
   const removeComment = (id) => {
-    axios.delete(`/comment/${id}`);
+    axios.delete(`/comments/${id}`);
     getPost();
   };
 
