@@ -1,25 +1,19 @@
-/* custom.css */
-blockquote {
+
+
+  .content-wrapper {
     position: relative;
   }
   
-  blockquote::before {
-    content: "\f10d";
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900;
-    position: absolute;
-    top: -50px;
-    left: -10px;
-    font-size: 2rem;
-    color:rgb(33,75,62,100%); 
-  }
   
-  blockquote::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -1.5rem;
-    width: 0.5rem;
-    height: 120%;
-    background-color: rgb(33,75,62,100%);
-  }
+.content-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 0;
+  transform: translateY(-50%); /* Adjust to center vertically */
+  width: 0.5rem; /* Adjust width as needed */
+  height: 100%;
+  border-radius: 0%; /* This will make it a circle */
+  background-color: rgba(33, 75, 62, 1); /* Correctly format rgba */
+  z-index: -1; /* Place it behind the content */
+}

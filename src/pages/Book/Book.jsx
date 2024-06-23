@@ -5,6 +5,7 @@ import { FaSearch, FaStar } from "react-icons/fa";
 import Noresult from "../../components/NoResult/NoResult";
 import Category from "../../components/Category/Category";
 import { Link, useLocation } from "react-router-dom";
+// import Sidebar from './../../components/Sidebar/Sidebar';
 
 const Book = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Book = () => {
   const [searchInput, setSearchInput] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const location = useLocation();
-
+  
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const category = query.get("category");
@@ -28,8 +29,6 @@ const Book = () => {
   const handleSearchChange = (e) => {
     setSearchInput(e.target.value);
   };
- 
-
 
   const resetSearch = () => {
     setSearchInput("");
@@ -45,12 +44,12 @@ const Book = () => {
   const filteredBooks = books.filter(
     (book) =>
       (selectedCategory ? book.category === selectedCategory : true) &&
-      book.title.toLowerCase().startsWith(searchInput.toLowerCase().slice(0, 5))
+      book.title.toLowerCase().startsWith(searchInput.toLowerCase())
   );
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-20  container mb-8 lg:ms-80 mx-auto">
-      {/* <div className="bg-primary h-[40rem] ml-0">SideLeft</div> */}
+    <div className="grid grid-cols-4 gap-20 container mb-8 lg:ml-96 mt-20">
+      {/* <div className='bg-primary h-[40rem] ml-0'><Sidebar/></div> */}
       <div className="col-span-2">
         <div className="bg-transparent mt-20 relative">
           <input
@@ -72,10 +71,10 @@ const Book = () => {
             All Books
           </button>
           {Array.isArray(filteredBooks) && filteredBooks.length > 0 ? (
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3">
               {filteredBooks.map((book) => (
                 <Link to={`/user/details/${book._id}`} key={book._id}>
-                  <div className="border border-gray-200 rounded-md p-3">
+                  <div className="border border-gray-200 rounded-md p-3 m-4">
                     <img
                       src={`http://localhost:9000/image/${book.cover}`}
                       alt="BookImage"
@@ -84,8 +83,8 @@ const Book = () => {
                     <h2 className="text-center font-bold text-primary">
                       {book.title}
                     </h2>
-                    <div className="flex ">
-                      <FaStar className="text-orange-500 " />
+                    <div className="flex">
+                      <FaStar className="text-orange-500" />
                     </div>
                   </div>
                 </Link>
@@ -96,7 +95,7 @@ const Book = () => {
           )}
         </div>
       </div>
-      <div className="hidden md:block bg-transparent border border-gray-300 rounded-md mt-20 h-[35rem]">
+      <div className='bg-transparent border border-gray-300 rounded-md mt-20 h-auto'>
         <Category handleCategoryClick={handleCategoryClick} />
       </div>
     </div>

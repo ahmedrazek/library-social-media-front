@@ -1,15 +1,12 @@
 
-
 import React, { useState } from 'react';
 const RatingPopup = ({ onClose, onAddRating }) => {
   const initialRatings = [1];
   const [ratings, setRatings] = useState(initialRatings);
-
   const handleStarClick = (rowIndex, starIndex) => {
     const newRatings = ratings.map((rating, idx) => (idx === rowIndex ? starIndex + 1 : rating));
     setRatings(newRatings);
   };
-
   const handleSubmitRating = () => {
     onAddRating(ratings[0]);
     onClose();

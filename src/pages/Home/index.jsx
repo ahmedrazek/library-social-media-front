@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const ServiceCard = ({ title, description, icon }) => {
   return (
-    <div className="bg-secondary rounded-lg p-6 flex items-center">
+    <div className="bg-secondary rounded-bl-full rounded-tl-full p-6 flex items-center">
       <div className="mr-4 rounded-full p-6 bg-primary">{icon}</div>
       <div>
         <h3 className="text-lg font-medium">{title}</h3>
@@ -170,7 +170,8 @@ const Home = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
               {services.map((service, index) => (
-                <ServiceCard
+                <ServiceCard 
+              
                   key={index}
                   title={service.title}
                   description={service.description}

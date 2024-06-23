@@ -5,7 +5,7 @@ import axios from 'axios';
 export const fetchFavoriteBooks = createAsyncThunk(
   'favorites/fetchFavoriteBooks',
   async (userId) => {
-    const response = await axios.get(`http://localhost:9000/${userId}`);
+    const response = await axios.get(`http://localhost:9000/books/${userId}`);
     return response.data;
   }
 );

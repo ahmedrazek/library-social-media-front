@@ -1,8 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import {
-  BrowserRouter,
-  Navigate,
+ 
   RouterProvider,
   createBrowserRouter,
   redirect,
@@ -20,13 +19,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserProfile } from "./store/userSlice";
 import Profile from "./pages/Profile";
+import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
-import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
+import MyFavorites from './pages/MyFavorites/MyFavorites';
+import SavedPosts from './pages/SavedPosts/SavedPosts'
 
+import { UserPosts } from "./components/UserPosts";
+import { Following } from "./components/Following";
+import { Followers } from "./components/Followers";
 
-
-function App() {  
+function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
@@ -40,17 +43,21 @@ function App() {
       element: <PageLayout />,
       children: [
         { path: "timeline", element: <Timeline /> },
-        { path: "books", element: <Book/> },
-        {path:"favorite" , element:<FavoriteBooks/>},
+        { path: "books", element: <Book /> },
+         {path:"favorite" , element:<MyFavorites/>,children:[
+          {path:'books', element:<FavoriteBooks/>},
+          {path:'posts', element:<SavedPosts/>}
+         ]},
         { path: "details/:id", element: <BookDetails/> }
         
       ],
     },
+   
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
     { path: "forgotPassword", element: <ForgotPassword /> },
     { path: "resetPassword", element: <ResetPassword /> },
-    {path:"noresult" , element:<Noresult/>},
+    { path: "noresult", element: <Noresult /> },
     { path: "*", element: <NotFound /> },
   ]);
   useEffect(() => {
@@ -63,7 +70,7 @@ function App() {
   }, [dispatch, user, status]);
   if (status === "loading") {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center h-screen">
         <div role="status">
           <svg
             aria-hidden="true"
