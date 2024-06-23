@@ -4,7 +4,7 @@ const AddComment = ({ addComment, setComment, comment, user }) => {
   return (
     <div className="flex justify-between  py-2 gap-2 items-center">
       <div className=" w-12 h-12 rounded-full bg-black">
-        {user.photo && <img src={user.photo} alt="" />}
+        {user?.photo && <img src={user.photo} alt="" />}
       </div>
 
       <input

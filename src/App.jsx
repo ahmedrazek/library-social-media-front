@@ -1,7 +1,6 @@
 import "./App.css";
 import axios from "axios";
 import {
- 
   RouterProvider,
   createBrowserRouter,
   redirect,
@@ -22,12 +21,13 @@ import Profile from "./pages/Profile";
 import FavoriteBooks from "./pages/FavoriteBooks/FavoriteBooks";
 import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
-import MyFavorites from './pages/MyFavorites/MyFavorites';
-import SavedPosts from './pages/SavedPosts/SavedPosts'
+import MyFavorites from "./pages/MyFavorites/MyFavorites";
+import SavedPosts from "./pages/SavedPosts/SavedPosts";
 
 import { UserPosts } from "./components/UserPosts";
 import { Following } from "./components/Following";
 import { Followers } from "./components/Followers";
+import { UserProfile } from "./pages/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,15 +44,45 @@ function App() {
       children: [
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
-        {path:"favorite" , element:<MyFavorites/>,children:[
-          {path:'books', element:<FavoriteBooks/>},
-          {path:'posts', element:<SavedPosts/>}
-         ]},
-        { path: "details/:id", element: <BookDetails/> }
-        
+        {
+          path: "favorite",
+          element: <MyFavorites />,
+          children: [
+            { path: "books", element: <FavoriteBooks /> },
+            { path: "posts", element: <SavedPosts /> },
+          ],
+        },
+        { path: "details/:id", element: <BookDetails /> },
+        {
+          path: "profile",
+          element: <Profile />,
+          children: [
+            { path: "posts", element: <UserPosts />, index: true },
+            { path: "following", element: <Following /> },
+            { path: "followers", element: <Followers /> },
+          ],
+        },
+        {
+          path: "userProfile/:id",
+          element: <UserProfile />,
+          children: [
+            { path: "posts", element: <UserPosts /> },
+            { path: "following", element: <Following /> },
+            { path: "followers", element: <Followers /> },
+          ],
+        },
+        {
+          path: "favorite",
+          element: <MyFavorites />,
+          children: [
+            { path: "books", element: <FavoriteBooks /> },
+            { path: "posts", element: <SavedPosts /> },
+          ],
+        },
+        { path: "details/:id", element: <BookDetails /> },
       ],
     },
-   
+
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
     { path: "forgotPassword", element: <ForgotPassword /> },
