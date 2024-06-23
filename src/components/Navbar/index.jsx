@@ -602,6 +602,8 @@
 
 
 
+
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
@@ -647,19 +649,24 @@ export default function Navbar() {
     };
   }, [user]); // Ensure user is a dependency if it changes
 
-  const fetchNotifications = async () => {
-    if (user && user._id) {
-      try {
-        const response = await axios.get(`http://localhost:9000/notifications/${user._id}`);
-        setNotifications(response.data);
-        if (response.data.length > 0) {
-          setNewNotification(true);
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      if (user && user._id) {
+        try {
+          const response = await axios.get(`http://localhost:9000/notifications/${user._id}`);
+          console.log(response);
+          setNotifications(response.data);
+          if (response.data.length > 0) {
+            setNewNotification(true);
+          }
+        } catch (error) {
+          console.error("Error fetching notifications:", error);
         }
-      } catch (error) {
-        console.error("error fetching notifications:", error);
       }
-    }
-  };
+    };
+
+    fetchNotifications();
+  }, [user,newNotification]);
 
   const handleNotificationClick = (id) => {
     setOpenedNotifications((prev) => ({ ...prev, [id]: true }));
@@ -684,9 +691,9 @@ export default function Navbar() {
     }
   };
 
-  useEffect(() => {
-    fetchNotifications();
-  }, [notifications]);
+  // useEffect(() => {
+  //   fetchNotifications();
+  // }, [user]);
 
   useEffect(() => {
     if (showNotifications) {
