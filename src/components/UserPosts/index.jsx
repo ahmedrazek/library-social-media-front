@@ -2,12 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import PostCard from "../PostCard";
+import { useParams } from "react-router-dom";
 
 export const UserPosts = () => {
   const [posts, setPosts] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const { id } = useParams();
   const user = useSelector((state) => state.user.user);
   const getUserPosts = async () => {
-    const res = await axios.get(`/posts/${user._id}`);
+    const res = await axios.get(`/posts/${userId}`);
     setPosts(res.data);
     console.log(res.data);
   };
@@ -16,8 +19,14 @@ export const UserPosts = () => {
     getUserPosts();
   };
   useEffect(() => {
+    if (id) {
+      setUserId(id);
+    } else if (user && user._id) {
+      setUserId(user._id);
+    }
+    console.log(userId);
     getUserPosts();
-  }, []);
+  }, [userId]);
 
   return (
     <div>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { IoMdHome, IoIosSettings } from 'react-icons/io';
-import { FaUserCircle, FaBookOpen, FaBookmark } from 'react-icons/fa';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { IoMdHome, IoIosSettings } from "react-icons/io";
+import { FaUserCircle, FaBookOpen, FaBookmark } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
@@ -15,20 +15,28 @@ const Sidebar = () => {
             }
           >
             {({ isActive }) => (
-              <li className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${isActive ? 'bg-secondary text-primary w-full' : ''}`}>
+              <li
+                className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${
+                  isActive ? "bg-secondary text-primary w-full" : ""
+                }`}
+              >
                 <IoMdHome className="text-3xl" />
                 <span className={isActive ? "text-primary " : ""}>Home</span>
               </li>
             )}
           </NavLink>
           <NavLink
-            to="/profile"
+            to="/user/profile"
             className={({ isActive }) =>
               isActive ? "active-link w-full" : "hover:w-full"
             }
           >
             {({ isActive }) => (
-              <li className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${isActive ? 'bg-secondary text-primary w-full' : ''}`}>
+              <li
+                className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${
+                  isActive ? "bg-secondary text-primary w-full" : ""
+                }`}
+              >
                 <FaUserCircle className="text-2xl" />
                 <span className={isActive ? "text-primary" : ""}>Profile</span>
               </li>
@@ -41,7 +49,11 @@ const Sidebar = () => {
             }
           >
             {({ isActive }) => (
-              <li className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${isActive ? 'bg-secondary text-primary w-full' : ''}`}>
+              <li
+                className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${
+                  isActive ? "bg-secondary text-primary w-full" : ""
+                }`}
+              >
                 <FaBookOpen />
                 <span className={isActive ? "text-primary" : ""}>Books</span>
               </li>
@@ -54,9 +66,15 @@ const Sidebar = () => {
             }
           >
             {({ isActive }) => (
-              <li className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${isActive ? 'bg-secondary text-primary w-full' : ''}`}>
+              <li
+                className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:transition-all w-full ${
+                  isActive ? "bg-secondary text-primary w-full" : ""
+                }`}
+              >
                 <FaBookmark />
-                <span className={isActive ? "text-primary" : ""}>My Favorites</span>
+                <span className={isActive ? "text-primary" : ""}>
+                  My Favorites
+                </span>
               </li>
             )}
           </NavLink>
@@ -67,7 +85,11 @@ const Sidebar = () => {
             }
           >
             {({ isActive }) => (
-              <li className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:w-full hover:transition-all w-full ${isActive ? 'bg-secondary text-primary w-full' : ''}`}>
+              <li
+                className={`flex flex-row items-center justify-start gap-2 py-1 px-2 rounded-md hover:bg-secondary hover:text-primary hover:w-full hover:transition-all w-full ${
+                  isActive ? "bg-secondary text-primary w-full" : ""
+                }`}
+              >
                 <IoIosSettings className="text-3xl" />
                 <span className={isActive ? "text-primary" : ""}>Settings</span>
               </li>
