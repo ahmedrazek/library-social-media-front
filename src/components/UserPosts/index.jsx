@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import PostCard from "../PostCard";
 import { useParams } from "react-router-dom";
@@ -24,7 +24,6 @@ export const UserPosts = () => {
     } else if (user && user._id) {
       setUserId(user._id);
     }
-    console.log(userId);
     getUserPosts();
   }, [userId]);
 
