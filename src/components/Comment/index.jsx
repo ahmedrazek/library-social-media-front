@@ -41,14 +41,14 @@ export default function Comment({ comment, user, getPost, removeComment }) {
   return (
     <div
       className="bg-secondary px-4 py-4 rounded-xl mx-4 my-2"
-      key={comment._id}
+      key={comment?._id}
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <div className=" w-8 h-8 rounded-full bg-black"></div>
 
           <div>
-            <h4 className=" font-semibold text-sm">{comment.userId.name}</h4>
+            <h4 className=" font-semibold text-sm">{comment?.userId?.name}</h4>
             <p className=" text-xs text-gray-500">
               {calculateCommentDate(comment.createdAt)}
             </p>

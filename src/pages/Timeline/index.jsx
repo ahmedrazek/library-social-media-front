@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
+import QuoteCard from "../../components/QouteCard";
+import ReviewCard from "../../components/ReviewCard";
 
 function Timeline() {
   const [posts, setPosts] = useState();
@@ -15,6 +17,7 @@ function Timeline() {
     const res = await axios.get("/posts");
     setPosts(res.data);
     setLoading(false);
+    console.log(res.data);
   };
   const removePost = (id) => {
     axios.delete(`/posts/${id}`);
@@ -24,7 +27,6 @@ function Timeline() {
   useEffect(() => {
     getPosts();
     console.log(user, status);
-    console.log(posts);
   }, []);
   // if (loading) {
   //   return (
@@ -40,13 +42,33 @@ function Timeline() {
         <CreatePost />
         <div className="flex flex-col gap-6 items-center pt-20 bg-secondary">
           {posts &&
-            posts.map((post) => (
-              <PostCard
-                postId={post._id}
-                key={post._id}
-                removePost={removePost}
-              />
-            ))}
+            posts.map((post) => {
+              if (post.type === "post") {
+                return (
+                  <PostCard
+                    postId={post._id}
+                    key={post._id}
+                    removePost={removePost}
+                  />
+                );
+              } else if (post.type === "review") {
+                return (
+                  <ReviewCard
+                    postId={post._id}
+                    key={post._id}
+                    removePost={removePost}
+                  />
+                );
+              } else {
+                return (
+                  <QuoteCard
+                    postId={post._id}
+                    key={post._id}
+                    removePost={removePost}
+                  />
+                );
+              }
+            })}
         </div>
         <div className=" hidden lg:block w-72 bg-primary fixed right-4 top-28 z-30 h-[44rem] pt-6 px-4 rounded-2xl shadow-lg">
           <h1 className="text-xl text-white font-bold mb-8 text-center">
