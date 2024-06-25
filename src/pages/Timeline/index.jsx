@@ -1,6 +1,6 @@
 import PostCard from "../../components/PostCard";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
@@ -23,7 +23,9 @@ function Timeline() {
     axios.delete(`/posts/${id}`);
     getPosts();
   };
-
+  const updatePosts = useCallback(() => {
+    getPosts();
+  }, []);
   useEffect(() => {
     getPosts();
     console.log(user, status);
@@ -39,7 +41,7 @@ function Timeline() {
   return (
     <>
       <div className="bg-secondary h-screen lg:ml-18 ">
-        <CreatePost />
+        <CreatePost updatePosts={updatePosts} />
         <div className="flex flex-col gap-6 items-center pt-20 bg-secondary">
           {posts &&
             posts.map((post) => {

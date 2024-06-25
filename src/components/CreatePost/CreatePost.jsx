@@ -3,7 +3,7 @@ import axios from "axios";
 import { FiUpload, FiX } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
 
-const CreatePost = () => {
+const CreatePost = ({ updatePosts }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupType, setPopupType] = useState("");
   const [postText, setPostText] = useState("");
@@ -63,6 +63,7 @@ const CreatePost = () => {
       setIncludeImage(false);
       setSelectedBook("");
       setReviewRating(0);
+      updatePosts();
     } catch (error) {
       console.error(error);
     }
