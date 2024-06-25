@@ -703,7 +703,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white border-gray-200 shadow-md z-50 fixed top-0 start-0 w-full">
+      <nav className="bg-white border-gray-200 border-b-2 shadow-sm z-50 fixed top-0 start-0 w-full">
         <div className="flex items-center flex-wrap justify-between mx-auto p-4">
           <Link to="/">
             <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
