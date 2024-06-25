@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar";
 
 const PageLayout = () => {
   return (
-    <div>
+    <div className="bg-white">
       <Navbar />
       <div className="">
         <Sidebar />
