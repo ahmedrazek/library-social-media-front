@@ -11,7 +11,7 @@ export const UserProfile = () => {
   const getUser = async () => {
     const res = await axios.get(`/users/${id}`);
     setCurUser(res.data);
-    if (user?.following.includes(id)) {
+    if (user?.following.find((follow) => follow._id == curUser._id)) {
       setFollow(true);
     } else {
       setFollow(false);
@@ -29,6 +29,11 @@ export const UserProfile = () => {
   };
   useEffect(() => {
     getUser();
+    console.log(
+      user?.following.find((follow) => follow._id == curUser._id),
+      curUser,
+      user
+    );
   }, []);
   if (id == user?._id) {
     return <Navigate to={"/user/profile"} />;
@@ -78,14 +83,20 @@ export const UserProfile = () => {
           One day you leave this life behind so live a life you will remember
         </q>
       </div>
-      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-primary font-semibold border-b pb-4 border-gray-400 w-[30rem]">
+      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 w-[30rem]">
         <Link className="px-12" to={"posts"}>
           Posts
         </Link>
-        <Link className="px-12" to={"following"}>
+        <Link className="px-12 flex gap-4" to={"following"}>
+          <span className="font-bold italic text-xl ">
+            {curUser?.following.length}
+          </span>{" "}
           Following
         </Link>
-        <Link className="px-12" to={"followers"}>
+        <Link className="px-12 flex gap-4" to={"followers"}>
+          <span className="font-bold italic text-xl ">
+            {curUser?.followers.length}
+          </span>{" "}
           Followers{" "}
         </Link>
       </div>

@@ -1,4 +1,3 @@
-
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { Link, Navigate } from "react-router-dom";
@@ -37,7 +36,6 @@
 //   const handleNotificationClick = (id) => {
 //     setOpenedNotifications((prev) => ({ ...prev, [id]: true }));
 //   };
-
 
 //   const handleDeleteNotification = async (notificationId) => {
 //     try {
@@ -291,7 +289,6 @@
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { Link, Navigate } from "react-router-dom";
@@ -314,7 +311,7 @@
 //   const user = useSelector((state) => state.user.user);
 //   const dispatch = useDispatch();
 //   const [searchResults, setSearchResults] = useState([]);
-  
+
 //   const fetchNotifications = async () => {
 //     if (user && user._id) {
 //       try {
@@ -598,22 +595,17 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { logout } from "../../store/userSlice";
 import { FaBell } from "react-icons/fa";
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from "date-fns";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResultsList from "../SearchResultsList/SearchResultsList";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
+
 export default function Navbar() {
   const [showUser, setShowUser] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -626,47 +618,47 @@ export default function Navbar() {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const [searchResults, setSearchResults] = useState([]);
-  
-  useEffect(() => {
-    const socket = io('http://localhost:9000'); // Ensure this matches your server URL
 
-    socket.on('connect', () => {
-      console.log('Connected to socket server');
+  useEffect(() => {
+    const socket = io("http://localhost:9000"); // Ensure this matches your server URL
+
+    socket.on("connect", () => {
+      console.log("Connected to socket server");
       if (user && user._id) {
-        socket.emit('join', user._id);
+        socket.emit("join", user._id);
       }
     });
 
-    socket.on('newNotification', (notification) => {
-      console.log('New notification received:', notification);
-      setNotifications((prevNotifications) => [notification, ...prevNotifications]);
+    socket.on("newNotification", (notification) => {
+      console.log("New notification received:", notification);
+      setNotifications((prevNotifications) => [
+        notification,
+        ...prevNotifications,
+      ]);
       setNewNotification(true);
     });
 
     return () => {
       socket.disconnect();
-      console.log('disconnected from socket server');
+      console.log("disconnected from socket server");
     };
   }, [user]); // Ensure user is a dependency if it changes
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      if (user && user._id) {
-        try {
-          const response = await axios.get(`http://localhost:9000/notifications/${user._id}`);
-          console.log(response);
-          setNotifications(response.data);
-          if (response.data.length > 0) {
-            setNewNotification(true);
-          }
-        } catch (error) {
-          console.error("Error fetching notifications:", error);
+  const fetchNotifications = async () => {
+    if (user && user._id) {
+      try {
+        const response = await axios.get(
+          `http://localhost:9000/notifications/${user._id}`
+        );
+        setNotifications(response.data);
+        if (response.data.length > 0) {
+          setNewNotification(true);
         }
+      } catch (error) {
+        console.error("error fetching notifications:", error);
       }
-    };
-
-    fetchNotifications();
-  }, [user,newNotification]);
+    }
+  };
 
   const handleNotificationClick = (id) => {
     setOpenedNotifications((prev) => ({ ...prev, [id]: true }));
@@ -674,8 +666,12 @@ export default function Navbar() {
 
   const handleDeleteNotification = async (notificationId) => {
     try {
-      await axios.delete(`http://localhost:9000/notifications/${user._id}/${notificationId}`);
-      setNotifications((prev) => prev.filter((notification) => notification._id !== notificationId));
+      await axios.delete(
+        `http://localhost:9000/notifications/${user._id}/${notificationId}`
+      );
+      setNotifications((prev) =>
+        prev.filter((notification) => notification._id !== notificationId)
+      );
     } catch (error) {
       console.error("Error deleting notification:", error);
     }
@@ -700,7 +696,6 @@ export default function Navbar() {
       setNewNotification(false);
     }
   }, [showNotifications]);
-
 
   if (redirect) {
     return <Navigate to="/login" />;
@@ -895,7 +890,10 @@ export default function Navbar() {
                         <div>{notification.message}</div>
                         <div>
                           <span className="text-sm text-gray-500 dark:text-gray-400">
-                            {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
+                            {formatDistanceToNow(
+                              new Date(notification.createdAt),
+                              { addSuffix: true }
+                            )}
                           </span>
                         </div>
                       </div>
@@ -906,7 +904,9 @@ export default function Navbar() {
                             viewBox="0 0 24 24"
                             fill="currentColor"
                             className="size-5"
-                            onClick={() => handleDeleteNotification(notification._id)}
+                            onClick={() =>
+                              handleDeleteNotification(notification._id)
+                            }
                           >
                             <path
                               fillRule="evenodd"
