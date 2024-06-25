@@ -5,9 +5,9 @@ import { FaUserCircle, FaBookOpen, FaBookmark } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
-    <aside className="hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20 ps-2">
+    <aside className="hidden lg:block w-64 bg-white fixed left-0 border-r-2 top-16 z-30 h-screen pt-20 ps-2">
       <div className="">
-        <ul className="text-secondary flex flex-col justify-center items-start gap-4 text-2xl font-semibold px-6">
+        <ul className="text-black flex flex-col justify-center items-start gap-4 text-2xl font-semibold px-6">
           <NavLink
             to="/user/timeline"
             className={({ isActive }) =>

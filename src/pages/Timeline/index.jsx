@@ -24,6 +24,7 @@ function Timeline() {
   useEffect(() => {
     getPosts();
     console.log(user, status);
+    console.log(posts);
   }, []);
   // if (loading) {
   //   return (
