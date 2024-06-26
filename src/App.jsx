@@ -28,7 +28,8 @@ import { UserPosts } from "./components/UserPosts";
 import { Following } from "./components/Following";
 import { Followers } from "./components/Followers";
 import { UserProfile } from "./pages/UserProfile";
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -127,8 +128,10 @@ function App() {
 
   return (
     <>
+     <ToastContainer theme="colored" />
       <RouterProvider router={router} />
-    </>
+     
+|    </>
   );
 }
 
