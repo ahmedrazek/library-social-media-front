@@ -1,12 +1,11 @@
-
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchBookById, updateFavoriteStatus } from "../../store/bookSlice";
 import { FaHeart, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
 import axios from "axios";
-import Sidebar from "../../components/Sidebar/index";
+import Sidebar from "../../components/Sidebar";
 
 const BookDetails = () => {
   const dispatch = useDispatch();
@@ -18,11 +17,11 @@ const BookDetails = () => {
   const [rating, setRating] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-   
+
   useEffect(() => {
     // Fetch book details
     dispatch(fetchBookById(id));
-    
+
     // Initialize favorite state from localStorage
     const storedFavoriteState = localStorage.getItem(`favorite_${id}`);
     if (storedFavoriteState !== null) {
@@ -58,7 +57,9 @@ const BookDetails = () => {
 
       const newFavoriteState = !isFavorite;
       setIsFavorite(newFavoriteState);
-      dispatch(updateFavoriteStatus({ bookId: id, isFavorite: newFavoriteState }));
+      dispatch(
+        updateFavoriteStatus({ bookId: id, isFavorite: newFavoriteState })
+      );
       localStorage.setItem(`favorite_${id}`, JSON.stringify(newFavoriteState));
 
       console.log(response.data);

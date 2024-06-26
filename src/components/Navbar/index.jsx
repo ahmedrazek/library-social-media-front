@@ -347,7 +347,7 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { logout } from "../../store/userSlice";
 import { FaBell } from "react-icons/fa";
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from "date-fns";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResultsList from "../SearchResultsList/SearchResultsList";
 import io from "socket.io-client";
@@ -366,27 +366,30 @@ export default function Navbar() {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const [searchResults, setSearchResults] = useState([]);
-  
-  useEffect(() => {
-    const socket = io('http://localhost:9000'); // Ensure this matches your server URL
 
-    socket.on('connect', () => {
-      console.log('Connected to socket server');
+  useEffect(() => {
+    const socket = io("http://localhost:9000"); // Ensure this matches your server URL
+
+    socket.on("connect", () => {
+      console.log("Connected to socket server");
       if (user && user._id) {
-        socket.emit('join', user._id);
+        socket.emit("join", user._id);
       }
     });
 
-    socket.on('newNotification', (notification) => {
-      console.log('New notification received:', notification);
-      setNotifications((prevNotifications) => [notification, ...prevNotifications]);
+    socket.on("newNotification", (notification) => {
+      console.log("New notification received:", notification);
+      setNotifications((prevNotifications) => [
+        notification,
+        ...prevNotifications,
+      ]);
       setNewNotification(true);
       //setShowNotifications(true);
     });
 
     return () => {
       socket.disconnect();
-      console.log('disconnected from socket server');
+      console.log("disconnected from socket server");
     };
   }, [user]); // Ensure user is a dependency if it changes
 
@@ -417,8 +420,12 @@ export default function Navbar() {
 
   const handleDeleteNotification = async (notificationId) => {
     try {
-      await axios.delete(`http://localhost:9000/notifications/${user._id}/${notificationId}`);
-      setNotifications((prev) => prev.filter((notification) => notification._id !== notificationId));
+      await axios.delete(
+        `http://localhost:9000/notifications/${user._id}/${notificationId}`
+      );
+      setNotifications((prev) =>
+        prev.filter((notification) => notification._id !== notificationId)
+      );
     } catch (error) {
       console.error("Error deleting notification:", error);
     }
@@ -450,7 +457,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white border-gray-200 shadow-md z-50 fixed top-0 start-0 w-full">
+      <nav className="bg-white border-gray-200 border-b-2 shadow-sm z-50 fixed top-0 start-0 w-full">
         <div className="flex items-center flex-wrap justify-between mx-auto p-4">
           <Link to="/">
             <span className="text-2xl font-semibold whitespace-nowrap dark:text-white" >
@@ -637,7 +644,10 @@ export default function Navbar() {
                         <div>{notification.message}</div>
                         <div>
                           <span className="text-sm text-gray-500 dark:text-gray-400">
-                            {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
+                            {formatDistanceToNow(
+                              new Date(notification.createdAt),
+                              { addSuffix: true }
+                            )}
                           </span>
                         </div>
                       </div>
@@ -648,7 +658,9 @@ export default function Navbar() {
                             viewBox="0 0 24 24"
                             fill="currentColor"
                             className="size-5"
-                            onClick={() => handleDeleteNotification(notification._id)}
+                            onClick={() =>
+                              handleDeleteNotification(notification._id)
+                            }
                           >
                             <path
                               fillRule="evenodd"

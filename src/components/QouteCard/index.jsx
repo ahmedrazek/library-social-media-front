@@ -8,7 +8,7 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const PostCard = ({ postId, removePost }) => {
+const QuoteCard = ({ postId, removePost }) => {
   const [showPhotos, setShowPhoto] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [like, setLike] = useState(false);
@@ -174,7 +174,7 @@ const PostCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 shadow-xl bg-white">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 shadow-xl bg-red-300">
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
             <div className=" w-12 h-12 rounded-full bg-black">
@@ -188,7 +188,9 @@ const PostCard = ({ postId, removePost }) => {
                 >
                   {post.userId?.name}
                 </Link>
-                <p className=" text-xs text-gray-500">posted an update</p>
+                <p className=" text-xs text-gray-500">
+                  posted an <span className="font-bold italic">Quote</span>
+                </p>
               </div>
               <p className=" text-xs text-gray-500">{date} ago</p>
             </div>
@@ -232,8 +234,9 @@ const PostCard = ({ postId, removePost }) => {
           </div>
         </div>
         {/* POST DESC  */}
-        <div className="px-2">
-          <p>{post.description}</p>
+        {/* <h1 className="text-center italic text-xl font-semibold">Quote : </h1> */}
+        <div className="px-2 text-center italic text-lg font-semibold">
+          <q>{post.description}</q>
         </div>
         {/* POST GALLERY  */}
         {post.imageURL && (
@@ -307,4 +310,4 @@ const PostCard = ({ postId, removePost }) => {
   );
 };
 
-export default PostCard;
+export default QuoteCard;
