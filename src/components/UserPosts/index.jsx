@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import PostCard from "../PostCard";
 import { useParams } from "react-router-dom";
+import ReviewCard from "../ReviewCard";
+import QuoteCard from "../QouteCard";
 
 export const UserPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -57,13 +59,33 @@ export const UserPosts = () => {
     <div>
       <div className="flex flex-col gap-6 items-center pt-20">
         {posts &&
-          posts.map((post) => (
-            <PostCard
-              postId={post._id}
-              key={post._id}
-              removePost={removePost}
-            />
-          ))}
+          posts.map((post) => {
+            if (post.type === "post") {
+              return (
+                <PostCard
+                  postId={post._id}
+                  key={post._id}
+                  removePost={removePost}
+                />
+              );
+            } else if (post.type === "review") {
+              return (
+                <ReviewCard
+                  postId={post._id}
+                  key={post._id}
+                  removePost={removePost}
+                />
+              );
+            } else {
+              return (
+                <QuoteCard
+                  postId={post._id}
+                  key={post._id}
+                  removePost={removePost}
+                />
+              );
+            }
+          })}
       </div>
     </div>
   );

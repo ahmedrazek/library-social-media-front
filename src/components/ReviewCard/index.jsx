@@ -4,7 +4,7 @@ import { differenceInMinutes } from "date-fns";
 import axios from "axios";
 import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -174,7 +174,7 @@ const ReviewCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-4/12 shadow-xl bg-green-400">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 shadow-xl bg-green-400">
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
             <div className=" w-12 h-12 rounded-full bg-black">
@@ -237,6 +237,18 @@ const ReviewCard = ({ postId, removePost }) => {
         <h1 className="text-center italic text-xl font-semibold">
           Reviewed Book : <q>{post.book}</q>
         </h1>
+        <h3 className=" italic text-lg font-semibold flex gap-2 justify-center">
+          Rating:
+          <div className="flex">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <FaStar
+                key={star}
+                size={24}
+                color={star <= post.rating ? "#ffc107" : "#e4e5e9"}
+              />
+            ))}
+          </div>
+        </h3>
         <div className="px-2 font-semibold">
           <p>{post.description}</p>
         </div>

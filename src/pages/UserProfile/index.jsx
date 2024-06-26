@@ -116,7 +116,7 @@ export const UserProfile = () => {
           One day you leave this life behind so live a life you will remember
         </q>
       </div>
-      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 w-[30rem]">
+      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 w-[40rem]">
         <Link className="px-12" to={"posts"}>
           Posts
         </Link>

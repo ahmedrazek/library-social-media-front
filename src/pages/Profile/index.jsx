@@ -1,9 +1,15 @@
-import { useSelector } from "react-redux";
+import { useCallback, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, Outlet } from "react-router-dom";
+import { fetchUserProfile } from "../../store/userSlice";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
+  const fetchUser = useCallback(() => {
+    dispatch(fetchUserProfile());
+  }, []);
   console.log(user);
   if (!user && status == "failed") {
     return <Navigate to="/login" />;
@@ -25,7 +31,7 @@ const Profile = () => {
             ) : null}
           </div>
           <h1 className="text-2xl font-semibold text-black">
-            {user && user.name} Abdelrazek
+            {user && user.name}
           </h1>
         </div>
         <div>
@@ -56,7 +62,7 @@ const Profile = () => {
           Followers
         </Link>
       </div>
-      <Outlet />
+      <Outlet context={[fetchUser]} />
     </div>
   );
 };
