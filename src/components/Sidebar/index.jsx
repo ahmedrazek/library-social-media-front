@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { IoMdHome, IoIosSettings } from "react-icons/io";
 import { FaUserCircle, FaBookOpen, FaBookmark } from "react-icons/fa";
-
 const Sidebar = () => {
   return (
     <aside className="hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20 ps-2">
