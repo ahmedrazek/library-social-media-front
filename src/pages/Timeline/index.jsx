@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import QuoteCard from "../../components/QouteCard";
 import ReviewCard from "../../components/ReviewCard";
+import RightSideBar from "../../components/RightSideBar/RightSideBar";
 
 function Timeline() {
   const [posts, setPosts] = useState();
@@ -72,83 +73,11 @@ function Timeline() {
               }
             })}
         </div>
-        <div className=" hidden lg:block w-72 bg-primary fixed right-4 top-28 z-30 h-[44rem] pt-6 px-4 rounded-2xl shadow-lg">
-          <h1 className="text-xl text-white font-bold mb-8 text-center">
-            Who to follow
-          </h1>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-          <div className="flex text-white justify-between items-center mb-10">
-            <div className="h-10 w-10 rounded-full bg-black"></div>
-            <div>
-              <h1 className="text-sm font-semibold">Ahmed Abdelrazek</h1>
-            </div>
-            <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4 ">
-              Follow
-            </button>
-          </div>
-        </div>
+       {/* ***** */}
+       <RightSideBar
+        user={user}
+       
+       />
       </div>
       {loading && (
         <div className="bg-secondary h-screen flex justify-center items-center">
