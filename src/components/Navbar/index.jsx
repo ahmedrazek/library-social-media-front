@@ -1,5 +1,104 @@
 
 
+
+// import { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { Link, Navigate } from "react-router-dom";
+// import axios from "axios";
+// import { logout } from "../../store/userSlice";
+// import { FaBell } from "react-icons/fa";
+// import { formatDistanceToNow } from 'date-fns';
+// import SearchBar from "../SearchBar/SearchBar";
+// import SearchResultsList from "../SearchResultsList/SearchResultsList";
+
+// export default function Navbar() {
+//   const [showUser, setShowUser] = useState(false);
+//   const [showMenu, setShowMenu] = useState(false);
+//   const [showNotifications, setShowNotifications] = useState(false);
+//   const [notifications, setNotifications] = useState([]);
+//   const [redirect, setRedirect] = useState("");
+
+//   const [openedNotifications, setOpenedNotifications] = useState({});
+//   const user = useSelector((state) => state.user.user);
+//   const dispatch = useDispatch();
+//   const [searchResults, setSearchResults] = useState([]);
+//   const fetchNotifications = async () => {
+//     if (user && user._id) {
+//       try {
+//         const response = await axios.get(
+//           `http://localhost:9000/notification/${user._id}`
+//         );
+//         console.log(response.data);
+//         setNotifications(response.data);
+//       } catch (error) {
+//         console.error("Error fetching notifications:", error);
+//       }
+//     }
+//   };
+
+//   const handleNotificationClick = (id) => {
+//     setOpenedNotifications((prev) => ({ ...prev, [id]: true }));
+//   };
+
+//   const handleDeleteNotification = async (notificationId) => {
+//     try {
+//       await axios.delete(`http://localhost:9000/notification/${user._id}/${notificationId}`);
+//       setNotifications((prev) => prev.filter((notification) => notification._id !== notificationId));
+//     } catch (error) {
+//       console.error("Error deleting notification:", error);
+//     }
+//   };
+//   const setLogout = async () => {
+//     try {
+//       await axios.post("/users/logout");
+//       dispatch(logout());
+//       console.log("logout");
+//       setRedirect("/login");
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (showNotifications) {
+//       fetchNotifications();
+//     }
+//   }, [showNotifications]);
+
+//   if (redirect) {
+//     return <Navigate to="/login" />;
+//   }
+
+//   return (
+//     <>
+//       <nav className="bg-white border-gray-200 shadow-md z-50 fixed top-0 start-0 w-full">
+//         <div className="flex items-center flex-wrap justify-between mx-auto p-4">
+//           <Link to="/">
+//             <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
+//               BookNet
+//             </span>
+//           </Link>
+//           <div className="flex items-center lg:order-2 space-x-3 lg:space-x- rtl:space-x-reverse">
+//             <button
+//               type="button"
+//               className="relative ml-4"
+//               onClick={() => setShowNotifications(!showNotifications)}
+//             >
+//               <FaBell className="text-2xl text-primary" />
+//               <span className="sr-only">View notifications</span>
+//             </button>
+//             <button
+//               type="button"
+//               className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 relative"
+//               id="user-menu-button"
+//               onClick={() => setShowUser(!showUser)}
+//             >
+//               <div className="w-8 h-8 rounded-full bg-black"></div>
+//               <span className="sr-only">Open user menu</span>
+//             </button>
+
+
+
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { Link, Navigate } from "react-router-dom";
@@ -697,4 +796,8 @@ useEffect(()=>{
       </nav>
     </>
   );
+
 }
+
+
+
