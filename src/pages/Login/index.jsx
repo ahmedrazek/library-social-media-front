@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
 import { Navigate, Link } from "react-router-dom";
+import { GoogleAuth } from "../../components/GoogleAuth";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -167,12 +168,7 @@ export default function Login() {
                 <a href="#">Forgot password ?</a>
               </div>
             </form>
-            <a
-              href="#"
-              className="text-primary  py-3 rounded-lg font-bold text-center border border-primary hover:bg-primary hover:text-white  shadow-lg"
-            >
-              Google account
-            </a>
+            <GoogleAuth setRedirect={setRedirect} />
             <p className="text-center">
               Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>
