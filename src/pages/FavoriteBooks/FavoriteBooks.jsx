@@ -72,3 +72,5 @@ const FavoriteBooks = () => {
 
 export default FavoriteBooks;
 
+FavoriteBooks.js
+
