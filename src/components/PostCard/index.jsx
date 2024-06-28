@@ -8,8 +8,8 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const PostCard = ({ postId, removePost }) => {
-  const [showPhotos, setShowPhoto] = useState(false);
+const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
+  // const [showPhotos, setShowPhoto] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [like, setLike] = useState(false);
   const [date, setDate] = useState("");
@@ -105,77 +105,9 @@ const PostCard = ({ postId, removePost }) => {
   }, []);
 
   if (!post) return null;
-  if (showPhotos) {
-    return (
-      <>
-        <div className="absolute inset-0 text-white min-h-screen">
-          <div className="bg-black w-full h-full">
-            <div>
-              <img src={post.photo} alt="" />
-            </div>
-            <button className="absolute left-10 top-1/2 text-5xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L12.31 12l6.97-6.97a.75.75 0 0 0-1.06-1.06l-7.5 7.5Z"
-                  clipRule="evenodd"
-                />
-                <path
-                  fillRule="evenodd"
-                  d="M4.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L11.69 12l-6.97-6.97a.75.75 0 0 0-1.06-1.06l7.5 7.5Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-            <button className="absolute right-10 top-1/2 text-5xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
-                  clipRule="evenodd"
-                />
-                <path
-                  fillRule="evenodd"
-                  d="M19.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-            <button
-              className="absolute top-10 right-10"
-              onClick={() => setShowPhoto(false)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </>
-    );
-  }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 shadow-xl bg-white">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 bg-white">
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
             <div className=" w-12 h-12 rounded-full bg-black">
@@ -242,7 +174,11 @@ const PostCard = ({ postId, removePost }) => {
             <img
               src={`http://localhost:9000/postcard/${post.imageURL}`}
               alt="Post"
-              className=" object-contain rounded-2xl h-full w-full"
+              className=" object-contain rounded-2xl h-full w-full cursor-pointer"
+              onClick={() => {
+                setShowPhoto(true);
+                setImageUrl(post.imageURL);
+              }}
             />
           </div>
         )}

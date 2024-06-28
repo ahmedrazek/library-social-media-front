@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar";
-import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { useSelector } from "react-redux";
 

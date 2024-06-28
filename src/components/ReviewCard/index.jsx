@@ -67,16 +67,17 @@ const ReviewCard = ({ postId, removePost }) => {
   const toggleLike = async () => {
     try {
       if (!like) {
-        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLike(true);
+        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLikesNum(likesNum + 1);
       } else {
-        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLike(false);
+        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLikesNum(likesNum - 1);
         console.log("dislike", res);
       }
     } catch (error) {
+      setLike(!like);
       console.error(error);
     }
   };
@@ -258,7 +259,10 @@ const ReviewCard = ({ postId, removePost }) => {
             <img
               src={`http://localhost:9000/postcard/${post.imageURL}`}
               alt="Post"
-              className=" object-contain rounded-2xl h-full w-full"
+              className=" object-contain rounded-2xl h-full w-full cursor-pointer"
+              onClick={() => {
+                setShowPhoto(true);
+              }}
             />
           </div>
         )}

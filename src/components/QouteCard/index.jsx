@@ -67,16 +67,17 @@ const QuoteCard = ({ postId, removePost }) => {
   const toggleLike = async () => {
     try {
       if (!like) {
-        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLike(true);
+        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLikesNum(likesNum + 1);
       } else {
-        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLike(false);
+        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLikesNum(likesNum - 1);
         console.log("dislike", res);
       }
     } catch (error) {
+      setLike(!like);
       console.error(error);
     }
   };

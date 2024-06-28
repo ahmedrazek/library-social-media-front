@@ -2,7 +2,6 @@ import PostCard from "../../components/PostCard";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import QuoteCard from "../../components/QouteCard";
 import ReviewCard from "../../components/ReviewCard";
@@ -10,10 +9,10 @@ import RightSideBar from "../../components/RightSideBar/RightSideBar";
 
 function Timeline() {
   const [posts, setPosts] = useState();
+  const [showPhotos, setShowPhoto] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const user = useSelector((state) => state.user.user);
-  const status = useSelector((state) => state.user.status);
   const getPosts = async () => {
     const res = await axios.get("/posts");
     setPosts(res.data);
@@ -29,15 +28,75 @@ function Timeline() {
   }, []);
   useEffect(() => {
     getPosts();
-    console.log(user, status);
   }, []);
-  // if (loading) {
-  //   return (
 
-  //   );
-  // }
-  if (!user && status == "failed") {
-    return <Navigate to="/login" />;
+  if (showPhotos) {
+    return (
+      <>
+        <div className="absolute inset-0 text-white min-h-screen z-50">
+          <div className="bg-black w-full h-full">
+            <div className="flex justify-center items-center h-full">
+              <img src={`http://localhost:9000/postcard/${imageUrl}`} alt="" />
+            </div>
+            <button className="absolute left-10 top-1/2 text-5xl">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L12.31 12l6.97-6.97a.75.75 0 0 0-1.06-1.06l-7.5 7.5Z"
+                  clipRule="evenodd"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M4.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L11.69 12l-6.97-6.97a.75.75 0 0 0-1.06-1.06l7.5 7.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            <button className="absolute right-10 top-1/2 text-5xl">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
+                  clipRule="evenodd"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M19.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            <button
+              className="absolute top-10 right-10"
+              onClick={() => setShowPhoto(false)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </>
+    );
   }
   return (
     <>
@@ -52,6 +111,8 @@ function Timeline() {
                     postId={post._id}
                     key={post._id}
                     removePost={removePost}
+                    setImageUrl={setImageUrl}
+                    setShowPhoto={setShowPhoto}
                   />
                 );
               } else if (post.type === "review") {
@@ -73,11 +134,8 @@ function Timeline() {
               }
             })}
         </div>
-       {/* ***** */}
-       <RightSideBar
-        user={user}
-       
-       />
+        {/* ***** */}
+        <RightSideBar user={user} />
       </div>
       {loading && (
         <div className="bg-secondary h-screen flex justify-center items-center">
