@@ -14,27 +14,12 @@ export const GoogleAuth = ({ setRedirect }) => {
       setRedirect(true);
     },
   });
-  // useEffect(() => {
-  //   if (user) {
-  //     axios
-  //       .get(`https://www.googleapis.com/oauth2/v3/userinfo`, {
-  //         headers: {
-  //           Authorization: `Bearer ${user.access_token}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         setProfile(res.data);
-  //         console.log(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [user]);
   return (
-    <div>
+    <div className="flex justify-center">
       <button
         type="button"
         onClick={login}
-        className="text-primary  py-3 rounded-lg font-bold text-center border border-primary hover:bg-primary hover:text-white  shadow-lg"
+        className="text-primary  py-3  w-full rounded-lg font-bold text-center border border-primary transition-all ease-in  hover:bg-primary hover:text-white  shadow-lg"
       >
         Google account
       </button>

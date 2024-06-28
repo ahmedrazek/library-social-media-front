@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchBookById, updateFavoriteStatus } from "../../store/bookSlice";
+import { fetchBookById } from "../../store/bookSlice";
 import { FaHeart, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
 import axios from "axios";
@@ -14,7 +14,7 @@ const BookDetails = () => {
   const favoriteBooks = useSelector((state) => state.book.favoriteBooks);
   const user = useSelector((state) => state.user.user);
   const userId = user?._id;
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -39,7 +39,7 @@ const BookDetails = () => {
 
   const toggleFavorite = async () => {
     if (!userId) {
-      console.error('User not logged in');
+      console.error("User not logged in");
       return;
     }
 
@@ -64,12 +64,12 @@ const BookDetails = () => {
 
       console.log(response.data);
     } catch (error) {
-      console.error('Error toggling favorite status:', error);
+      console.error("Error toggling favorite status:", error);
     }
   };
 
   const handleDownload = () => {
-    const downloadLink = document.createElement('a');
+    const downloadLink = document.createElement("a");
     downloadLink.href = `http://localhost:9000/image/${bookDetails.data.Pdf}`;
     downloadLink.download = `${bookDetails.data.title}.pdf`;
     downloadLink.click();
@@ -77,9 +77,12 @@ const BookDetails = () => {
 
   const handleRead = () => {
     if (bookDetails.data.Pdf) {
-      window.open(`http://localhost:9000/image/${bookDetails.data.Pdf}`, '_blank');
+      window.open(
+        `http://localhost:9000/image/${bookDetails.data.Pdf}`,
+        "_blank"
+      );
     } else {
-      console.error('PDF URL not available');
+      console.error("PDF URL not available");
     }
   };
 
@@ -90,7 +93,7 @@ const BookDetails = () => {
   return (
     <div className="grid grid-cols-4 gap-20 container mb-8 h-full">
       <div className="h-[40rem] ml-0">
-        <Sidebar/>
+        <Sidebar />
       </div>
       <div className="col-span-2 mt-30">
         <div className="book-content bg-transparent border border-gray-300 rounded-md my-10 h-auto">
@@ -106,7 +109,9 @@ const BookDetails = () => {
               )}
             </div>
             <FaHeart
-              className={`text-2xl cursor-pointer ${isFavorite ? 'text-red-500' : 'text-gray-500'}`}
+              className={`text-2xl cursor-pointer ${
+                isFavorite ? "text-red-500" : "text-gray-500"
+              }`}
               onClick={toggleFavorite}
             />
           </div>
@@ -165,4 +170,3 @@ const BookDetails = () => {
 };
 
 export default BookDetails;
-
