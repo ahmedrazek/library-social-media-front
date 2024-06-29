@@ -96,16 +96,7 @@ favoriteBooks: [],
 const bookSlice = createSlice({
   name: "book",
   initialState,
-  // reducers: {
-  //   updateFavoriteStatus(state, action) {
-  //     const { bookId, isFavorite } = action.payload;
-  //     if (isFavorite) {
-  //       state.favoriteBooks.push(bookId);
-  //     } else {
-  //       state.favoriteBooks = state.favoriteBooks.filter(id => id !== bookId);
-  //     }
-  //   },
-  // },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.pending, (state) => {
@@ -132,7 +123,7 @@ const bookSlice = createSlice({
       });
   },
 });
-// export const {  updateFavoriteStatus } = bookSlice.actions;
+
 export default bookSlice.reducer;
 
 

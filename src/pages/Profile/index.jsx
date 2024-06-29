@@ -15,7 +15,7 @@ const Profile = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div className="mt-32 mx-10  lg:ml-72">
+    <div className="mt-32   mx-10 ">
       <div
         className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative "
         style={{ backgroundImage: `url(${user.cover ? user.cover : ""})` }}

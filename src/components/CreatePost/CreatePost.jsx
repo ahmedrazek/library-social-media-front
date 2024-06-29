@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiUpload, FiX } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
-
+import { FaPlusCircle, FaPen } from 'react-icons/fa';
 const CreatePost = ({ updatePosts }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupType, setPopupType] = useState("");
@@ -83,8 +83,8 @@ const CreatePost = ({ updatePosts }) => {
   };
 
   return (
-    <div className="w-11/12 lg:w-5/12 mx-auto pt-24">
-      <div className="relative rounded-xl bg-white p-4 shadow-md flex items-start">
+    <div className="w-11/12 lg:w-8/12 mx-auto  ">
+      <div className="relative rounded-xl  bg-secondary p-4 shadow-md flex items-start">
         <img
           src="/avatar.jpg"
           alt="Profile"
@@ -100,7 +100,7 @@ const CreatePost = ({ updatePosts }) => {
             value=""
             onFocus={() => handleFormSubmit("post")}
           />
-          <div className="flex justify-around mb-2">
+          {/* <div className="flex justify-around mb-2">
             <button
               type="button"
               onClick={() => handleFormSubmit("quote")}
@@ -122,7 +122,34 @@ const CreatePost = ({ updatePosts }) => {
             >
               Add Review
             </button>
-          </div>
+          </div> */}
+    <div className="flex justify-around mb-2">
+      <button
+        type="button"
+        onClick={() => handleFormSubmit("quote")}
+        className="bg-primary   hover:bg-primary text-white font- p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 md:mr-2 flex items-center"
+      >
+        <span className="hidden md:inline-block mr-2">Add Quote</span>
+        <FaPlusCircle className="block md:hidden text-xl" title="Add Quote" />
+      </button>
+      <button
+        type="button"
+        onClick={() => handleFormSubmit("post")}
+        className="bg-primary hover:bg-primary text-white font-semibold p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 md:mr-2 flex items-center"
+      >
+        <span className="hidden md:inline-block mr-2">Add Post</span>
+        <FaPen className="block md:hidden text-xl" title="Add Post" />
+      </button>
+      <button
+        type="button"
+        onClick={() => handleFormSubmit("review")}
+        className="bg-primary hover:bg-primary text-white font-semibold p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 flex items-center"
+      >
+        <span className="hidden md:inline-block mr-2">Add Review</span>
+        <FaStar className="block md:hidden text-xl" title="Add Review" />
+      </button>
+    </div>
+
         </form>
       </div>
       {showPopup && (

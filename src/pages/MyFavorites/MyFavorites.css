@@ -6,10 +6,10 @@ ul {
 .favorites-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
+  padding: 6px 10px;
   margin-top: 100px; 
-  margin-left:3rem;
 }
 
 

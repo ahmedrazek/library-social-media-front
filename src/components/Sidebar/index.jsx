@@ -4,27 +4,28 @@ import { IoMdHome, IoIosSettings } from "react-icons/io";
 import { FaUserCircle, FaBookOpen, FaBookmark } from "react-icons/fa";
 const Sidebar = () => {
   return (
-    <aside className="hidden lg:block w-64 bg-white fixed left-0 border-r-2 top-16 z-30 h-screen pt-20 ps-2">
+    <aside className="hidden lg:block  w-64 bg-primary fixed left-0  top-16 z-30 h-screen pt-20 ">
       <div className="">
-        <ul className="text-black flex flex-col justify-center items-start gap-10 text-2xl px-6">
-          <NavLink
-            to="/user/timeline"
-            className={({ isActive }) =>
-              isActive ? "active-link w-full" : "hover:w-full"
-            }
-          >
-            {({ isActive }) => (
-              <li
-                className={`flex flex-row items-center justify-start gap-4 py-1 px-2 rounded-full hover:bg-secondary hover:text-primary hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary w-full" : ""
-                }`}
-              >
-                <CiHome />
-
-                <span className={isActive ? "text-primary " : ""}>Home</span>
-              </li>
-            )}
-          </NavLink>
+        <ul className="text-secondary  font-semibold flex flex-col justify-center items-start gap-4 text-[1.8rem]  ">
+        <NavLink
+      to="/user/timeline"
+      className={({ isActive }) =>
+        isActive
+          ? "active-link  w-full"
+          : "hover:w-full "
+      }
+    >
+      {({ isActive }) => (
+        <li
+        className={`flex items-center gap-4 py-3  pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+          isActive ? "bg-secondary text-primary  rounded-r-full" : ""
+        }`}
+      >
+        <IoMdHome />
+        <span className={isActive ? "text-primary" : ""}>Home</span>
+      </li>
+      )}
+    </NavLink>
           <NavLink
             to="/user/profile/posts"
             className={({ isActive }) =>
@@ -33,11 +34,11 @@ const Sidebar = () => {
           >
             {({ isActive }) => (
               <li
-                className={`flex flex-row items-center justify-start gap-4 py-1 px-2 rounded-full hover:bg-secondary hover:text-primary hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary w-full" : ""
-                }`}
+              className={`flex items-center gap-4 py-3  pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                isActive ? "bg-secondary text-primary  rounded-r-full" : ""
+              }`}
               >
-                <IoPersonOutline />
+                <FaUserCircle />
 
                 <span className={isActive ? "text-primary" : ""}>Profile</span>
               </li>
@@ -51,11 +52,11 @@ const Sidebar = () => {
           >
             {({ isActive }) => (
               <li
-                className={`flex flex-row items-center justify-start gap-4 py-1 px-2 rounded-full hover:bg-secondary hover:text-primary hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary w-full" : ""
-                }`}
+              className={`flex items-center gap-4 py-4  pl-3 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                isActive ? "bg-secondary text-primary  rounded-r-full" : ""
+              }`}
               >
-                <BsBook />
+                <FaBookOpen />
                 <span className={isActive ? "text-primary" : ""}>Books</span>
               </li>
             )}
@@ -68,11 +69,11 @@ const Sidebar = () => {
           >
             {({ isActive }) => (
               <li
-                className={`flex flex-row items-center justify-start gap-4 py-1 px-2 rounded-full hover:bg-secondary hover:text-primary hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary w-full" : ""
-                }`}
+              className={`flex items-center gap-4 py-3  pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                isActive ? "bg-secondary text-primary  rounded-r-full" : ""
+              }`}
               >
-                <FaRegBookmark />
+                <FaBookmark />
                 <span className={isActive ? "text-primary" : ""}>
                   My Favorites
                 </span>
@@ -87,11 +88,11 @@ const Sidebar = () => {
           >
             {({ isActive }) => (
               <li
-                className={`flex flex-row items-center justify-start gap-4 py-1 px-2 rounded-full hover:bg-secondary hover:text-primary hover:w-full hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary w-full" : ""
-                }`}
+              className={`flex items-center gap-4 py-3  pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                isActive ? "bg-secondary text-primary  rounded-r-full" : ""
+              }`}
               >
-                <IoSettingsOutline />
+                <IoIosSettings />
                 <span className={isActive ? "text-primary" : ""}>Settings</span>
               </li>
             )}

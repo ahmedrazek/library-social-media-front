@@ -4,9 +4,9 @@ import './MyFavorites.css';
 
 const MyFavorites = () => {
   return (
-    <div className="favorites-container">
+    <div className="favorites-container ">
       <div id="nav" className="nav-container">
-        <ul className="nav-menu clearfix unstyled justify-center">
+        <ul className="nav-menu clearfix unstyled ">
           <li>
             <NavLink
               to="/user/favorite/books"
@@ -37,7 +37,7 @@ const MyFavorites = () => {
           </li>
         </ul>
       </div>
-      <div className="outlet-container">
+      <div className="outlet-container ">
         <Outlet />
       </div>
     </div>
