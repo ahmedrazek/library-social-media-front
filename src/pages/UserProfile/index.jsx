@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Navigate, Outlet, useParams } from "react-router-dom";
+import { Avatar } from '@chakra-ui/react';
 
 export const UserProfile = () => {
   const [curUser, setCurUser] = useState(null);
@@ -9,44 +10,54 @@ export const UserProfile = () => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const user = useSelector((state) => state.user.user);
-  const getUser = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`/users/${id}`);
-      setCurUser(res.data);
-      if (user?.following.find((follow) => follow._id == curUser?._id)) {
-        setFollow(true);
-      } else {
-        setFollow(false);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`/users/${id}`);
+        setCurUser(res.data);
+
+        // Check if the current user is following the fetched user
+        if (user?.following.find((follow) => follow._id === res.data._id)) {
+          setFollow(true);
+        } else {
+          setFollow(false);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
       }
-      setLoading(false);
+    };
+
+    getUser();
+  }, [id, user]); // Ensure to include 'id' and 'user' in the dependencies array for useEffect
+
+  const follow = async () => {
+    try {
+      const res = await axios.post(`/users/follow/${user._id}/${id}`);
+      console.log(res);
+      setFollow(true);
     } catch (error) {
-      console.log(error);
+      console.error("Error following user:", error);
     }
   };
-  const follow = async () => {
-    const res = await axios.post(`/users/follow/${user._id}/${id}`);
-    console.log(res);
-    setFollow(true);
-  };
-  const unFollow = async () => {
-    const res = await axios.post(`/users/unfollow/${user._id}/${id}`);
-    console.log(res);
-    setFollow(false);
-  };
-  useEffect(() => {
-    getUser();
-    console.log(
-      user?.following.find((follow) => follow._id == curUser?._id),
-      curUser,
-      user
-    );
-  }, []);
 
-  if (id == user?._id) {
+  const unFollow = async () => {
+    try {
+      const res = await axios.post(`/users/unfollow/${user._id}/${id}`);
+      console.log(res);
+      setFollow(false);
+    } catch (error) {
+      console.error("Error unfollowing user:", error);
+    }
+  };
+
+  if (id === user?._id) {
     return <Navigate to={"/user/profile"} />;
   }
-  if (loading) {
+
+  if (loading || !curUser) {
     return (
       <div className="flex justify-center items-center h-screen">
         <div role="status">
@@ -71,39 +82,42 @@ export const UserProfile = () => {
       </div>
     );
   }
+
   return (
-    <div className="mt-32   ml-72 mr-10">
+    <div className="mt-32 lg:ml-72 mr-10">
       <div
-        className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative "
+        className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
         style={{
-          backgroundImage: `url(${curUser?.cover ? curUser.cover : ""})`,
+          backgroundImage: `url(http://localhost:9000${curUser.cover})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%'  
         }}
       >
-        <div className="flex flex-col items-center gap-4 absolute -bottom-28 ">
-          <div className="h-40 w-40 rounded-full bg-red-500">
-            {curUser?.photo ? (
+        <div className="flex flex-col items-center gap-4 absolute -bottom-28">
+          <div className="h-40 w-40 rounded-full bg-green-600">
+            {curUser.photo ? (
               <img
-                src={curUser.photo}
-                alt="profile"
+                src={`http://localhost:9000${curUser.photo}`}
+                alt="Profile Avatar"
                 className="h-40 w-40 rounded-full object-cover"
               />
-            ) : null}
+            ) : <Avatar bg='teal.500' />}
           </div>
           <h1 className="text-2xl font-semibold text-black">
             {curUser && curUser.name}
           </h1>
         </div>
-        <div className=" absolute right-10 -bottom-28">
+        <div className="absolute right-10 -bottom-28">
           {following ? (
             <button
-              className="text-white bg-primary px-4 py-2 text-md rounded-full  border hover:border-2 border-primary font-semibold"
+              className="text-white bg-primary px-4 py-2 text-md rounded-full border hover:border-2 border-primary font-semibold"
               onClick={unFollow}
             >
               Following
             </button>
           ) : (
             <button
-              className="text-primary bg-white px-4 py-2 text-md rounded-full  border hover:border-2 border-primary font-semibold"
+              className="text-primary bg-white px-4 py-2 text-md rounded-full border hover:border-2 border-primary font-semibold"
               onClick={follow}
             >
               Follow
@@ -111,9 +125,9 @@ export const UserProfile = () => {
           )}
         </div>
       </div>
-      <div className="text-center mt-20 border-b-2 pb-10 ">
-        <q className=" italic font-semibold text-xl">
-          One day you leave this life behind so live a life you will remember
+      <div className="text-center mt-20 border-b-2 pb-10">
+        <q className="italic font-semibold text-xl">
+          {curUser.bio ? curUser.bio : "NO BIO"}
         </q>
       </div>
       <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 w-[30rem]">
@@ -121,16 +135,16 @@ export const UserProfile = () => {
           Posts
         </Link>
         <Link className="px-12 flex gap-4" to={"following"}>
-          <span className="font-bold italic text-xl ">
+          <span className="font-bold italic text-xl">
             {curUser?.following.length}
           </span>{" "}
           Following
         </Link>
         <Link className="px-12 flex gap-4" to={"followers"}>
-          <span className="font-bold italic text-xl ">
+          <span className="font-bold italic text-xl">
             {curUser?.followers.length}
           </span>{" "}
-          Followers{" "}
+          Followers
         </Link>
       </div>
       <Outlet />

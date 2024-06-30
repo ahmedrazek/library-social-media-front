@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiUpload, FiX } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
+import { Avatar } from '@chakra-ui/react'
+import { useSelector } from "react-redux";
 
 const CreatePost = ({ updatePosts }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -81,15 +83,25 @@ const CreatePost = ({ updatePosts }) => {
   const handleStarClick = (rating) => {
     setReviewRating(rating);
   };
+  const user = useSelector((state) => state.user.user);
+
 
   return (
-    <div className="w-11/12 lg:w-4/12 mx-auto pt-24">
-      <div className="relative rounded-xl bg-white p-4 shadow-md flex items-start">
-        <img
-          src="/avatar.jpg"
-          alt="Profile"
-          className="h-14 w-14 rounded-full border-2 border-primary mr-4"
-        />
+    <div className="w-11/12 lg:w-[40rem] mx-auto pt-24 ">
+      <div className="relative rounded-xl bg-white p-4 shadow-md flex items-start ">
+      <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden m-2 border-2 border-zinc-900">
+        {user.photo ? (
+          <img
+            src={`http://localhost:9000${user.photo}`}
+            className="object-cover w-full h-full"
+            alt="Profile"
+          />
+        ) : (
+          <Avatar bg="teal.500" size="full"/>
+        )}
+      </div>
+
+
         <form className="flex-grow">
           <textarea
             className="w-full border border-gray-200 focus:border-0 rounded-full p-2 mb-2 resize-none"

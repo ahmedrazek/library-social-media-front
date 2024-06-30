@@ -6,6 +6,7 @@ import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Avatar } from '@chakra-ui/react';
 
 // eslint-disable-next-line react/prop-types
 const PostCard = ({ postId, removePost }) => {
@@ -140,7 +141,7 @@ const PostCard = ({ postId, removePost }) => {
               >
                 <path
                   fillRule="evenodd"
-                  d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
+                  d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 1 1 1.06-1.06l7.5 7.5Z"
                   clipRule="evenodd"
                 />
                 <path
@@ -174,27 +175,33 @@ const PostCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-4/12 shadow-xl bg-white">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-white">
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
-            <div className=" w-12 h-12 rounded-full bg-black">
-              {post.userId?.photo && <img src={post.userId.photo} alt="" />}
+            <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden border-2 border-zinc-900">
+              {post.userId?.photo ? (
+                <img
+                  src={`http://localhost:9000${post.userId.photo}`}
+                  className="object-cover  w-full h-full"
+                />
+              ) : (
+                <Avatar bg="teal.500" size="full" />
+              )}
             </div>
             <div>
               <div className="flex gap-2 items-center">
                 <Link
-                  to={`/user/userProfile/${post.userId?._id}/posts`}
-                  className="font-semibold"
+                  to={`/user/userprofile/${post.userId?._id}`}
+                  className="font-bold text-primary cursor-pointer"
                 >
-                  {post.userId?.name}
+                  {post.userId?.name || "Username"}
                 </Link>
-                <p className=" text-xs text-gray-500">posted an update</p>
               </div>
-              <p className=" text-xs text-gray-500">{date} ago</p>
+              <p className="text-sm text-zinc-500">{date} ago</p>
             </div>
           </div>
           <div className="flex justify-between gap-8">
-            {user?._id == post.userId?._id ? (
+            {user?._id === post.userId?._id ? (
               <button
                 className="text-primary"
                 onClick={() => removePost(post._id)}

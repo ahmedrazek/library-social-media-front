@@ -1,43 +1,38 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import './MyFavorites.css';
-
+import { NavLink, Outlet, useLocation , Navigate} from 'react-router-dom';
+import './MyFavorites.css'; 
 const MyFavorites = () => {
+  const location = useLocation();
+
+  if (location.pathname === '/user/favorite') {
+    
+    return <Navigate to="/user/favorite/books" replace />;
+  }
+
   return (
-    <div className="favorites-container">
-      <div id="nav" className="nav-container">
-        <ul className="nav-menu clearfix unstyled justify-center">
-          <li>
-            <NavLink
-              to="/user/favorite/books"
-              className={({ isActive }) =>
-                `three-d ${isActive ? 'active' : ''}`
-              }
-            >
-              Books
-              <span className="three-d-box">
-                <span className="front">Books</span>
-                <span className="back">Books</span>
-              </span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/user/favorite/posts"
-              className={({ isActive }) =>
-                `three-d ${isActive ? 'active' : ''}`
-              }
-            >
-              Posts
-              <span className="three-d-box">
-                <span className="front">Posts</span>
-                <span className="back">Posts</span>
-              </span>
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-      <div className="outlet-container">
+    <div className="flex h-screen sm:ml-0 md:ml-0 lg:ml-64 xl:ml-64">
+      <div className="flex-1 p-6">
+        <div className="mb-6 flex justify-center">
+          <ul className="flex space-x-8">
+            <li>
+              <NavLink
+                to="/user/favorite/books"
+                className="nav-link" 
+              >
+                Books
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/user/favorite/posts"
+                className="nav-link" 
+              >
+                Posts
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        <div className="border-b mb-4"></div>
         <Outlet />
       </div>
     </div>

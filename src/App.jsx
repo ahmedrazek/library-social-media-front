@@ -23,6 +23,8 @@ import Noresult from "./components/NoResult/NoResult";
 import BookDetails from "./pages/BookDetails/BookDetails";
 import MyFavorites from "./pages/MyFavorites/MyFavorites";
 import SavedPosts from "./pages/SavedPosts/SavedPosts";
+import Settings from "./pages/Settings/Settings";
+import AccountDeleted from "./pages/AccountDeleted/AccountDeleted";
 
 import { UserPosts } from "./components/UserPosts";
 import { Following } from "./components/Following";
@@ -72,18 +74,16 @@ function App() {
             { path: "followers", element: <Followers /> },
           ],
         },
-        {
-          path: "favorite",
-          element: <MyFavorites />,
-          children: [
-            { path: "books", element: <FavoriteBooks /> },
-            { path: "posts", element: <SavedPosts /> },
-          ],
-        },
-        { path: "details/:id", element: <BookDetails /> },
       ],
     },
-
+    {
+      path: "/",
+      element: <PageLayout />,
+      children: [
+        { path: "settings", element: <Settings /> },
+      ],
+    },
+    { path: "account-deleted", element: <AccountDeleted /> },
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
     { path: "forgotPassword", element: <ForgotPassword /> },
@@ -91,6 +91,8 @@ function App() {
     { path: "noresult", element: <Noresult /> },
     { path: "*", element: <NotFound /> },
   ]);
+  
+  
   useEffect(() => {
     if (!user && status === "idle") {
       dispatch(fetchUserProfile());
