@@ -487,16 +487,16 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
           <p>{post.description}</p>
         </div>
         {/* POST IMAGE */}
-        {post.image ? (
+        {post.imageURL ? (
           <div
-            className="w-full h-[15rem] md:h-[25rem] cursor-pointer"
+            className="w-full cursor-pointer"
             onClick={() => {
-              setImageUrl(`http://localhost:9000${post.image}`);
+              setImageUrl(`http://localhost:9000/postcard/${post.imageURL}`);
               setShowPhoto(true);
             }}
           >
             <img
-              src={`http://localhost:9000${post.image}`}
+              src={`http://localhost:9000/postcard/${post.imageURL}`}
               className="w-full h-full object-cover rounded-xl"
             />
           </div>
