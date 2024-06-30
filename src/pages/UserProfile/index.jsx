@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, Outlet, useParams } from "react-router-dom";
+import { fetchUserProfile } from "../../store/userSlice";
 
 export const UserProfile = () => {
   const [curUser, setCurUser] = useState(null);
@@ -34,6 +35,10 @@ export const UserProfile = () => {
     console.log(res);
     setFollow(false);
   };
+  const dispatch = useDispatch();
+  const fetchUser = useCallback(() => {
+    dispatch(fetchUserProfile());
+  }, []);
   useEffect(() => {
     getUser();
     console.log(
@@ -72,7 +77,7 @@ export const UserProfile = () => {
     );
   }
   return (
-    <div className="mt-32   ml-72 mr-10">
+    <div className="mt-32 mx-auto lg:mr-8  lg:ml-72">
       <div
         className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative "
         style={{
@@ -111,29 +116,29 @@ export const UserProfile = () => {
           )}
         </div>
       </div>
-      <div className="text-center mt-20 border-b-2 pb-10 ">
+      <div className="text-center mt-40 lg:mt-20 border-b-2 pb-10 ">
         <q className=" italic font-semibold text-xl">
           One day you leave this life behind so live a life you will remember
         </q>
       </div>
-      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 w-[40rem]">
-        <Link className="px-12" to={"posts"}>
+      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 lg:w-[40rem]">
+        <Link className="px-4 lg:px-12" to={"posts"}>
           Posts
         </Link>
-        <Link className="px-12 flex gap-4" to={"following"}>
+        <Link className="px-4 lg:px-12 flex gap-4" to={"following"}>
           <span className="font-bold italic text-xl ">
             {curUser?.following.length}
           </span>{" "}
           Following
         </Link>
-        <Link className="px-12 flex gap-4" to={"followers"}>
+        <Link className="px-4 lg:px-12 flex gap-4" to={"followers"}>
           <span className="font-bold italic text-xl ">
             {curUser?.followers.length}
           </span>{" "}
           Followers{" "}
         </Link>
       </div>
-      <Outlet />
+      <Outlet context={[fetchUser]} />
     </div>
   );
 };

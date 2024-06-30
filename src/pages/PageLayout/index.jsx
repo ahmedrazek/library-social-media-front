@@ -16,7 +16,7 @@ const PageLayout = () => {
         <Sidebar />
 
         <div className="mt-20">
-          <Outlet className="space-y-20 " />
+          <Outlet />
         </div>
       </div>
     </div>

@@ -50,7 +50,7 @@ export const Followers = () => {
   }
   return (
     <div>
-      <div className=" w-6/12 mx-auto divide-y mt-10">
+      <div className="w-10/12 lg:w-6/12 mx-auto divide-y mt-10">
         {curUser?.followers.map((follow) => (
           // <div className="py-6" key={follow._id}>
           //   <div className="flex justify-between">

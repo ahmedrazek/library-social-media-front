@@ -15,7 +15,7 @@ const Profile = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div className="mt-32 mx-10  lg:ml-72">
+    <div className="mt-32 mx-auto lg:mr-8 lg:ml-72">
       <div
         className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative "
         style={{ backgroundImage: `url(${user.cover ? user.cover : ""})` }}
@@ -40,22 +40,22 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <div className="text-center mt-20 border-b-2 pb-10 ">
+      <div className="text-center mt-40 lg:mt-20 border-b-2 pb-10 ">
         <q className=" italic font-semibold text-xl">
           One day you leave this life behind so live a life you will remember
         </q>
       </div>
-      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-primary  border-b pb-4 border-gray-400 w-[30rem]">
-        <Link className="px-12" to={"posts"}>
+      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-primary  border-b pb-4 border-gray-400 lg:w-[30rem]">
+        <Link className="px-4 lg:px-12" to={"posts"}>
           Posts
         </Link>
-        <Link className="px-12 flex gap-2" to={"following"}>
+        <Link className="px-4 lg:px-12 flex gap-2" to={"following"}>
           <span className="text-xl italic font-bold">
             {user?.following.length}
           </span>{" "}
           Following
         </Link>
-        <Link className="px-12 flex gap-2 " to={"followers"}>
+        <Link className="px-4 lg:px-12 flex gap-2 " to={"followers"}>
           <span className="text-xl italic font-bold ">
             {user?.followers.length}
           </span>{" "}
