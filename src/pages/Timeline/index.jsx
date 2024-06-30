@@ -2,17 +2,17 @@ import PostCard from "../../components/PostCard";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import QuoteCard from "../../components/QouteCard";
 import ReviewCard from "../../components/ReviewCard";
+import RightSideBar from "../../components/RightSideBar/RightSideBar";
 
 function Timeline() {
   const [posts, setPosts] = useState();
+  const [showPhotos, setShowPhoto] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const user = useSelector((state) => state.user.user);
-  const status = useSelector((state) => state.user.status);
   const getPosts = async () => {
     const res = await axios.get("/posts");
     setPosts(res.data);
@@ -28,7 +28,6 @@ function Timeline() {
   }, []);
   useEffect(() => {
     getPosts();
-    console.log(user, status);
   }, []);
   // if (loading) {
   //   return (

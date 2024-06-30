@@ -1,8 +1,14 @@
 import Navbar from "../../components/Navbar";
-import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { useSelector } from "react-redux";
 
 const PageLayout = () => {
+  const user = useSelector((state) => state.user.user);
+  const status = useSelector((state) => state.user.status);
+  if (!user && status == "failed") {
+    return <Navigate to="/login" />;
+  }
   return (
     <div className="bg-white">
       <Navbar />
