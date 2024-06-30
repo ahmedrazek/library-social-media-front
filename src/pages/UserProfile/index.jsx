@@ -130,7 +130,7 @@ export const UserProfile = () => {
           {curUser.bio ? curUser.bio : "NO BIO"}
         </q>
       </div>
-      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 w-[30rem]">
+      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 w-[40rem]">
         <Link className="px-12" to={"posts"}>
           Posts
         </Link>

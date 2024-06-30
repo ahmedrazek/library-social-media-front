@@ -29,7 +29,7 @@ export default function Category({ handleCategoryClick }) {
       {categories.map(category => (
         <button
           key={category}
-          className='border border-gray-200 rounded-md p-3 m-4 flex items-center hover:bg-secondary w-[90%] '
+          className='border border-gray-200 rounded-md   p-3 m-4 flex items-center hover:bg-secondary w-[90%] '
           onClick={() => handleCategoryClick(category)} // Pass the category to the click handler
         >
           <FaBook className="mr-2 font-medium text-dark_light" />

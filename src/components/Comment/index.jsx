@@ -7,7 +7,6 @@ import { Avatar } from "@chakra-ui/react";
 export default function Comment({ comment, user, getPost, removeComment }) {
   const [like, setLike] = useState(false);
   const [likesNum, setLikesNum] = useState(0);
-
   const calculateCommentDate = (createdAt) => {
     const postDate = differenceInMinutes(
       new Date(Date.now()),

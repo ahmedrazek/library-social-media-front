@@ -7,6 +7,7 @@ import axios from "axios";
 import { Avatar } from '@chakra-ui/react';
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
   const [showEditProfilePopup, setShowEditProfilePopup] = useState(false);
@@ -48,6 +49,11 @@ const Profile = () => {
   }, [user]);
 
   if (!user && status === "failed") {
+  const fetchUser = useCallback(() => {
+    dispatch(fetchUserProfile());
+  }, []);
+  console.log(user);
+  if (!user && status == "failed") {
     return <Navigate to="/login" />;
   }
 

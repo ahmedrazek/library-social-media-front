@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { FollowCard } from "../followCard";
 
 export const Followers = () => {
@@ -9,7 +9,7 @@ export const Followers = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const user = useSelector((state) => state.user.user);
-
+  const [fetchUser] = useOutletContext();
   const getUser = async () => {
     const res = await axios.get(`/users/${id}`);
     setCurUser(res.data);
@@ -83,6 +83,7 @@ export const Followers = () => {
             user={user}
             curUser={curUser}
             follow={follow}
+            fetchUser={fetchUser}
           />
         ))}
       </div>

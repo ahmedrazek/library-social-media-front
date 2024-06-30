@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, Navigate } from "react-router-dom";
 import { setUser } from "../../store/userSlice";
 import backgroundImage from "../../assets/signupImage.jpg";
+import { GoogleAuth } from "../../components/GoogleAuth";
 
 export default function Signup() {
   const [redirect, setRedirect] = useState();
@@ -287,12 +288,7 @@ export default function Signup() {
                 <p>Or, Create account with</p>
               </div>
 
-              <a
-                href="#"
-                className="text-green-800  py-3 rounded-lg font-bold text-center border-2 border-green-800"
-              >
-                Google account
-              </a>
+              <GoogleAuth setRedirect={setRedirect} />
             </form>
             <div className="text-center">
               Already a member ?{" "}
