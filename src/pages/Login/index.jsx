@@ -29,6 +29,11 @@ export default function Login() {
       setLoading(true);
       const res = await axios.post("/users/login", data);
       dispatch(setUser(res.data.user));
+      if (res.data.user.savedPosts && res.data.user.savedPosts.length > 0) {
+        res.data.user.savedPosts.forEach(postId => {
+          localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
+        });
+      }
       setRedirect(true);
       setLoading(false);
     } catch (error) {

@@ -57,9 +57,6 @@ const BookDetails = () => {
 
       const newFavoriteState = !isFavorite;
       setIsFavorite(newFavoriteState);
-      dispatch(
-        updateFavoriteStatus({ bookId: id, isFavorite: newFavoriteState })
-      );
       localStorage.setItem(`favorite_${id}`, JSON.stringify(newFavoriteState));
 
       console.log(response.data);

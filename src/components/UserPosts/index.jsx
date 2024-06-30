@@ -23,6 +23,7 @@ export const UserPosts = () => {
     getUserPosts();
   };
   useEffect(() => {
+   
     if (id) {
       setUserId(id);
     } else if (user && user._id) {

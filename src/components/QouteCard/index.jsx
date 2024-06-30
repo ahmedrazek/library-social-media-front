@@ -6,6 +6,8 @@ import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Avatar} from '@chakra-ui/react'
+
 
 // eslint-disable-next-line react/prop-types
 const QuoteCard = ({ postId, removePost }) => {
@@ -175,11 +177,19 @@ const QuoteCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-5/12 shadow-xl bg-red-300">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-red-300">
+
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
-            <div className=" w-12 h-12 rounded-full bg-black">
-              {post.userId?.photo && <img src={post.userId.photo} alt="" />}
+          <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
+          {post.userId?.photo ? (
+                <img
+                  src={`http://localhost:9000${post.userId.photo}`}
+                  className="object-cover  w-full h-full"
+                />
+              ) : (
+                <Avatar bg="teal.500" size="full" />
+              )}
             </div>
             <div>
               <div className="flex gap-2 items-center">
