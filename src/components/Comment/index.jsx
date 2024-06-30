@@ -35,7 +35,7 @@ export default function Comment({ comment, user, getPost, removeComment }) {
     }
   };
   useEffect(() => {
-    setLike(comment.likes.some((like) => like === user._id));
+    setLike(comment.likes.some((like) => like === user?._id));
     setLikesNum(comment.likes.length);
     console.log(user._id , comment._id)
   }, []);

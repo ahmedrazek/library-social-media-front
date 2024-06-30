@@ -88,7 +88,7 @@ const CreatePost = ({ updatePosts }) => {
 
 
   return (
-    <div className="w-11/12 lg:w-[40rem] mx-auto pt-24 ">
+    <div className="w-11/12 lg:w-[40rem]  pt-0 ">
       <div className="relative rounded-xl bg-white p-4 shadow-md flex items-start ">
       <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden m-2 border-2 border-zinc-900">
         {user.photo ? (

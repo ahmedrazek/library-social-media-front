@@ -84,7 +84,7 @@ export const UserProfile = () => {
   }
 
   return (
-    <div className="mt-32 lg:ml-72 mr-10">
+    <div className="mt-32  mr-10">
       <div
         className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
         style={{

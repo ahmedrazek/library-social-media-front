@@ -10,7 +10,7 @@ const MyFavorites = () => {
   }
 
   return (
-    <div className="flex h-screen sm:ml-0 md:ml-0 lg:ml-64 xl:ml-64">
+    <div className="flex h-screen ">
       <div className="flex-1 p-6">
         <div className="mb-6 flex justify-center">
           <ul className="flex space-x-8">
