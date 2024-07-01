@@ -232,22 +232,12 @@ function Timeline() {
           </div>
         </div>
         <div className="col-span-12 lg:col-span-3">
-          <div className="hidden lg:block mt-22  w-full w-72 bg-primary z-30 h-full lg:h-[44rem] pt-6 px-4 rounded-2xl shadow-lg">
-            <h1 className="text-xl text-white font-bold mb-8 text-center">
-              Who to follow
-            </h1>
-            {["Ahmed Abdelrazek", "Ahmed Abdelrazek", "Ahmed Abdelrazek", "Ahmed Abdelrazek", "Ahmed Abdelrazek", "Ahmed Abdelrazek", "Ahmed Abdelrazek", "Ahmed Abdelrazek"].map((name, index) => (
-              <div key={index} className="flex text-white justify-between items-center mb-10">
-                <div className="h-10 w-10 rounded-full bg-black"></div>
-                <div>
-                  <h1 className="text-sm font-semibold">{name}</h1>
-                </div>
-                <button className="bg-secondary text-primary text-center rounded-full text-sm py-2 px-4">
-                  Follow
-                </button>
-              </div>
-            ))}
-          </div>
+    
+                   {/* ***** */}
+          <RightSideBar
+            user={user}
+              />
+          
         </div>
       </div>
       {loading && (

@@ -54,15 +54,17 @@ const FavoriteBooks = () => {
       <h1 className="text-2xl font-bold mb-4 text-center text-primary">My Favorite Books</h1>
       <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-10  ">
         {favoriteBookIds.map((book) => (
-          <div key={book._id} className="w-full border border-gray-300 rounded-md p-4 shadow-lg  " >
+          <div key={book._id} className="w-full border border-gray-300 rounded-md pb-4 shadow-lg  " >
             {book.cover && (
               <img
                 src={`http://localhost:9000/image/${book.cover}`}
-                alt="Book Cover"
+                alt="Book Cover" 
                 className="w-full h-40 object-cover mb-2"
               />
             )}
-            <h2 className="text-xl font-semibold">{book.title}</h2>
+            <h2 className="text-center font-bold text-primary">
+                  {book.title}
+             </h2>
           </div>
         ))}
       </div>
