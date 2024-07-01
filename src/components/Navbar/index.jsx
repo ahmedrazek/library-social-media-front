@@ -456,6 +456,8 @@ import { formatDistanceToNow } from "date-fns";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResultsList from "../SearchResultsList/SearchResultsList";
 import { io } from "socket.io-client";
+import { Avatar } from "@chakra-ui/react";
+
 
 export default function Navbar() {
   const [showUser, setShowUser] = useState(false);
@@ -469,6 +471,7 @@ export default function Navbar() {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const [searchResults, setSearchResults] = useState([]);
+
 
   useEffect(() => {
     const socket = io("http://localhost:9000"); // Ensure this matches your server URL
@@ -538,6 +541,8 @@ useEffect(()=>{
       await axios.post("/users/logout");
       dispatch(logout());
       setRedirect("/login");
+      localStorage.clear();
+
     } catch (error) {
       console.log(error);
     }
@@ -596,7 +601,16 @@ useEffect(()=>{
               id="user-menu-button"
               onClick={() => setShowUser(!showUser)}
             >
-              <div className="w-8 h-8 rounded-full bg-black"></div>
+          <div className="w-10 h-10 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
+            {user?.photo ? (
+              <img
+                src={`http://localhost:9000${user?.photo}`}
+                className="object-cover w-full h-full"
+              />
+            ) : (
+              <Avatar bg="teal.500" size="full" />
+            )}
+          </div>
               <span className="sr-only">Open user menu</span>
             </button>
 

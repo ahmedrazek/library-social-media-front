@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FollowCard } from "../followCard";
 
 export const Following = () => {
@@ -9,7 +9,7 @@ export const Following = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const user = useSelector((state) => state.user.user);
-  const [fetchUser] = useOutletContext();
+
   const getUser = async () => {
     const res = await axios.get(`/users/${id}`);
     setCurUser(res.data);
@@ -50,7 +50,7 @@ export const Following = () => {
   }
   return (
     <div>
-      <div className=" w-6/12 mx-auto divide-y mt-10">
+      <div className="w-10/12 lg:w-6/12 mx-auto divide-y mt-10">
         {curUser?.following.map((follow) => (
           // <div className="py-6" key={follow._id}>
           //   <div className="flex justify-between">
@@ -83,7 +83,6 @@ export const Following = () => {
             user={user}
             curUser={curUser}
             follow={follow}
-            fetchUser={fetchUser}
           />
         ))}
       </div>
