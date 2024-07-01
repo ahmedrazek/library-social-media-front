@@ -97,6 +97,23 @@ import { BsBook } from "react-icons/bs";
               </li>
             )}
           </NavLink>
+          <NavLink
+            to="/user/message"
+            className={({ isActive }) =>
+              isActive ? "active-link w-full" : "hover:w-full"
+            }
+          >
+            {({ isActive }) => (
+              <li
+                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                  isActive ? "bg-secondary text-primary rounded-r-full" : ""
+                }`}
+              >
+                <IoIosSettings />
+                <span className={isActive ? "text-primary" : ""}>Messages</span>
+              </li>
+            )}
+          </NavLink>
         </ul>
       </div>
     </aside>

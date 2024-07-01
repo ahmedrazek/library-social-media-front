@@ -117,14 +117,14 @@ const RightSideBar = () => {
   };
 
   return (
-    <div className="hidden lg:block w-72 bg-primary fixed right-4 top-28 z-30 h-[44rem] pt-6 px-4 rounded-2xl shadow-lg">
-      <h1 className="text-xl text-white font-bold mb-8 text-center">Who to follow</h1>
+    <div className="hidden lg:block w-80 bg-transparent   fixed right-4 top-28 z-30 h-[34rem] pt-6 px-4 rounded-2xl shadow-lg">
+      <h1 className="text-xl text-primary font-bold mb-8 text-center">Who to follow</h1>
       {users.length > 0 ? (
         users.map(user => (
-          <div key={user._id} className="flex text-white justify-between items-center mb-10">
+          <div key={user._id} className="flex text-gray-800 justify-between items-start mb-6">
             <div className="h-10 w-10 rounded-full bg-black">
-              {user.photo ? (
-                <img src={user.photo} alt={user.name} className="h-10 w-10 rounded-full" />
+              {user?.photo ? (
+                <img src={`http://localhost:9000${user?.photo}`}  alt={user?.name} className="h-10 w-10 rounded-full" />
               ) : (
                 <div className="h-10 w-10 rounded-full bg-black"></div>
               )}

@@ -508,9 +508,9 @@ export default function Navbar() {
           `http://localhost:9000/notifications/${user._id}`
         );
         setNotifications(response.data);
-        if (response.data.length > 0) {
-          setNewNotification(true);
-        }
+        // if (response.data.length > 0) {
+        //   setNewNotification(true);
+        // }
       } catch (error) {
         console.error("error fetching notifications:", error);
       }
