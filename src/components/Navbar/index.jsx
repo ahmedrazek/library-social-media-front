@@ -499,8 +499,8 @@ export default function Navbar() {
       console.log("disconnected from socket server");
     };
   }, [user]); // Ensure user is a dependency if it changes
-
-useEffect(()=>{
+  useEffect(()=>{
+    
   const fetchNotifications = async () => {
     if (user && user._id) {
       try {
@@ -516,8 +516,8 @@ useEffect(()=>{
       }
     }
   };
-  fetchNotifications();
-},[user,newNotification])
+  fetchNotifications()
+  },[user,newNotification])
 
   const handleNotificationClick = (id) => {
     setOpenedNotifications((prev) => ({ ...prev, [id]: true }));

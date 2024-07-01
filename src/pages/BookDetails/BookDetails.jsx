@@ -5,7 +5,7 @@ import { fetchBookById } from "../../store/bookSlice";
 import { FaHeart, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
 import axios from "axios";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/Sidebar/index";
 
 const BookDetails = () => {
   const dispatch = useDispatch();

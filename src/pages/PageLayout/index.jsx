@@ -1,3 +1,4 @@
+
 import Navbar from "../../components/Navbar";
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
@@ -35,3 +36,4 @@ const PageLayout = () => {
 };
 
 export default PageLayout;
+
