@@ -3,18 +3,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export const FollowCard = ({ follow, user, curUser }) => {
+export const FollowCard = ({ follow, user, curUser, fetchUser }) => {
   const [userFollow, setUserFollow] = useState(false);
   const followUser = async () => {
-    const res = await axios.post(`/users/follow/${user?._id}/${follow?._id}`);
-    console.log(res);
+    await axios.post(`/users/follow/${user?._id}/${follow?._id}`);
 
+    fetchUser();
     setUserFollow(true);
   };
   const unFollow = async () => {
-    const res = await axios.post(`/users/unfollow/${user?._id}/${follow?._id}`);
-    console.log(res);
+    await axios.post(`/users/unfollow/${user?._id}/${follow?._id}`);
     setUserFollow(false);
+    fetchUser();
   };
   useEffect(() => {
     if (user?.following.find((follower) => follower._id == follow?._id)) {
@@ -23,6 +23,7 @@ export const FollowCard = ({ follow, user, curUser }) => {
     console.log(
       user?.following.find((follower) => follower._id == follow?._id)
     );
+    console.log(follow);
   }, []);
   return (
     <div className="py-6">

@@ -5,10 +5,13 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
 import { Navigate, Link } from "react-router-dom";
+import { GoogleAuth } from "../../components/GoogleAuth";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const {
     register,
@@ -23,11 +26,19 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
+      setLoading(true);
       const res = await axios.post("/users/login", data);
       dispatch(setUser(res.data.user));
+      if (res.data.user.savedPosts && res.data.user.savedPosts.length > 0) {
+        res.data.user.savedPosts.forEach(postId => {
+          localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
+        });
+      }
       setRedirect(true);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      if (error.response.status == 401) setError(true);
     }
   };
   if (redirect) return <Navigate to={"/user/timeline"} />;
@@ -35,7 +46,7 @@ export default function Login() {
     <div className="relative h-screen w-full">
       <div className="absolute hidden md:block lg:block bg-primary w-1/2 -z-10 h-full"></div>
       <div className="flex justify-center items-center h-screen ">
-        <div className="flex flex-col md:flex-row lg:flex-row mx-auto justify-between  shadow-2xl shadow-black  w-10/12 rounded-xl py-20 px-40 gap-4 ">
+        <div className="flex flex-col md:flex-row mx-auto md:justify-between items-center  shadow-2xl shadow-black  w-10/12 rounded-xl py-20 md:px-40 gap-4 ">
           <div className="hidden md:flex lg:flex flex-col gap-12 items-center w-5/12 text-white ">
             <h1 className=" text-6xl self-start">BookNet </h1>
             <img src={image} alt="" />
@@ -46,7 +57,7 @@ export default function Login() {
               </span>{" "}
             </p>
           </div>
-          <div className="flex flex-col gap-8 w-5/12">
+          <div className="flex flex-col gap-8 px-10 md:w-5/12">
             <h1 className=" text-2xl mb-8">Login into your account</h1>
             <form
               action=""
@@ -155,26 +166,50 @@ export default function Login() {
                     {errors.password.message}
                   </p>
                 )}
+                {error && (
+                  <p className=" text-red-800 text-sm mt-2">
+                    Email or Password is wrong
+                  </p>
+                )}
               </div>
-              <button className="text-white shadow-lg bg-primary py-3 rounded-lg font-semibold hover:bg-white hover:text-primary hover:border-primary hover:border">
-                Login
+              <button className="text-white shadow-lg border bg-primary py-3 rounded-lg font-semibold hover:bg-white hover:text-primary hover:border-primary hover:border">
+                {loading ? (
+                  <span>
+                    <svg
+                      aria-hidden="true"
+                      role="status"
+                      className="inline w-4 h-4 me-3 text-white animate-spin"
+                      viewBox="0 0 100 101"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                        fill="#E5E7EB"
+                      />
+                      <path
+                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    ...Loading
+                  </span>
+                ) : (
+                  " Login"
+                )}
               </button>
-              <div className="flex justify-between">
-                <div>
-                  <input type="checkbox" name="" id="" />{" "}
-                  <span>Remember password</span>
-                </div>
-                <a href="#">Forgot password ?</a>
+              <div className="text-primary font-semibold ">
+                <a href="#" className=" hover: ">
+                  Forgot password ?
+                </a>
               </div>
             </form>
-            <a
-              href="#"
-              className="text-primary  py-3 rounded-lg font-bold text-center border border-primary hover:bg-primary hover:text-white  shadow-lg"
-            >
-              Google account
-            </a>
+            <GoogleAuth setRedirect={setRedirect} />
             <p className="text-center">
-              Don't have an account? <Link to="/signup">Sign Up</Link>
+              Don't have an account?{" "}
+              <Link to="/signup" className="font-semibold">
+                Sign Up
+              </Link>
             </p>
           </div>
         </div>

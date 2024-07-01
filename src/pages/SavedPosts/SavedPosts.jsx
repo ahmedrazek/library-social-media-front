@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { Avatar } from '@chakra-ui/react';
 
 const SavedPosts = () => {
   const user = useSelector((state) => state.user.user);
@@ -35,6 +36,11 @@ const SavedPosts = () => {
     }
   }, [savePosts]);
 
+  const removePost = (postId) => {
+    // Function to remove a post from saved posts
+    setSavedPosts(savedPosts.filter(post => post._id !== postId));
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -53,12 +59,19 @@ const SavedPosts = () => {
       <h1 className="text-2xl font-bold mb-4 text-center text-primary">My Saved Posts</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {savedPosts.map((post) => (
-          <div key={post._id} className="border border-gray-300 rounded-md p-4 shadow-lg">
+          <div key={post._id} className="border border-gray-300 rounded-md p-6 shadow-lg">
             <div className="flex justify-between items-center">
               <div className="flex gap-2 items-center">
-                {post.userId?.photo && (
-                  <img src={post.userId.photo} alt="" className="w-12 h-12 rounded-full" />
-                )}
+                <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden border-2 border-zinc-900">
+                  {post.userId?.photo ? (
+                    <img
+                      src={`http://localhost:9000${post.userId.photo}`}
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <Avatar bg="teal.500" size="full" />
+                  )}
+                </div>
                 <div>
                   <div className="flex gap-2 items-center">
                     <h2 className="font-semibold">{post.userId?.name}</h2>
@@ -90,7 +103,7 @@ const SavedPosts = () => {
                 <img
                   src={`http://localhost:9000/postcard/${post.imageURL}`}
                   alt="Post"
-                  className="object-contain rounded-2xl w-full h-40"
+                  className="object-contain rounded-2xl w-full h-48"
                 />
               </div>
             )}

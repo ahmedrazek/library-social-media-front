@@ -2,11 +2,11 @@
 import axios from "axios";
 import { differenceInMinutes } from "date-fns";
 import { useEffect, useState } from "react";
+import { Avatar } from "@chakra-ui/react";
 
 export default function Comment({ comment, user, getPost, removeComment }) {
   const [like, setLike] = useState(false);
   const [likesNum, setLikesNum] = useState(0);
-
   const calculateCommentDate = (createdAt) => {
     const postDate = differenceInMinutes(
       new Date(Date.now()),
@@ -35,8 +35,9 @@ export default function Comment({ comment, user, getPost, removeComment }) {
     }
   };
   useEffect(() => {
-    setLike(comment.likes.some((like) => like === user._id));
+    setLike(comment.likes.some((like) => like === user?._id));
     setLikesNum(comment.likes.length);
+    console.log(user._id , comment._id)
   }, []);
   return (
     <div
@@ -45,8 +46,16 @@ export default function Comment({ comment, user, getPost, removeComment }) {
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
-          <div className=" w-8 h-8 rounded-full bg-black"></div>
-
+        <div className="w-12 h-12 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
+           {comment.userId?.photo ? (
+                <img
+                  src={`http://localhost:9000${comment.userId.photo}`}
+                  className="object-cover  w-full h-full"
+                />
+              ) : (
+                <Avatar bg="teal.500" size="full" />
+              )}
+          </div>
           <div>
             <h4 className=" font-semibold text-sm">{comment?.userId?.name}</h4>
             <p className=" text-xs text-gray-500">

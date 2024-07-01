@@ -4,8 +4,10 @@ import { differenceInMinutes } from "date-fns";
 import axios from "axios";
 import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Avatar} from '@chakra-ui/react'
+
 
 // eslint-disable-next-line react/prop-types
 const ReviewCard = ({ postId, removePost }) => {
@@ -67,16 +69,17 @@ const ReviewCard = ({ postId, removePost }) => {
   const toggleLike = async () => {
     try {
       if (!like) {
-        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLike(true);
+        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLikesNum(likesNum + 1);
       } else {
-        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLike(false);
+        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLikesNum(likesNum - 1);
         console.log("dislike", res);
       }
     } catch (error) {
+      setLike(!like);
       console.error(error);
     }
   };
@@ -174,11 +177,18 @@ const ReviewCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-4/12 shadow-xl bg-green-400">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-green-400">
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
-            <div className=" w-12 h-12 rounded-full bg-black">
-              {post.userId?.photo && <img src={post.userId.photo} alt="" />}
+            <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
+            {post.userId?.photo ? (
+                <img
+                  src={`http://localhost:9000${post.userId.photo}`}
+                  className="object-cover  w-full h-full"
+                />
+              ) : (
+                <Avatar bg="teal.500" size="full" />
+              )}
             </div>
             <div>
               <div className="flex gap-2 items-center">
@@ -237,6 +247,18 @@ const ReviewCard = ({ postId, removePost }) => {
         <h1 className="text-center italic text-xl font-semibold">
           Reviewed Book : <q>{post.book}</q>
         </h1>
+        <h3 className=" italic text-lg font-semibold flex gap-2 justify-center">
+          Rating:
+          <div className="flex">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <FaStar
+                key={star}
+                size={24}
+                color={star <= post.rating ? "#ffc107" : "#e4e5e9"}
+              />
+            ))}
+          </div>
+        </h3>
         <div className="px-2 font-semibold">
           <p>{post.description}</p>
         </div>
@@ -246,7 +268,10 @@ const ReviewCard = ({ postId, removePost }) => {
             <img
               src={`http://localhost:9000/postcard/${post.imageURL}`}
               alt="Post"
-              className=" object-contain rounded-2xl h-full w-full"
+              className=" object-contain rounded-2xl h-full w-full cursor-pointer"
+              onClick={() => {
+                setShowPhoto(true);
+              }}
             />
           </div>
         )}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchBookById, updateFavoriteStatus } from "../../store/bookSlice";
+import { fetchBookById } from "../../store/bookSlice";
 import { FaHeart, FaStar } from "react-icons/fa";
 import RatingPopup from "../../components/RatingPopup";
 import axios from "axios";
@@ -57,9 +57,6 @@ const BookDetails = () => {
 
       const newFavoriteState = !isFavorite;
       setIsFavorite(newFavoriteState);
-      dispatch(
-        updateFavoriteStatus({ bookId: id, isFavorite: newFavoriteState })
-      );
       localStorage.setItem(`favorite_${id}`, JSON.stringify(newFavoriteState));
 
       console.log(response.data);

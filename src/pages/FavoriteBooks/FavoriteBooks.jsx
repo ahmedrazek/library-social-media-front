@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -15,12 +14,8 @@ const FavoriteBooks = () => {
       try {
         const bookDetailsPromises = favoriteBookIds.map(bookId => 
            axios.get(`http://localhost:9000/books/${bookId}`) );
-
            const booksResponses = await Promise.all(bookDetailsPromises);
-          
-
-        const books = booksResponses.map(response => response.data);
-        
+           const books = booksResponses.map(response => response.data);
         setFavoriteBooks(books);
       } catch (error) {
         console.error("Error fetching favorite books", error);
@@ -50,19 +45,21 @@ const FavoriteBooks = () => {
   }
 
   return (
-    <div className="container mx-auto my-8 px-4">
+    <div className="container  mt-2 px-4">
       <h1 className="text-2xl font-bold mb-4 text-center text-primary">My Favorite Books</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-center ">
-        {favoriteBookIds.map((book, index) => (
-          <div key={book._id} className="border border-gray-300 rounded-md p-4 shadow-lg w-[10rem]" >
+      <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-10  ">
+        {favoriteBookIds.map((book) => (
+          <div key={book._id} className="w-full border border-gray-300 rounded-md pb-4 shadow-lg  " >
             {book.cover && (
               <img
                 src={`http://localhost:9000/image/${book.cover}`}
-                alt="Book Cover"
+                alt="Book Cover" 
                 className="w-full h-40 object-cover mb-2"
               />
             )}
-            <h2 className="text-xl font-semibold">{book.title}</h2>
+            <h2 className="text-center font-bold text-primary">
+                  {book.title}
+             </h2>
           </div>
         ))}
       </div>
@@ -71,4 +68,6 @@ const FavoriteBooks = () => {
 };
 
 export default FavoriteBooks;
+
+
 
