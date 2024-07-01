@@ -177,7 +177,7 @@ const QuoteCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-red-300">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-slate-300">
 
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
