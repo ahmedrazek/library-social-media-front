@@ -14,12 +14,8 @@ const FavoriteBooks = () => {
       try {
         const bookDetailsPromises = favoriteBookIds.map(bookId => 
            axios.get(`http://localhost:9000/books/${bookId}`) );
-
            const booksResponses = await Promise.all(bookDetailsPromises);
-          
-
-        const books = booksResponses.map(response => response.data);
-        
+           const books = booksResponses.map(response => response.data);
         setFavoriteBooks(books);
       } catch (error) {
         console.error("Error fetching favorite books", error);
@@ -73,5 +69,5 @@ const FavoriteBooks = () => {
 
 export default FavoriteBooks;
 
-FavoriteBooks.js
+
 
