@@ -457,7 +457,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchResultsList from "../SearchResultsList/SearchResultsList";
 import { io } from "socket.io-client";
 import { Avatar } from "@chakra-ui/react";
-
+import logo from '../../assets/logo.jpg'
 
 export default function Navbar() {
   const [showUser, setShowUser] = useState(false);
@@ -577,8 +577,8 @@ export default function Navbar() {
       <nav className="bg-white border-gray-200 border-b-2 shadow-sm z-50 fixed top-0 start-0 w-full">
         <div className="flex items-center flex-wrap justify-between mx-auto p-4">
           <Link to="/">
-            <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
-              BookNet
+            <span className="text-xl font-semibold whitespace-nowrap dark:text-white">
+             <img src={logo}  className="w-60 h-12"/>
             </span>
           </Link>
           <div className="flex items-center lg:order-2 space-x-3 rtl:space-x-reverse">

@@ -32,7 +32,7 @@ const MyFavorites = () => {
             </li>
           </ul>
         </div>
-        <div className="border-b mb-4"></div>
+        <div className="border-b mb-4 mx-20"></div>
         <Outlet />
       </div>
     </div>

@@ -117,24 +117,27 @@ const RightSideBar = () => {
   };
 
   return (
-    <div className="hidden lg:block w-80 bg-transparent   fixed right-4 top-28 z-30 h-[34rem] pt-6 px-4 rounded-2xl shadow-lg">
-      <h1 className="text-xl text-primary font-bold mb-8 text-center">Who to follow</h1>
+    <div className="hidden lg:block w-80 bg-gray-50 px-4   fixed  top-28 z-30 h-[34rem]  rounded-2xl shadow-lg">
+      <h1 className="text-xl text-primary font-bold mb-8 py-6 text-center">Who to follow</h1>
       {users.length > 0 ? (
         users.map(user => (
-          <div key={user._id} className="flex text-gray-800 justify-between items-start mb-6">
-            <div className="h-10 w-10 rounded-full bg-black">
+          <div key={user._id} className="flex px-4 text-gray-800 justify-between items-start mb-6">
+           <div className="info  flex w-full gap-4 items-center">
+           <div className=" h-10 w-10 rounded-full bg-black">
               {user?.photo ? (
                 <img src={`http://localhost:9000${user?.photo}`}  alt={user?.name} className="h-10 w-10 rounded-full" />
               ) : (
                 <div className="h-10 w-10 rounded-full bg-black"></div>
               )}
-            </div>
-            <div>
+          </div>
+          <div>
               <h1 className="text-sm font-semibold">{user.name}</h1>
             </div>
+           </div>
+           
             <button
-              className={`px-4 py-2 rounded-full ${
-                user.isFollowing ? 'bg-primary text-white' : 'bg-white text-primary border border-primary'
+              className={`px-4 py-2 rounded font-medium hover:bg-primary w-20 hover:text-secondary  ${
+                user.isFollowing ? 'bg-primary w-24 px-auto text-white ' : 'bg-white text-primary border border-primary'
               }`}
               onClick={() => toggleFollow(user._id, user.isFollowing)}
             >

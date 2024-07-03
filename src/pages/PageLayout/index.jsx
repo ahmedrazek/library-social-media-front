@@ -21,10 +21,10 @@ const PageLayout = () => {
         </div>
       </div> */}
 <div className="grid lg:grid-cols-12 ">
-  <div className=" col-span-3 lg:block hidden w-74">
+  <div className=" col-span-2 lg:block hidden w-74">
     <Sidebar />
   </div>
-  <div className=" col-span-9 ">
+  <div className=" col-span-10 ">
     <div className="mt-40">
       <Outlet />
     </div>

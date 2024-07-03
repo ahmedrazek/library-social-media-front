@@ -32,7 +32,7 @@ import { Followers } from "./components/Followers";
 import { UserProfile } from "./pages/UserProfile";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import Chat from './pages/Chat/Chat';
+
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -49,7 +49,7 @@ function App() {
       children: [
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
-        { path: "message", element: <Chat /> },
+        
         {
           path: "favorite",
           element: <MyFavorites />,
@@ -132,7 +132,7 @@ function App() {
 
   return (
     <>
-     <ToastContainer theme="colored" />
+     <ToastContainer theme="colored"/>
       <RouterProvider router={router} />
      
 |    </>

@@ -63,32 +63,33 @@ const Profile = () => {
   return (
     <div className="mt-32 mx-10">
       <div
-        className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
+        className="h-80 mx-2 lg:mx-20 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
         style={{
           backgroundImage: `url(http://localhost:9000${cover})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 100%",
         }}
       >
-        <div className="flex flex-col items-center gap-4 absolute -bottom-28">
-          <div className="h-40 w-40 rounded-full bg-green-600">
-            {avatar ? (
-              <img
-                src={`http://localhost:9000${avatar}`}
-                alt="Profile Avatar"
-                className="h-40 w-40 rounded-full object-cover"
-              />
-            ) : (
-              <Avatar bg="teal.500" />
-            )}
-          </div>
-          <h1 className="text-2xl font-semibold text-black">
-            {user && user.name}
-          </h1>
-        </div>
+       <div className="flex flex-col items-center gap-4 absolute -bottom-28">
+  <div className="h-40 w-40 border border-gray-800 rounded-full overflow-hidden bg-green-600">
+    {avatar ? (
+      <img
+        src={`http://localhost:9000${avatar}`}
+        alt="Profile Avatar"
+        className="h-40 w-40 object-cover rounded-full"
+      />
+    ) : (
+      <Avatar bg="teal.500" />
+    )}
+  </div>
+  <h1 className="text-2xl font-semibold text-black">
+    {user && user.name}
+  </h1>
+</div>
+
         <div>
           <button
-            className="text-primary bg-white px-4 py-2 text-md rounded-full absolute right-10 -bottom-28 border hover:border-2 border-primary font-semibold"
+            className="text-primary bg-white px-4 py-2 text-md rounded  hover:bg-primary hover:text-secondary absolute right-10 -bottom-28 border hover:border-2 border-primary font-semibold"
             onClick={() => setShowEditProfilePopup(true)}
           >
             Edit Profile
@@ -128,3 +129,25 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
