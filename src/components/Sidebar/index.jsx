@@ -1,15 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { FaRegBookmark, FaUserCircle, FaBookOpen } from "react-icons/fa";
-import { IoMdHome, IoIosSettings } from "react-icons/io";
+import { FaRegBookmark } from "react-icons/fa";
 import { CiHome } from "react-icons/ci";
 import { IoPersonOutline, IoSettingsOutline } from "react-icons/io5";
 import { BsBook } from "react-icons/bs";
 
- const Sidebar = () => {
+const Sidebar = () => {
   return (
     <aside className="hidden lg:block w-64 bg-primary fixed left-0 top-16 z-30 h-screen pt-20">
       <div>
-        <ul className="text-secondary font-semibold flex flex-col justify-center items-start gap-4 text-[1.8rem]">
+        <ul className="text-secondary flex flex-col justify-center items-start gap-2 text-2xl">
           <NavLink
             to="/user/timeline"
             className={({ isActive }) =>
@@ -18,11 +17,11 @@ import { BsBook } from "react-icons/bs";
           >
             {({ isActive }) => (
               <li
-                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary rounded-r-full" : ""
+                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-white hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                  isActive ? "bg-white text-primary rounded-r-full" : ""
                 }`}
               >
-                <IoMdHome />
+                <CiHome />
                 <span className={isActive ? "text-primary" : ""}>Home</span>
               </li>
             )}
@@ -35,11 +34,11 @@ import { BsBook } from "react-icons/bs";
           >
             {({ isActive }) => (
               <li
-                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary rounded-r-full" : ""
+                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-white hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                  isActive ? "bg-white text-primary rounded-r-full" : ""
                 }`}
               >
-                <FaUserCircle />
+                <IoPersonOutline />
                 <span className={isActive ? "text-primary" : ""}>Profile</span>
               </li>
             )}
@@ -52,11 +51,11 @@ import { BsBook } from "react-icons/bs";
           >
             {({ isActive }) => (
               <li
-                className={`flex items-center gap-4 py-4 pl-3 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary rounded-r-full" : ""
+                className={`flex items-center gap-4 py-4 pl-3 active:rounded-r-full hover:bg-white hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                  isActive ? "bg-white text-primary rounded-r-full" : ""
                 }`}
               >
-                <FaBookOpen />
+                <BsBook />
                 <span className={isActive ? "text-primary" : ""}>Books</span>
               </li>
             )}
@@ -69,8 +68,8 @@ import { BsBook } from "react-icons/bs";
           >
             {({ isActive }) => (
               <li
-                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary rounded-r-full" : ""
+                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-white hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                  isActive ? "bg-white text-primary rounded-r-full" : ""
                 }`}
               >
                 <FaRegBookmark />
@@ -88,16 +87,16 @@ import { BsBook } from "react-icons/bs";
           >
             {({ isActive }) => (
               <li
-                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-secondary hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
-                  isActive ? "bg-secondary text-primary rounded-r-full" : ""
+                className={`flex items-center gap-4 py-3 pl-4 active:rounded-r-full hover:bg-white hover:text-primary hover:rounded-r-full hover:transition-all w-full ${
+                  isActive ? "bg-white  text-primary rounded-r-full" : ""
                 }`}
               >
-                <IoIosSettings />
+                <IoSettingsOutline />
                 <span className={isActive ? "text-primary" : ""}>Settings</span>
               </li>
             )}
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/user/message"
             className={({ isActive }) =>
               isActive ? "active-link w-full" : "hover:w-full"
@@ -109,16 +108,15 @@ import { BsBook } from "react-icons/bs";
                   isActive ? "bg-secondary text-primary rounded-r-full" : ""
                 }`}
               >
-                <IoIosSettings />
+                <IoSettingsOutline />
                 <span className={isActive ? "text-primary" : ""}>Messages</span>
               </li>
             )}
-          </NavLink>
+          </NavLink> */}
         </ul>
       </div>
     </aside>
   );
 };
-
 
 export default Sidebar;

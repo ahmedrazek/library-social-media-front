@@ -321,8 +321,8 @@ import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Avatar } from '@chakra-ui/react';
-
+import { Avatar } from "@chakra-ui/react";
+import { BiSolidMessageDetail } from "react-icons/bi";
 const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const [showComments, setShowComments] = useState(false);
   const [like, setLike] = useState(false);
@@ -334,7 +334,10 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const user = useSelector((state) => state.user.user);
 
   const calculateDate = (createdAt) => {
-    const postDate = differenceInMinutes(new Date(Date.now()), new Date(createdAt));
+    const postDate = differenceInMinutes(
+      new Date(Date.now()),
+      new Date(createdAt)
+    );
     if (postDate > 1440) {
       setDate(`${Math.floor(postDate / 1440)} days`);
     } else if (postDate > 60) {
@@ -396,13 +399,13 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const savePost = async () => {
     try {
       if (saved) {
-        const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
         setSaved(false);
+        const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(false));
         console.log("Post unsaved:", res.data);
       } else {
-        const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         setSaved(true);
+        const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         console.log("Post saved:", res.data);
       }
@@ -466,16 +469,16 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
             ) : null}
             <button
               onClick={savePost}
-              className="text-primary flex items-center gap-1"
+              className="text-primary flex items-center gap-1 text-md font-medium"
             >
               {saved ? (
                 <>
-                  <FaBookmark className="w-5 h-5" />
+                  <FaBookmark className="w-4 h-4" />
                   <span>Saved</span>
                 </>
               ) : (
                 <>
-                  <FaRegBookmark className="w-5 h-5" />
+                  <FaRegBookmark className="w-4 h-4" />
                   <span>Save</span>
                 </>
               )}
@@ -540,18 +543,8 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
               className="text-primary flex items-center gap-1"
               onClick={() => setShowComments(true)}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12 3C6.477 3 2 6.805 2 11.5c0 2.474 1.164 4.7 3.028 6.3-.202.811-.734 2.029-1.81 2.913 0 0-.002 0-.002.001-.32.274-.203.694.262.849a9.528 9.528 0 0 0 2.075.461c.382.046.773.07 1.162.07 5.523 0 10-3.805 10-8.5S17.523 3 12 3zm-4 9a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm5 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm4 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <BiSolidMessageDetail className="text-xl" />
+
               <span>{post.comments.length}</span>
             </button>
           </div>
@@ -562,18 +555,19 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
             comment={comment}
             setComment={setComment}
             addComment={addComment}
+            user={user}
           />
         </div>
       </div>
       {showComments && (
         <CommentPopup
-        setComment={setComment}
-        post={post}
-        comment={comment}
-        addComment={addComment}
-        user={user}
-        setShowComments={setShowComments}
-        getPost={getPost}
+          setComment={setComment}
+          post={post}
+          comment={comment}
+          addComment={addComment}
+          user={user}
+          setShowComments={setShowComments}
+          getPost={getPost}
         />
       )}
     </>

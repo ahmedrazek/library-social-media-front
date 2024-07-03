@@ -1,4 +1,3 @@
-
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { Link, Navigate } from "react-router-dom";
@@ -10,7 +9,6 @@
 // import SearchResultsList from "../SearchResultsList/SearchResultsList";
 // import { io } from "socket.io-client";
 // import { Avatar } from "@chakra-ui/react";
-
 
 // export default function Navbar() {
 //   const [showUser, setShowUser] = useState(false);
@@ -25,7 +23,6 @@
 //   const dispatch = useDispatch();
 //   const [searchResults, setSearchResults] = useState([]);
 
-
 //   useEffect(() => {
 //     const socket = io("http://localhost:9000"); // Ensure this matches your server URL
 
@@ -36,7 +33,6 @@
 //       }
 //     });
 
- 
 //     socket.on("newNotification",
 //       (notification) => {
 //      console.log("New notification received:", notification);
@@ -47,13 +43,13 @@
 //      setNewNotification(true);
 //    });
 //     return () => {
-      
+
 //       socket.disconnect();
 //       console.log("disconnected from socket server");
 //     };
 //   }, [user]); // Ensure user is a dependency if it changes
 //   useEffect(()=>{
-    
+
 //   const fetchNotifications = async () => {
 //     if (user && user._id) {
 //       try {
@@ -143,7 +139,7 @@
 //               <FaBell className="text-2xl text-primary" />
 //               {newNotification && (
 //                 <span className="absolute w-[0.8rem] h-[0.8rem] top-0 right-0 inline-flex items-center justify-center  bg-red-500 text-white rounded-full text-xs">
-                
+
 //                 </span>
 //               )}
 //               <span className="sr-only">View notifications</span>
@@ -366,10 +362,7 @@
 
 // }
 
-
 ////////////////////////////////////////////////////////////////////////////
-
-
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -493,12 +486,28 @@ export default function Navbar() {
   return (
     <>
       <nav className="bg-white border-gray-200 border-b-2 shadow-sm z-50 fixed top-0 start-0 w-full">
-        <div className="flex items-center flex-wrap justify-between mx-auto p-4">
-          <Link to="/">
-            <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
-              BookNet
-            </span>
-          </Link>
+        <div className="flex items-center justify-between flex-wrap mx-auto p-4">
+          <div className="flex gap-10">
+            <Link to="/">
+              <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
+                BookNet
+              </span>
+            </Link>
+            <div
+              className={
+                showMenu
+                  ? "items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
+                  : "items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
+              }
+              id="navbar-user"
+            >
+              <ul className="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                  <SearchBar setSearchResults={setSearchResults} />
+                </li>
+              </ul>
+            </div>
+          </div>
           <div className="flex items-center lg:order-2 space-x-3 rtl:space-x-reverse">
             <button
               type="button"
@@ -597,70 +606,6 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
-
-          <div
-            className={
-              showMenu
-                ? "items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
-                : "items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
-            }
-            id="navbar-user"
-          >
-            <ul className="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
-              <li>
-                <Link
-                  to="/dashboard"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                >
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  className="hidden lg:block py-2 px-3 text-white bg-blue-700 rounded lg:bg-transparent lg:text-blue-700 lg:p-0 dark:text-white"
-                  aria-current="page"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/explore"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                >
-                  Explore
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/library"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                >
-                  Library
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/friends"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                >
-                  Friends
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/profile"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                >
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <SearchBar setSearchResults={setSearchResults} />
-              </li>
-            </ul>
-          </div>
         </div>
       </nav>
       <SearchResultsList results={searchResults} />
@@ -716,4 +661,3 @@ export default function Navbar() {
     </>
   );
 }
-
