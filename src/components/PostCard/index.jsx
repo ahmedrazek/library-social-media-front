@@ -321,9 +321,9 @@ import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 import { Avatar } from '@chakra-ui/react';
 import { MdOutlineInsertComment } from "react-icons/md";
-
 const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const [showComments, setShowComments] = useState(false);
   const [like, setLike] = useState(false);
@@ -335,7 +335,10 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const user = useSelector((state) => state.user.user);
 
   const calculateDate = (createdAt) => {
-    const postDate = differenceInMinutes(new Date(Date.now()), new Date(createdAt));
+    const postDate = differenceInMinutes(
+      new Date(Date.now()),
+      new Date(createdAt)
+    );
     if (postDate > 1440) {
       setDate(`${Math.floor(postDate / 1440)} days`);
     } else if (postDate > 60) {
@@ -397,13 +400,13 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const savePost = async () => {
     try {
       if (saved) {
-        const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
         setSaved(false);
+        const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(false));
         console.log("Post unsaved:", res.data);
       } else {
-        const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         setSaved(true);
+        const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         console.log("Post saved:", res.data);
       }
@@ -466,7 +469,7 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
                 </svg>
               </button>
             ) : null}
-           
+
           </div>
         </div>
         {/* POST DESC  */}
@@ -527,7 +530,9 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
               className="text-primary flex items-center gap-1"
               onClick={() => setShowComments(true)}
             >
+
               <MdOutlineInsertComment className="w-5 h-5"/>
+
               <span>{post.comments.length}</span>
             </button>
           </div>
@@ -555,18 +560,19 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
             comment={comment}
             setComment={setComment}
             addComment={addComment}
+            user={user}
           />
         </div>
       </div>
       {showComments && (
         <CommentPopup
-        setComment={setComment}
-        post={post}
-        comment={comment}
-        addComment={addComment}
-        user={user}
-        setShowComments={setShowComments}
-        getPost={getPost}
+          setComment={setComment}
+          post={post}
+          comment={comment}
+          addComment={addComment}
+          user={user}
+          setShowComments={setShowComments}
+          getPost={getPost}
         />
       )}
     </>

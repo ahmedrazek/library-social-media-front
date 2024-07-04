@@ -6,8 +6,10 @@ import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 import { Avatar} from '@chakra-ui/react'
 import { MdOutlineInsertComment } from "react-icons/md";
+
 
 
 // eslint-disable-next-line react/prop-types
@@ -178,12 +180,14 @@ const QuoteCard = ({ postId, removePost }) => {
   }
   return (
     <>
+
       <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-gray-50">
+
 
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
-          <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
-          {post.userId?.photo ? (
+            <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
+              {post.userId?.photo ? (
                 <img
                   src={`http://localhost:9000${post.userId.photo}`}
                   className="object-cover  w-full h-full"
@@ -246,8 +250,10 @@ const QuoteCard = ({ postId, removePost }) => {
           </div>
         )}
         {/* COMMENT SECTION  */}
+
         <div className="flex gap-4 px-2 items-center">
           <div className="flex gap-1">
+
             <button onClick={toggleLike}>
               {like && (
                 <svg
@@ -278,6 +284,7 @@ const QuoteCard = ({ postId, removePost }) => {
             </button>
             <p>{likesNum}</p>
           </div>
+
           <div
             onClick={() => setShowComments(true)}
             className=" flex items-center gap-1 cursor-pointer"
@@ -301,6 +308,7 @@ const QuoteCard = ({ postId, removePost }) => {
                   <span>Save</span>
                 </>
               )}
+
             </button>
           </div>
         </div>

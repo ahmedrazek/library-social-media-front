@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiUpload, FiX } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
-import { Avatar } from '@chakra-ui/react'
+import { Avatar } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
-import { FaPlusCircle, FaPen } from 'react-icons/fa';
+import { FaPlusCircle, FaPen } from "react-icons/fa";
 const CreatePost = ({ updatePosts }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupType, setPopupType] = useState("");
@@ -86,9 +86,9 @@ const CreatePost = ({ updatePosts }) => {
   };
   const user = useSelector((state) => state.user.user);
 
-
   return (
     <div className="w-11/12 lg:w-[40rem]  pt-0 ">
+
       <div className=" rounded bg-gray-50 p-4 shadow-md flex items-baseline ">
       <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden m-2 border-2 border-zinc-900">
         {user.photo ? (
@@ -101,6 +101,7 @@ const CreatePost = ({ updatePosts }) => {
           <Avatar bg="teal.500" size="full"/>
         )}
       </div>
+
         <form className="flex-grow">
           <textarea
             className="w-full border border-gray-200 focus:border-0 rounded p-2 mb-2 resize-none"
@@ -134,6 +135,7 @@ const CreatePost = ({ updatePosts }) => {
               Add Review
             </button>
           </div> */}
+
     <div className="flex justify-around mb-2">
       <button
         type="button"
@@ -170,6 +172,7 @@ const CreatePost = ({ updatePosts }) => {
         <FaStar className="block md:hidden text-2xl" title="Add Review" />
       </button>
     </div>
+
 
         </form>
       </div>

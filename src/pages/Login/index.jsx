@@ -30,7 +30,7 @@ export default function Login() {
       const res = await axios.post("/users/login", data);
       dispatch(setUser(res.data.user));
       if (res.data.user.savedPosts && res.data.user.savedPosts.length > 0) {
-        res.data.user.savedPosts.forEach(postId => {
+        res.data.user.savedPosts.forEach((postId) => {
           localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         });
       }
@@ -199,9 +199,9 @@ export default function Login() {
                 )}
               </button>
               <div className="text-primary font-semibold ">
-                <a href="#" className=" hover: ">
+                <Link to={"/forgotPassword"} className=" hover: ">
                   Forgot password ?
-                </a>
+                </Link>
               </div>
             </form>
             <GoogleAuth setRedirect={setRedirect} />

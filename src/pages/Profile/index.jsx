@@ -160,6 +160,7 @@ const Profile = () => {
       console.log("Update profile response:", response.data);
       updateProfile();
       setShowEditProfilePopup(false);
+      dispatch(fetchUserProfile());
     } catch (error) {
       console.error("Error updating profile:", error.message);
     }
@@ -196,7 +197,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="mt-32 mx-10">
+    <div className="mt-32">
       <div
         className="h-80 mx-2 lg:mx-20 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
         style={{

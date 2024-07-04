@@ -50,8 +50,10 @@
 
 
 
+
 import { useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
+
 
 const SearchResultsList = ({ searchResults, setSearchResults }) => {
   const navigate = useNavigate();
@@ -70,6 +72,7 @@ const SearchResultsList = ({ searchResults, setSearchResults }) => {
   }
 
   return (
+
     <div className='results-list absolute w-full bg-secondary flex flex-col shadow-sm rounded-sm top-24 cursor-pointer max-h-64 overflow-y-scroll z-50'>
       {searchResults.map((result, id) => (
         <div key={id} className="p-2 border-b border-gray-300 hover:bg-white flex items-center gap-2" onClick={() => handleClick(result)}>
@@ -94,6 +97,19 @@ const SearchResultsList = ({ searchResults, setSearchResults }) => {
           )}
         </div>
       ))}
+
+//     <div className="results-list absolute w-full bg-secondary flex flex-col shadow-sm rounded-sm top-24 cursor-pointer max-h-64 overflow-y-scroll z-50">
+//       {searchResults &&
+//         searchResults.map((result, id) => (
+//           <div
+//             key={id}
+//             className="p-2 border-b border-gray-300 hover:bg-white"
+//             onClick={() => handleClick(result)}
+//           >
+//             {result.name ? result.name : result.title}
+//           </div>
+//         ))}
+
     </div>
   );
 };
