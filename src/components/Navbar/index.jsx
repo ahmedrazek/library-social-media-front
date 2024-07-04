@@ -375,6 +375,8 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchResultsList from "../SearchResultsList/SearchResultsList";
 import { io } from "socket.io-client";
 import { Avatar } from "@chakra-ui/react";
+import logo from '../../assets/logo.jpg'
+
 
 export default function Navbar() {
   const [showUser, setShowUser] = useState(false);
@@ -486,28 +488,37 @@ export default function Navbar() {
   return (
     <>
       <nav className="bg-white border-gray-200 border-b-2 shadow-sm z-50 fixed top-0 start-0 w-full">
-        <div className="flex items-center justify-between flex-wrap mx-auto p-4">
-          <div className="flex gap-10">
-            <Link to="/">
-              <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
-                BookNet
-              </span>
-            </Link>
-            <div
-              className={
-                showMenu
-                  ? "items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
-                  : "items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
-              }
-              id="navbar-user"
-            >
-              <ul className="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
-                <li>
-                  <SearchBar setSearchResults={setSearchResults} />
-                </li>
-              </ul>
-            </div>
-          </div>
+
+        <div className="flex items-center flex-wrap justify-between mx-auto p-4">
+          <Link to="/">
+            <span className="text-xl font-semibold whitespace-nowrap dark:text-white">
+             <img src={logo}  className="w-60 h-12"/>
+            </span>
+          </Link>
+
+//         <div className="flex items-center justify-between flex-wrap mx-auto p-4">
+//           <div className="flex gap-10">
+//             <Link to="/">
+//               <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
+//                 BookNet
+//               </span>
+//             </Link>
+//             <div
+//               className={
+//                 showMenu
+//                   ? "items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
+//                   : "items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
+//               }
+//               id="navbar-user"
+//             >
+//               <ul className="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
+//                 <li>
+//                   <SearchBar setSearchResults={setSearchResults} />
+//                 </li>
+//               </ul>
+//             </div>
+//           </div>
+
           <div className="flex items-center lg:order-2 space-x-3 rtl:space-x-reverse">
             <button
               type="button"
