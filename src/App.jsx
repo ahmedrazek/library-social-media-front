@@ -30,8 +30,9 @@ import { UserPosts } from "./components/UserPosts";
 import { Following } from "./components/Following";
 import { Followers } from "./components/Followers";
 import { UserProfile } from "./pages/UserProfile";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { QueryClient } from "react-query";
 
 function App() {
   const dispatch = useDispatch();
@@ -81,20 +82,17 @@ function App() {
     {
       path: "/",
       element: <PageLayout />,
-      children: [
-        { path: "settings", element: <Settings /> },
-      ],
+      children: [{ path: "settings", element: <Settings /> }],
     },
     { path: "account-deleted", element: <AccountDeleted /> },
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
     { path: "forgotPassword", element: <ForgotPassword /> },
-    { path: "resetPassword", element: <ResetPassword /> },
+    { path: "resetPassword/:token", element: <ResetPassword /> },
     { path: "noresult", element: <Noresult /> },
     { path: "*", element: <NotFound /> },
   ]);
-  
-  
+
   useEffect(() => {
     if (!user && status === "idle") {
       dispatch(fetchUserProfile());
@@ -131,10 +129,9 @@ function App() {
 
   return (
     <>
-     <ToastContainer theme="colored" />
-      <RouterProvider router={router} />
-     
-|    </>
+      <ToastContainer theme="colored" />
+      <RouterProvider router={router} />|
+    </>
   );
 }
 

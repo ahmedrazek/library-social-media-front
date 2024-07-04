@@ -6,6 +6,7 @@ import { NavLink, Navigate } from "react-router-dom";
 import { setUser } from "../../store/userSlice";
 import backgroundImage from "../../assets/signupImage.jpg";
 import { GoogleAuth } from "../../components/GoogleAuth";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Signup() {
   const [redirect, setRedirect] = useState();
@@ -29,13 +30,13 @@ export default function Signup() {
   password.current = watch("password", "");
   const onSubmit = async (data) => {
     try {
-      console.log(data);
       const res = await axios.post("/users/register", data);
       console.log(res);
       dispatch(setUser(res.data));
       setRedirect(true);
     } catch (error) {
-      console.log(error);
+      if (error.response.status == 409)
+        toast.error("this email is already registered");
     }
   };
 
@@ -302,6 +303,7 @@ export default function Signup() {
           </div>
         </div>
       </div>
+      <Toaster />
     </>
   );
 }

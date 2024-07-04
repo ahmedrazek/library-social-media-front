@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 export const ForgotPassword = () => {
   const {
@@ -18,6 +19,7 @@ export const ForgotPassword = () => {
     try {
       await axios.post("/users/forgotPassword", data);
       toast.success("Password reset link sent to your email");
+      return <Navigate to={"/"} />;
     } catch (error) {
       console.log(error);
       toast.error("Error sending password reset link");
