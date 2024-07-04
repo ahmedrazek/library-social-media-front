@@ -19,16 +19,30 @@ const PageLayout = () => {
           <Outlet />
         </div>
       </div> */}
-      <div className="grid lg:grid-cols-12 ">
-        <div className=" col-span-2 lg:block hidden ">
-          <Sidebar />
-        </div>
-        <div className=" lg:col-span-10 ">
-          <div className="mt-40 w-12/12 mx-auto">
-            <Outlet />
-          </div>
-        </div>
-      </div>
+
+<div className="grid lg:grid-cols-12 ">
+  <div className=" col-span-2 lg:block hidden w-74">
+    <Sidebar />
+  </div>
+  <div className=" col-span-10 ">
+    <div className="mt-40">
+      <Outlet />
+    </div>
+  </div>
+</div>
+
+
+//       <div className="grid lg:grid-cols-12 ">
+//         <div className=" col-span-2 lg:block hidden ">
+//           <Sidebar />
+//         </div>
+//         <div className=" lg:col-span-10 ">
+//           <div className="mt-40 w-12/12 mx-auto">
+//             <Outlet />
+//           </div>
+//         </div>
+//       </div>
+
     </div>
   );
 };

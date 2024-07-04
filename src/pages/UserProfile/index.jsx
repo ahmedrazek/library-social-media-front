@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Navigate, Outlet, useParams } from "react-router-dom";
 import { fetchUserProfile } from "../../store/userSlice";
 
 export const UserProfile = () => {
@@ -63,7 +63,7 @@ export const UserProfile = () => {
 
   if (loading || !curUser) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen ">
         <div role="status">
           <svg
             aria-hidden="true"
@@ -88,9 +88,9 @@ export const UserProfile = () => {
   }
 
   return (
-    <div className="mt-32  mr-10">
+    <div className="mt-32  mx-10">
       <div
-        className="h-80 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
+        className="h-80 mx-2 lg:mx-20  rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
         style={{
           backgroundImage: `url(${curUser?.cover ? curUser.cover : ""})`,
         }}
@@ -132,22 +132,37 @@ export const UserProfile = () => {
           {curUser.bio ? curUser.bio : "NO BIO"}
         </q>
       </div>
-      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-black border-b pb-4 border-gray-400 lg:w-[40rem]">
-        <Link className="px-4 lg:px-12" to={"posts"}>
+      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-primary border-b pb-4 border-gray-400 w-[30rem]">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "px-12 font-semibold text-red-500" : "px-12"
+          }
+          to={"posts"}
+        >
           Posts
-        </Link>
-        <Link className="px-4 lg:px-12 flex gap-4" to={"following"}>
-          <span className="font-bold italic text-xl ">
-            {curUser?.following.length}
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "px-12 text-red-500 flex gap-2" : "px-12 flex gap-2"
+          }
+          to={"following"}
+        >
+          <span className="text-xl italic font-bold">
+            {user?.following.length}
           </span>{" "}
           Following
-        </Link>
-        <Link className="px-12 flex gap-4" to={"followers"}>
-          <span className="font-bold italic text-xl">
-            {curUser?.followers.length}
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "px-12 text-red-500 flex gap-2" : "px-12 flex gap-2"
+          }
+          to={"followers"}
+        >
+          <span className="text-xl italic font-bold">
+            {user?.followers.length}
           </span>{" "}
           Followers
-        </Link>
+        </NavLink>
       </div>
       <Outlet context={[fetchUser]} />
     </div>

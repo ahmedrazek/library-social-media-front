@@ -257,18 +257,18 @@ const Book = () => {
         <div className="block md:hidden mb-4">
           <button
             onClick={toggleDropdown}
-            className="text-gray-700 p-4 hover:text-primary cursor-pointer flex justify-between items-center w-[80%] mx-auto border border-gray-300 rounded-md"
+            className="text-gray-700 p-4 hover:text-primary cursor-pointer flex justify-between items-center w-[50%] md:w-[80%]  mx-auto border border-gray-300 rounded-md"
           >
             Categories <FaCaretDown />
           </button>
           {isDropdownOpen && (
-            <div className="border-t border-gray-300 rounded-b-md">
+            <div className=" w-[50%] mx-auto md:w-[80%] border-t border-gray-300 rounded-b-md">
               <Category handleCategoryClick={handleCategoryClick} />
             </div>
           )}
         </div>
         <div className="content grid grid-cols-1 md:grid-cols-12 gap-3 mx-auto mt-8">
-          <div className="books-content w-[80%] md:col-span-8 lg:col-span-9 mx-auto">
+          <div className="books-content w-[50%] md:w-[80%] md:col-span-8 lg:col-span-8 mx-auto">
             <div className="bg-transparent relative mb-4">
               <input
                 type="search"
@@ -302,7 +302,7 @@ const Book = () => {
                           <img
                             src={`http://localhost:9000/image/${book.cover}`}
                             alt="BookImage"
-                            className="w-full h-40 object-cover mb-3"
+                            className="w-full  object-cover mb-3"
                           />
                           <h2 className="text-center font-bold text-primary">
                             {book.title}
@@ -339,7 +339,7 @@ const Book = () => {
                     : "bg-primary text-white"
                 }`}
               >
-                Previous
+              {currentPage}
               </button>
               <button
                 onClick={() => handlePageChange("next")}
@@ -350,13 +350,14 @@ const Book = () => {
                     : "bg-primary text-white"
                 }`}
               >
-                Next
+                {totalPages}
               </button>
             </div>
           </div>
-          <div className="categories-content h-[30rem] hidden md:block md:col-span-4 lg:col-span-3 bg-transparent border border-gray-300 px-2 rounded-md mt-10 md:mt-0">
+          <div className="categories-content sm:w-[50%] md:w-[80%] h-[30rem] hidden md:block md:col-span-4 lg:col-span-3 bg-transparent border border-gray-300 px-2 rounded-md mt-10 md:mt-0">
             <Category handleCategoryClick={handleCategoryClick} />
           </div>
+          <div className="lg:col-span-1"></div>
         </div>
       </div>
     </main>

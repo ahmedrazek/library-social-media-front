@@ -30,9 +30,11 @@ import { UserPosts } from "./components/UserPosts";
 import { Following } from "./components/Following";
 import { Followers } from "./components/Followers";
 import { UserProfile } from "./pages/UserProfile";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-import { QueryClient } from "react-query";
+
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +52,7 @@ function App() {
       children: [
         { path: "timeline", element: <Timeline /> },
         { path: "books", element: <Book /> },
+
         {
           path: "favorite",
           element: <MyFavorites />,
@@ -129,6 +132,7 @@ function App() {
 
   return (
     <>
+
       <ToastContainer theme="colored" />
       <RouterProvider router={router} />|
     </>
