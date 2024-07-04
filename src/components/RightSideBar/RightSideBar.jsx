@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -32,7 +31,6 @@ const RightSideBar = () => {
     try {
       if (isCurrentlyFollowing) {
         await axios.post(`/users/unfollow/${user._id}/${toggleUserId}`);
-       
       } else {
         await axios.post(`/users/follow/${user._id}/${toggleUserId}`);
       }
@@ -78,7 +76,7 @@ const RightSideBar = () => {
             {/* <div>
               <h1 className="text-sm font-semibold">{user.name}</h1>
             </div> */}
-             <div>
+            <div>
               <Link to={`/user/userProfile/${user._id}`}>
                 <h1 className="text-md font-semibold">{user.name}</h1>
               </Link>
