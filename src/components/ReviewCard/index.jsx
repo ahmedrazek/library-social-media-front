@@ -6,8 +6,9 @@ import AddComment from "../AddComment";
 import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Avatar} from '@chakra-ui/react'
 
+import { Avatar } from "@chakra-ui/react";
+import { MdOutlineInsertComment } from "react-icons/md";
 
 // eslint-disable-next-line react/prop-types
 const ReviewCard = ({ postId, removePost }) => {
@@ -177,11 +178,11 @@ const ReviewCard = ({ postId, removePost }) => {
   }
   return (
     <>
-      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-green-400">
+      <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-gray-50">
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
             <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
-            {post.userId?.photo ? (
+              {post.userId?.photo ? (
                 <img
                   src={`http://localhost:9000${post.userId.photo}`}
                   className="object-cover  w-full h-full"
@@ -208,7 +209,7 @@ const ReviewCard = ({ postId, removePost }) => {
           <div className="flex justify-between gap-8">
             {user?._id == post.userId?._id ? (
               <button
-                className="text-primary"
+                className="text-red-500"
                 onClick={() => removePost(post._id)}
               >
                 <svg
@@ -225,22 +226,6 @@ const ReviewCard = ({ postId, removePost }) => {
                 </svg>
               </button>
             ) : null}
-            <button
-              onClick={savePost}
-              className="text-primary flex items-center gap-1"
-            >
-              {saved ? (
-                <>
-                  <FaBookmark className="w-5 h-5" />
-                  <span>Saved</span>
-                </>
-              ) : (
-                <>
-                  <FaRegBookmark className="w-5 h-5" />
-                  <span>Save</span>
-                </>
-              )}
-            </button>
           </div>
         </div>
         {/* POST DESC  */}
@@ -276,8 +261,9 @@ const ReviewCard = ({ postId, removePost }) => {
           </div>
         )}
         {/* COMMENT SECTION  */}
-        <div className="flex justify-between">
-          <div className="flex gap-2">
+
+        <div className="flex gap-4 px-2 items-center">
+          <div className="flex gap-1">
             <button onClick={toggleLike}>
               {like && (
                 <svg
@@ -308,11 +294,40 @@ const ReviewCard = ({ postId, removePost }) => {
             </button>
             <p>{likesNum}</p>
           </div>
+
           <div
             onClick={() => setShowComments(true)}
-            className=" cursor-pointer"
+            className=" flex items-center gap-1 cursor-pointer"
           >
-            <span>{post.comments.length}</span> comments
+            <MdOutlineInsertComment className="w-5 h-5 text-primary" />
+            <span className="text-xl">{post.comments.length}</span>
+          </div>
+          <div>
+            <button
+              onClick={savePost}
+              className="text-primary flex items-center gap-1"
+            >
+              {saved ? (
+                <>
+                  <FaBookmark className="w-4 h-4" />
+                  <span>Saved</span>
+                </>
+              ) : (
+                <>
+                  <FaRegBookmark className="w-4 h-4" />
+                  <span>Save</span>
+                </>
+              )}
+
+              {/* //           <div className="flex gap-1">
+//             <button
+//               className="text-primary flex items-center gap-1"
+//               onClick={() => setShowComments(true)}
+//             >
+//               <BiSolidMessageDetail className="text-xl" />
+
+//               <span>{post.comments.length}</span> */}
+            </button>
           </div>
         </div>
         <AddComment

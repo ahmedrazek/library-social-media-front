@@ -10,26 +10,19 @@ const PageLayout = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div className="bg-white">
+    <div>
       <Navbar />
-      {/* <div className="">
-        <Sidebar />
 
-        <div className="mt-20">
-          <Outlet />
+      <div className="grid lg:grid-cols-12 ">
+        <div className=" col-span-2 lg:block hidden w-74">
+          <Sidebar />
         </div>
-      </div> */}
-<div className="grid lg:grid-cols-12 ">
-  <div className=" col-span-3 lg:block hidden w-74">
-    <Sidebar />
-  </div>
-  <div className=" col-span-9 ">
-    <div className="mt-40">
-      <Outlet />
-    </div>
-  </div>
-</div>
-
+        <div className=" col-span-10 ">
+          <div className="mt-40">
+            <Outlet />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

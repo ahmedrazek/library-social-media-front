@@ -2,9 +2,10 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export const ResetPassword = () => {
+  const { token } = useParams();
   const [showPassword, setShowPassword] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
@@ -15,7 +16,6 @@ export const ResetPassword = () => {
     watch,
   } = useForm({
     defaultValues: {
-      token: "",
       password: "",
       confirmPassword: "",
     },
@@ -25,7 +25,7 @@ export const ResetPassword = () => {
   password.current = watch("password", "");
   const onSubmit = async (data) => {
     try {
-      const { token, password, confirmPassword } = data;
+      const { password, confirmPassword } = data;
       await axios.post(`/users/resetPassword/${token}`, {
         password,
         confirmPassword,
@@ -50,7 +50,7 @@ export const ResetPassword = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col"
           >
-            <div className="relative z-0 w-full mb-5 group">
+            {/* <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
                 name="token"
@@ -85,7 +85,7 @@ export const ResetPassword = () => {
                   {errors.token.message}
                 </p>
               )}
-            </div>
+            </div> */}
             <div>
               <div className="relative z-0 w-full mb-5 group">
                 <input

@@ -32,13 +32,13 @@ const EditProfilePopup = ({ user, onClose, onSave }) => {
       <div className="bg-white p-4 rounded shadow-md w-full max-w-md">
         <h2 className="text-lg font-bold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+          <div className="mb-4 rounded-full">
             <label className="block text-gray-700">Avatar</label>
             <input type="file" onChange={handleAvatarChange} />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 rounded-full ">
             <label className="block text-gray-700">Cover</label>
-            <input type="file" onChange={handleCoverChange} />
+            <input type="file" onChange={handleCoverChange} className=""/>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Bio</label>
@@ -70,3 +70,4 @@ const EditProfilePopup = ({ user, onClose, onSave }) => {
 };
 
 export default EditProfilePopup;
+

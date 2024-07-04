@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiUpload, FiX } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
-import { Avatar } from '@chakra-ui/react'
+import { Avatar } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
-import { FaPlusCircle, FaPen } from 'react-icons/fa';
+import { FaPlusCircle, FaPen } from "react-icons/fa";
 const CreatePost = ({ updatePosts }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupType, setPopupType] = useState("");
@@ -86,10 +86,10 @@ const CreatePost = ({ updatePosts }) => {
   };
   const user = useSelector((state) => state.user.user);
 
-
   return (
     <div className="w-11/12 lg:w-[40rem]  pt-0 ">
-      <div className="relative rounded-xl bg-white p-4 shadow-md flex items-start ">
+
+      <div className=" rounded bg-gray-50 p-4 shadow-md flex items-baseline ">
       <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden m-2 border-2 border-zinc-900">
         {user.photo ? (
           <img
@@ -102,10 +102,9 @@ const CreatePost = ({ updatePosts }) => {
         )}
       </div>
 
-
         <form className="flex-grow">
           <textarea
-            className="w-full border border-gray-200 focus:border-0 rounded-full p-2 mb-2 resize-none"
+            className="w-full border border-gray-200 focus:border-0 rounded p-2 mb-2 resize-none"
             name="postText"
             placeholder="Add a post"
             rows={1}
@@ -136,38 +135,50 @@ const CreatePost = ({ updatePosts }) => {
               Add Review
             </button>
           </div> */}
+
     <div className="flex justify-around mb-2">
       <button
         type="button"
         onClick={() => handleFormSubmit("quote")}
-        className="bg-primary   hover:bg-primary text-white font- p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 md:mr-2 flex items-center"
+        className=" text-primary font-medium p-3 lg:py-2 lg:px-4 border-none rounded mb-2 md:mb-0 md:mr-2 flex items-center"
       >
-        <span className="hidden md:inline-block mr-2">Add Quote</span>
-        <FaPlusCircle className="block md:hidden text-xl" title="Add Quote" />
+        <div className=" items-center gap-2 hidden md:flex">
+        <FaPlusCircle className="text-xl"/>
+        <span className="hidden md:inline-block font-medium">Add Quote</span>
+        </div>
+        <FaPlusCircle className="block md:hidden text-2xl" title="Add Quote" />
       </button>
       <button
         type="button"
         onClick={() => handleFormSubmit("post")}
-        className="bg-primary hover:bg-primary text-white font-semibold p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 md:mr-2 flex items-center"
+        className=" text-primary font-semibold p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 md:mr-2 flex items-center"
       >
-        <span className="hidden md:inline-block mr-2">Add Post</span>
-        <FaPen className="block md:hidden text-xl" title="Add Post" />
+      <div className=" items-center gap-2 hidden md:flex">
+        <FaPlusCircle className="text-xl"/>
+        <span className=" font-medium">Add Post</span>
+        </div>
+        <FaPen className="block md:hidden text-2xl" title="Add Post" />
       </button>
       <button
         type="button"
         onClick={() => handleFormSubmit("review")}
-        className="bg-primary hover:bg-primary text-white font-semibold p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 flex items-center"
+        className=" text-primary font-semibold p-3 lg:py-2 lg:px-4 border-none rounded-full mb-2 md:mb-0 flex items-center"
       >
-        <span className="hidden md:inline-block mr-2">Add Review</span>
-        <FaStar className="block md:hidden text-xl" title="Add Review" />
+       <div className=" items-center gap-2 hidden md:flex">
+        <FaStar className="text-xl"/>
+        <span className="hidden md:inline-block font-medium">Add Review</span>
+        </div>
+       
+        <FaStar className="block md:hidden text-2xl" title="Add Review" />
       </button>
     </div>
+
 
         </form>
       </div>
       {showPopup && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-4 rounded shadow-md relative">
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-200 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white  p-4 rounded shadow-md relative">
             <h2 className="text-lg font-bold mb-4">
               {popupType === "quote" && "Add Quote"}
               {popupType === "post" && "Add Post"}
@@ -309,7 +320,7 @@ const CreatePost = ({ updatePosts }) => {
               </button>
             </form>
             <button
-              className="absolute top-0 right-0 m-2 p-2 text-gray-600 hover:text-gray-800"
+              className="absolute top-0 right-0 m-2 p-2 text-red-500 "
               onClick={handlePopupClose}
             >
               <svg
