@@ -269,7 +269,7 @@ function Timeline() {
             <InfiniteScroll
               next={getPosts}
               dataLength={posts?.length}
-              hasMore={true}
+              hasMore={hasMore}
               loader={
                 <div className="bg-secondary min-h-screen flex justify-center items-center">
                   <div
