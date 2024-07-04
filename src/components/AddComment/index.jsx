@@ -39,7 +39,7 @@
 /* eslint-disable react/prop-types */
 import { Avatar } from '@chakra-ui/react';
 import { FaPlus } from 'react-icons/fa';
-
+import { FaComment } from 'react-icons/fa';
 const AddComment = ({ addComment, setComment, comment, user }) => {
   return (
     <div className="flex justify-between py-2 gap-2 items-center">
@@ -69,7 +69,8 @@ const AddComment = ({ addComment, setComment, comment, user }) => {
         onClick={addComment}
         className="bg-primary px-4 py-2 rounded text-white text-sm hidden md:block"
       >
-        Add Comment
+        
+        add comment
       </button>
       <button
         onClick={addComment}

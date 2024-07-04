@@ -174,8 +174,8 @@ const CreatePost = ({ updatePosts }) => {
         </form>
       </div>
       {showPopup && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-4 rounded shadow-md relative">
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-200 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white  p-4 rounded shadow-md relative">
             <h2 className="text-lg font-bold mb-4">
               {popupType === "quote" && "Add Quote"}
               {popupType === "post" && "Add Post"}
@@ -317,7 +317,7 @@ const CreatePost = ({ updatePosts }) => {
               </button>
             </form>
             <button
-              className="absolute top-0 right-0 m-2 p-2 text-gray-600 hover:text-gray-800"
+              className="absolute top-0 right-0 m-2 p-2 text-red-500 "
               onClick={handlePopupClose}
             >
               <svg
