@@ -80,7 +80,7 @@ const RightSideBar = () => {
             </div> */}
              <div>
               <Link to={`/user/userProfile/${user._id}`}>
-                <h1 className="text-sm font-semibold">{user.name}</h1>
+                <h1 className="text-md font-semibold">{user.name}</h1>
               </Link>
             </div>
             <button
