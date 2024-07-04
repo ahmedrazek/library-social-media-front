@@ -31,10 +31,8 @@ import { Following } from "./components/Following";
 import { Followers } from "./components/Followers";
 import { UserProfile } from "./pages/UserProfile";
 
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
-
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -132,7 +130,6 @@ function App() {
 
   return (
     <>
-
       <ToastContainer theme="colored" />
       <RouterProvider router={router} />|
     </>

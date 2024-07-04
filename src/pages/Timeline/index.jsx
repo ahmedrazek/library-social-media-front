@@ -1,5 +1,3 @@
-
-
 import PostCard from "../../components/PostCard";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
@@ -9,16 +7,15 @@ import QuoteCard from "../../components/QouteCard";
 import ReviewCard from "../../components/ReviewCard";
 import RightSideBar from "../../components/RightSideBar/RightSideBar";
 
-import Swal from 'sweetalert';
+import Swal from "sweetalert";
 
-import { useInfiniteQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Navigate } from "react-router-dom";
 function Timeline() {
   const [filter, setFilter] = useState("all");
   const [posts, setPosts] = useState([]);
   const [showPhotos, setShowPhoto] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
-
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -33,60 +30,54 @@ function Timeline() {
     console.log(res.data, res.data.posts.length >= res.data.totalPosts);
   };
 
+  const removePost = async (postId) => {
+    try {
+      // Ask for confirmation before deleting
+      const confirmed = await Swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this post!",
+        icon: "warning",
+        buttons: ["Cancel", "Delete"],
+        dangerMode: true,
+      });
 
+      if (confirmed) {
+        // User confirmed deletion, proceed with API call
+        const res = await axios.delete(`/posts/${postId}`);
 
-
-const removePost = async (postId) => {
-  try {
-    // Ask for confirmation before deleting
-    const confirmed = await Swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this post!',
-      icon: 'warning',
-      buttons: ['Cancel', 'Delete'],
-      dangerMode: true,
-    });
-
-    if (confirmed) {
-      // User confirmed deletion, proceed with API call
-      const res = await axios.delete(`/posts/${postId}`);
-
-      if (res.status === 200) {
+        if (res.status === 200) {
+          Swal({
+            title: "Deleted!",
+            text: "Your post has been deleted successfully.",
+            icon: "success",
+            button: "OK",
+          });
+          // Optionally, you can also handle state updates or re-fetching posts here
+        }
+      } else {
+        // User clicked Cancel, do nothing or show a message
         Swal({
-          title: 'Deleted!',
-          text: 'Your post has been deleted successfully.',
-          icon: 'success',
-          button: 'OK',
+          title: "Cancelled",
+          text: "Your post is safe :)",
+          icon: "info",
+          button: "OK",
         });
-        // Optionally, you can also handle state updates or re-fetching posts here
       }
-    } else {
-      // User clicked Cancel, do nothing or show a message
+    } catch (error) {
+      console.error("Error deleting post:", error);
       Swal({
-        title: 'Cancelled',
-        text: 'Your post is safe :)',
-        icon: 'info',
-        button: 'OK',
+        title: "Error",
+        text: "Error deleting post",
+        icon: "error",
+        button: "OK",
       });
     }
-  } catch (error) {
-    console.error('Error deleting post:', error);
-    Swal({
-      title: 'Error',
-      text: 'Error deleting post',
-      icon: 'error',
-      button: 'OK',
-    });
-  }
-};
+  };
 
-  
-
-
-//   const removePost = (id) => {
-//     axios.delete(`/posts/${id}`);
-//     getPosts();
-//   };
+  //   const removePost = (id) => {
+  //     axios.delete(`/posts/${id}`);
+  //     getPosts();
+  //   };
 
   const updatePosts = useCallback(() => {
     getPosts();
@@ -96,15 +87,10 @@ const removePost = async (postId) => {
     getPosts();
   }, []);
 
-
   const filteredPosts = posts.filter((post) => {
     if (filter === "all") return true;
     return post.type === filter;
   });
-
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
   if (showPhotos) {
     return (
       <>
@@ -179,39 +165,55 @@ const removePost = async (postId) => {
       <div className="min-h-screen grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-20 px-10">
         <div className="col-span-12 lg:col-span-8 mx-auto">
           <div className="flex flex-col gap-20">
-          <div className="flex  items-center mx-auto gap-4 mb-4">
+            <div className="flex  items-center mx-auto gap-4 mb-4">
               <button
-                className={`py-2 px-auto rounded w-20 text-center font-medium ${filter === "all" ? "bg-primary text-white" : "bg-secondary text-black"}`}
+                className={`py-2 px-auto rounded w-20 text-center font-medium ${
+                  filter === "all"
+                    ? "bg-primary text-white"
+                    : "bg-secondary text-black"
+                }`}
                 onClick={() => setFilter("all")}
               >
                 All
               </button>
               <button
-                className={`py-2 px-auto rounded w-20 text-center font-medium ${filter === "post" ? "bg-primary text-white" : "bg-secondary text-black"}`}
+                className={`py-2 px-auto rounded w-20 text-center font-medium ${
+                  filter === "post"
+                    ? "bg-primary text-white"
+                    : "bg-secondary text-black"
+                }`}
                 onClick={() => setFilter("post")}
               >
                 Posts
               </button>
               <button
-                className={`py-2 px-auto w-20 rounded  font-medium text-center ${filter === "review" ? "bg-primary text-white" : "bg-secondary text-black"}`}
+                className={`py-2 px-auto w-20 rounded  font-medium text-center ${
+                  filter === "review"
+                    ? "bg-primary text-white"
+                    : "bg-secondary text-black"
+                }`}
                 onClick={() => setFilter("review")}
               >
                 Reviews
               </button>
               <button
-                className={`py-2 px-auto w-20 rounded  text-center  font-medium ${filter === "quote" ? "bg-primary text-white" : "bg-secondary text-black"}`}
+                className={`py-2 px-auto w-20 rounded  text-center  font-medium ${
+                  filter === "quote"
+                    ? "bg-primary text-white"
+                    : "bg-secondary text-black"
+                }`}
                 onClick={() => setFilter("quote")}
               >
                 Quotes
               </button>
             </div>
             <CreatePost updatePosts={updatePosts} className="" />
-               <InfiniteScroll
+            <InfiniteScroll
               next={getPosts}
               dataLength={posts?.length}
               hasMore={hasMore}
               loader={
-                <div className="bg-secondary min-h-screen flex justify-center items-center">
+                <div className=" min-h-screen flex justify-center items-center">
                   <div
                     role="status"
                     className="max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
@@ -257,40 +259,41 @@ const removePost = async (postId) => {
                 </p>
               }
             >
-            <div className="flex flex-col gap-4">
-              {filteredPosts.map((post) => {
-                if (post.type === "post") {
-                  return (
-                    <PostCard
-                      postId={post._id}
-                      key={post._id}
-                      removePost={removePost}
-                    />
-                  );
-                } else if (post.type === "review") {
-                  return (
-                    <ReviewCard
-                      postId={post._id}
-                      key={post._id}
-                      removePost={removePost}
-                    />
-                  );
-                } else {
-                  return (
-                    <QuoteCard
-                      postId={post._id}
-                      key={post._id}
-                      removePost={removePost}
-                    />
-                  );
-                }
-              })}
-            </div>
-             </InfiniteScroll>
+              <div className="flex flex-col gap-4">
+                {filteredPosts.map((post) => {
+                  if (post.type === "post") {
+                    return (
+                      <PostCard
+                        setImageUrl={setImageUrl}
+                        setShowPhoto={setShowPhoto}
+                        postId={post._id}
+                        key={post._id}
+                        removePost={removePost}
+                      />
+                    );
+                  } else if (post.type === "review") {
+                    return (
+                      <ReviewCard
+                        postId={post._id}
+                        key={post._id}
+                        removePost={removePost}
+                      />
+                    );
+                  } else {
+                    return (
+                      <QuoteCard
+                        postId={post._id}
+                        key={post._id}
+                        removePost={removePost}
+                      />
+                    );
+                  }
+                })}
+              </div>
+            </InfiniteScroll>
           </div>
         </div>
         <div className="col-span-12 lg:col-span-3">
-
           <RightSideBar user={user} />
         </div>
         <div className="lg:col-span-1"></div>
@@ -341,5 +344,3 @@ const removePost = async (postId) => {
 }
 
 export default Timeline;
-
-

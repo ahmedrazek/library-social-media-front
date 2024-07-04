@@ -1,7 +1,4 @@
-
-
-
-
+/* eslint-disable react/prop-types */
 // import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 // import { FaSearch, FaUserCircle } from 'react-icons/fa'; // Import the user icon
@@ -237,20 +234,18 @@
 
 // export default SearchBar;
 
-
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { FaSearch } from 'react-icons/fa'; // Import the search icon
-import SearchResultsList from '../SearchResultsList/SearchResultsList
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { FaSearch } from "react-icons/fa"; // Import the search icon
+import SearchResultsList from "../SearchResultsList/SearchResultsList";
 import { useNavigate } from "react-router-dom";
-
 
 const SearchBar = ({ setSearchResults, searchResults }) => {
   const [input, setInput] = useState("");
   const [searchType, setSearchType] = useState("users");
   const [allData, setAllData] = useState([]); // Store all fetched data here
   const [showResults, setShowResults] = useState(false); // Control the visibility of the result list
-
+  const navigate = useNavigate();
   const fetchData = () => {
     const endpoint =
       searchType === "users"
@@ -266,13 +261,12 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
           const formattedData = items.map((item) => ({
             id: item._id,
 
-            name: searchType === 'users' ? item.name : item.title,
-            photo: searchType === 'users' ? item.photo : null, // Add photo field for users
-            type: searchType === 'users' ? 'user' : 'book'
+            name: searchType === "users" ? item.name : item.title,
+            photo: searchType === "users" ? item.photo : null, // Add photo field for users
+            type: searchType === "users" ? "user" : "book",
 
-//             name: searchType === "users" ? item.name : item.title,
-//             type: searchType === "users" ? "user" : "book",
-
+            //             name: searchType === "users" ? item.name : item.title,
+            //             type: searchType === "users" ? "user" : "book",
           }));
           setAllData(formattedData);
         } else {
@@ -307,7 +301,6 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
     setSearchType(e.target.value);
   };
 
-
   const handleItemClick = (item) => {
     if (item.type === "user") {
       navigate(`/user/profile/${item.id}`);
@@ -320,7 +313,6 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
     setShowResults(false);
     setInput("");
   };
-
 
   return (
     <div className="search-bar-container flex flex-col min-w-[200px] px-10 items-center justify-center">
@@ -346,22 +338,25 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
       </div>
 
       {showResults && (
+        <>
+          <SearchResultsList
+            searchResults={searchResults}
+            setSearchResults={setSearchResults}
+          />
 
-        <SearchResultsList searchResults={searchResults} setSearchResults={setSearchResults} />
-
-        <div className="results-list absolute w-full bg-secondary flex flex-col shadow-sm rounded-sm top-24 cursor-pointer max-h-64 overflow-y-scroll z-50">
-          {Array.isArray(searchResults) &&
-            searchResults.map((result, id) => (
-              <div
-                key={id}
-                className="p-2 border-b border-gray-300 hover:bg-white"
-                onClick={() => handleItemClick(result)}
-              >
-                {result.name}
-              </div>
-            ))}
-        </div>
-
+          <div className="results-list absolute w-full bg-secondary flex flex-col shadow-sm rounded-sm top-24 cursor-pointer max-h-64 overflow-y-scroll z-50">
+            {Array.isArray(searchResults) &&
+              searchResults.map((result, id) => (
+                <div
+                  key={id}
+                  className="p-2 border-b border-gray-300 hover:bg-white"
+                  onClick={() => handleItemClick(result)}
+                >
+                  {result.name}
+                </div>
+              ))}
+          </div>
+        </>
       )}
     </div>
   );

@@ -7,10 +7,8 @@ import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import { Avatar} from '@chakra-ui/react'
+import { Avatar } from "@chakra-ui/react";
 import { MdOutlineInsertComment } from "react-icons/md";
-
-
 
 // eslint-disable-next-line react/prop-types
 const ReviewCard = ({ postId, removePost }) => {
@@ -228,7 +226,6 @@ const ReviewCard = ({ postId, removePost }) => {
                 </svg>
               </button>
             ) : null}
-           
           </div>
         </div>
         {/* POST DESC  */}
@@ -267,7 +264,6 @@ const ReviewCard = ({ postId, removePost }) => {
 
         <div className="flex gap-4 px-2 items-center">
           <div className="flex gap-1">
-
             <button onClick={toggleLike}>
               {like && (
                 <svg
@@ -303,11 +299,11 @@ const ReviewCard = ({ postId, removePost }) => {
             onClick={() => setShowComments(true)}
             className=" flex items-center gap-1 cursor-pointer"
           >
-            <MdOutlineInsertComment className="w-5 h-5 text-primary"/>
-            <span className="text-xl">{post.comments.length}</span> 
+            <MdOutlineInsertComment className="w-5 h-5 text-primary" />
+            <span className="text-xl">{post.comments.length}</span>
           </div>
           <div>
-          <button
+            <button
               onClick={savePost}
               className="text-primary flex items-center gap-1"
             >
@@ -323,15 +319,14 @@ const ReviewCard = ({ postId, removePost }) => {
                 </>
               )}
 
-//           <div className="flex gap-1">
+              {/* //           <div className="flex gap-1">
 //             <button
 //               className="text-primary flex items-center gap-1"
 //               onClick={() => setShowComments(true)}
 //             >
 //               <BiSolidMessageDetail className="text-xl" />
 
-//               <span>{post.comments.length}</span>
-
+//               <span>{post.comments.length}</span> */}
             </button>
           </div>
         </div>
