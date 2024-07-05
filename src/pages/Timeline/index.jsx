@@ -91,6 +91,7 @@ function Timeline() {
     if (filter === "all") return true;
     return post.type === filter;
   });
+  
   if (showPhotos) {
     return (
       <>

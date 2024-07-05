@@ -189,8 +189,8 @@ const Book = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Dropdown state
+  const [loading, setLoading] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const booksPerPage = 9;
 
@@ -339,8 +339,9 @@ const Book = () => {
                     : "bg-primary text-white"
                 }`}
               >
-              {currentPage}
+                Previous
               </button>
+              <span className="px-4 py-2">{currentPage}</span>
               <button
                 onClick={() => handlePageChange("next")}
                 disabled={currentPage === totalPages}
@@ -350,7 +351,7 @@ const Book = () => {
                     : "bg-primary text-white"
                 }`}
               >
-                {totalPages}
+                Next
               </button>
             </div>
           </div>
@@ -365,5 +366,6 @@ const Book = () => {
 };
 
 export default Book;
+
 
 
