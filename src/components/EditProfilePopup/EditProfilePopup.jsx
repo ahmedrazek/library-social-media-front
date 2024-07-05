@@ -1,8 +1,10 @@
 import { useState ,useEffect } from "react";
 
+
+// eslint-disable-next-line react/prop-types
 const EditProfilePopup = ({ user, onClose, onSave }) => {
   const [avatar, setAvatar] = useState("");
-  const [cover, setCover] = useState(user.bio ? "bio" : "");
+  const [cover, setCover] = useState(user.bio ? user.bio : "");
   const [bio, setBio] = useState("" , );
 
   const handleAvatarChange = (e) => {
