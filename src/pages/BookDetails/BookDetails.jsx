@@ -301,7 +301,7 @@ const BookDetails = () => {
   return (
     <div className="container mb-8 h-full">
       <div className="mx-auto w-[90%] md:w-[60%]">
-        <div className="book-content bg-transparent rounded-md my-10 h-auto">
+        <div className="book-content bg-gray-50 shadow-md px-6 rounded-md my-10 h-auto">
           <div className="flex flex-row justify-end items-end mb-3 px-6 pt-5">
             {isFavorite ? (
               <FaHeart className="text-2xl cursor-pointer text-red-500" onClick={toggleFavorite} />
@@ -311,7 +311,7 @@ const BookDetails = () => {
           </div>
           <div className="flex space-x-3 m-3">
             <div>
-              <img src={`http://localhost:9000/image/${bookDetails.data.cover}`} alt="BookImage" className="w-full h-40 object-cover mb-3" />
+              <img src={`http://localhost:9000/image/${bookDetails.data.cover}`} alt="BookImage" className="w-full h-50 object-cover mb-3" />
             </div>
             <div>
               <h1>{bookDetails.data.title}</h1>
@@ -338,8 +338,9 @@ const BookDetails = () => {
             <h2 className="text-primary font-extrabold py-2">Summary</h2>
             {bookDetails.data.description}
           </div>
+          <div className='border-b border-gray-200'></div>
           <div className="mt-6 mb-10">
-            <h2 className="text-xl mb-4">Add Review</h2>
+            <h2 className="text-2xl mb-4 text-primary text-center font-bold">Reviews</h2>
             <form onSubmit={handleAddReview}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">Rating</label>
@@ -367,7 +368,7 @@ const BookDetails = () => {
                 ></textarea>
               </div>
               <div className="flex justify-end">
-                <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md">
+                <button type="submit" className="bg-green-900 hover:bg-green-800 w-full text-white px-4 py-2 rounded-md">
                   Add Review
                 </button>
               </div>

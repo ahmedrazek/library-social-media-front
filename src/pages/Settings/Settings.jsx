@@ -206,7 +206,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 w-[90%] md:w-[60%] bg-white shadow-lg rounded-lg">
+    <div className="container mx-auto p-6 w-[90%] md:w-[60%] bg-gray-50 shadow-lg rounded-lg">
       <h1 className="text-[2rem] font-bold mb-6 text-center text-primary">Settings</h1>
 
       <form onSubmit={handleNameChange} className="mb-8">
@@ -238,7 +238,7 @@ const Settings = () => {
           <button
             type="button"
             onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-            className="absolute right-3 top-10 text-gray-500"
+            className="absolute right-3 top-12 text-gray-500"
           >
             {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
@@ -255,7 +255,7 @@ const Settings = () => {
           <button
             type="button"
             onClick={() => setShowNewPassword(!showNewPassword)}
-            className="absolute right-3 top-10 text-gray-500"
+            className="absolute right-3 top-12 text-gray-500"
           >
             {showNewPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
@@ -272,7 +272,7 @@ const Settings = () => {
           <button
             type="button"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-3 top-10  text-gray-500"
+            className="absolute right-3 top-12  text-gray-500"
           >
             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
