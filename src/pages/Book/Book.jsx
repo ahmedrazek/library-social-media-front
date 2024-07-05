@@ -262,7 +262,7 @@ const Book = () => {
             Categories <FaCaretDown />
           </button>
           {isDropdownOpen && (
-            <div className=" w-[50%] mx-auto md:w-[80%] border-t border-gray-300 rounded-b-md">
+            <div className=" w-[60%] mx-auto md:w-[80%]  rounded-b-md">
               <Category handleCategoryClick={handleCategoryClick} />
             </div>
           )}
@@ -277,11 +277,13 @@ const Book = () => {
                 placeholder="Search"
                 value={searchInput}
                 onChange={handleSearchChange}
-                className="border border-gray-200 rounded-full w-full p-3 pl-4 pr-10 bg-secondary/30"
+                className="border border-gray-200 rounded-full w-full p-3 pl-8 pr-10 bg-secondary/30" 
               />
-              <FaSearch className="absolute top-1/2 transform -translate-y-1/2 right-3 text-gray-400" />
+              <FaSearch className="absolute top-1/2 left-3 mr-4 transform -translate-y-1/2  text-gray-400" />
+              {/* <FaSearch className="absolute top-1/2 transform -translate-y-1/2  right-1  text-center w-11 h-11  p-4 rounded-full bg-green-900 text-gray-100" /> */}
             </div>
-            <div className="book-content bg-transparent border border-gray-200 shadow-sm rounded-md my-10">
+
+            <div className="book-content border border-gray-100 py-10 shadow-md rounded-md my-10">
               <button
                 onClick={resetSearch}
                 className="text-gray-900 text-end font-bold hover:text-primary cursor-pointer block px-10 py-4"
@@ -290,15 +292,15 @@ const Book = () => {
               </button>
               {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+                  <div className="loader ease-linear rounded-full border-4 border-t-4  border-gray-200 h-12 w-12"></div>
                 </div>
               ) : Array.isArray(currentBooks) && currentBooks.length > 0 ? (
-                <div className="grid sm:w-[90%] mx-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-2">
+                <div className="grid sm:w-[90%]  mx-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2 py-2">
                   {currentBooks.map((book) => {
                     const randomRating = Math.floor(Math.random() * 5) + 1;
                     return (
                       <Link to={`/user/details/${book._id}`} key={book._id}>
-                        <div className="border border-gray-200 rounded-md mx-auto pb-4">
+                        <div className="shadow-md  rounded-md mx-auto pb-4">
                           <img
                             src={`http://localhost:9000/image/${book.cover}`}
                             alt="BookImage"
@@ -355,7 +357,7 @@ const Book = () => {
               </button>
             </div>
           </div>
-          <div className="categories-content sm:w-[50%] md:w-[80%] h-[30rem] hidden md:block md:col-span-4 lg:col-span-3 bg-transparent border border-gray-300 px-2 rounded-md mt-10 md:mt-0">
+          <div className="categories-content sm:w-[50%] md:w-[80%] h-[30rem] hidden md:block md:col-span-4 lg:col-span-3 bg-gray-50 px-2 rounded-md mt-10 md:mt-0">
             <Category handleCategoryClick={handleCategoryClick} />
           </div>
           <div className="lg:col-span-1"></div>

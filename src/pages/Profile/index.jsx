@@ -207,7 +207,7 @@ const Profile = () => {
         }}
       >
         <div className="flex flex-col items-center gap-4 absolute -bottom-28">
-          <div className="h-40 w-40 border border-gray-800 rounded-full overflow-hidden bg-green-600">
+          <div className="h-40 w-40 border border-green-900 rounded-full overflow-hidden ">
             {avatar ? (
               <img
                 src={`http://localhost:9000${avatar}`}
