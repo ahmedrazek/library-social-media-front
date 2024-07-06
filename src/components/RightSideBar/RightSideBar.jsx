@@ -14,7 +14,6 @@ const RightSideBar = () => {
         const response = await axios.get(
           "users/random/user/whoToFollow/timeline"
         );
-        console.log("fetching users", response.data.data);
         // Initialize follow status for each user
         const usersWithFollowStatus = response.data.data.map((user) => ({
           ...user,

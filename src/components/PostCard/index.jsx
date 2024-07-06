@@ -322,7 +322,7 @@ import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import { Avatar } from '@chakra-ui/react';
+import { Avatar } from "@chakra-ui/react";
 import { MdOutlineInsertComment } from "react-icons/md";
 const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const [showComments, setShowComments] = useState(false);
@@ -383,13 +383,12 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
     try {
       if (!like) {
         setLike(true);
-        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLikesNum(likesNum + 1);
+        await axios.post(`/posts/like/${user?._id}/${post._id}`);
       } else {
         setLike(false);
-        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLikesNum(likesNum - 1);
-        console.log("dislike", res);
+        await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
       }
     } catch (error) {
       setLike(!like);
@@ -430,7 +429,6 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
               {post.userId?.photo ? (
                 <img
                   src={`http://localhost:9000${post.userId.photo}`}
-
                   className="object-cover  w-full h-full"
                 />
               ) : (
@@ -469,7 +467,6 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
                 </svg>
               </button>
             ) : null}
-
           </div>
         </div>
         {/* POST DESC  */}
@@ -530,14 +527,13 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
               className="text-primary flex items-center gap-1"
               onClick={() => setShowComments(true)}
             >
-
-              <MdOutlineInsertComment className="w-5 h-5"/>
+              <MdOutlineInsertComment className="w-5 h-5" />
 
               <span>{post.comments.length}</span>
             </button>
           </div>
-          <div >
-           <button
+          <div>
+            <button
               onClick={savePost}
               className="text-primary flex items-center gap-1"
             >
@@ -552,7 +548,8 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
                   <span>Save</span>
                 </>
               )}
-            </button></div>
+            </button>
+          </div>
         </div>
         {/* ADD COMMENT  */}
         <div className="p-2">

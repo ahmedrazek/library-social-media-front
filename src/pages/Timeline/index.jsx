@@ -27,7 +27,6 @@ function Timeline() {
     setLoading(false);
     setPage((prev) => prev + 1);
     if (res.data.posts.length >= res.data.totalPosts) setHasMore(false);
-    console.log(res.data, res.data.posts.length >= res.data.totalPosts);
   };
 
  
@@ -56,6 +55,7 @@ function Timeline() {
           
           getPosts();
         }
+        getPosts();
       } else {
         
         Swal({

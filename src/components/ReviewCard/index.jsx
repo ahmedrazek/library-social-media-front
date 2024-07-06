@@ -71,13 +71,12 @@ const ReviewCard = ({ postId, removePost }) => {
     try {
       if (!like) {
         setLike(true);
-        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLikesNum(likesNum + 1);
+        await axios.post(`/posts/like/${user?._id}/${post._id}`);
       } else {
         setLike(false);
-        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLikesNum(likesNum - 1);
-        console.log("dislike", res);
+        await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
       }
     } catch (error) {
       setLike(!like);
