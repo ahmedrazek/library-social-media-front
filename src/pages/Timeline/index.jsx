@@ -30,9 +30,10 @@ function Timeline() {
     console.log(res.data, res.data.posts.length >= res.data.totalPosts);
   };
 
-  const removePost = async (postId) => {
+ 
+  const removePost = async (id) => {
     try {
-      // Ask for confirmation before deleting
+      // Show confirmation dialog and await the user's response
       const confirmed = await Swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this post!",
@@ -40,11 +41,11 @@ function Timeline() {
         buttons: ["Cancel", "Delete"],
         dangerMode: true,
       });
-
+  
       if (confirmed) {
-        // User confirmed deletion, proceed with API call
-        const res = await axios.delete(`/posts/${postId}`);
-
+        
+        const res = await axios.delete(`/posts/${id}`);
+  
         if (res.status === 200) {
           Swal({
             title: "Deleted!",
@@ -52,10 +53,11 @@ function Timeline() {
             icon: "success",
             button: "OK",
           });
-          // Optionally, you can also handle state updates or re-fetching posts here
+          
+          getPosts();
         }
       } else {
-        // User clicked Cancel, do nothing or show a message
+        
         Swal({
           title: "Cancelled",
           text: "Your post is safe :)",
@@ -64,20 +66,13 @@ function Timeline() {
         });
       }
     } catch (error) {
-      console.error("Error deleting post:", error);
-      Swal({
-        title: "Error",
-        text: "Error deleting post",
-        icon: "error",
-        button: "OK",
-      });
+      console.log(error);
     }
   };
-
-  //   const removePost = (id) => {
-  //     axios.delete(`/posts/${id}`);
-  //     getPosts();
-  //   };
+  // const removePost = (id) => {
+  //   axios.delete(`/posts/${id}`);
+  //   getPosts();
+  // };
 
   const updatePosts = useCallback(() => {
     getPosts();
