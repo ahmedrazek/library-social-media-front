@@ -71,13 +71,12 @@ const QuoteCard = ({ postId, removePost }) => {
     try {
       if (!like) {
         setLike(true);
-        await axios.post(`/posts/like/${user?._id}/${post._id}`);
         setLikesNum(likesNum + 1);
+        await axios.post(`/posts/like/${user?._id}/${post._id}`);
       } else {
         setLike(false);
-        const res = await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
         setLikesNum(likesNum - 1);
-        console.log("dislike", res);
+        await axios.post(`/posts/dislike/${user?._id}/${post._id}`);
       }
     } catch (error) {
       setLike(!like);
@@ -232,6 +231,7 @@ const QuoteCard = ({ postId, removePost }) => {
         <h1 className="text-center italic text-xl font-semibold">
           Quoted Book : <q>{post.book}</q>
         </h1>
+
         {/* <h1 className="text-center italic text-xl font-semibold">Quote : </h1> */}
         <div className="px-2 text-center italic text-lg font-semibold">
           <q>{post.description}</q>
