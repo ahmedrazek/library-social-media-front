@@ -120,7 +120,7 @@ const Sidebar = () => {
   return (
     <aside className="hidden lg:block w-64 bg-gray-50 fixed left-0 top-16 z-30 h-screen pt-20">
       <div>
-        <ul className="text-primary pr-4 font-semibold flex flex-col justify-center items-start gap-4 text-[1.4rem]">
+        <ul className="text-primary pr-4  flex flex-col justify-center items-start gap-4 text-[1.4rem]">
           <NavLink
             to="/user/timeline"
             className={({ isActive }) =>

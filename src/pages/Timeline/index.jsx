@@ -168,7 +168,7 @@ function Timeline() {
           <div className="flex flex-col gap-20">
             <div className="flex  items-center mx-auto gap-4 mb-4">
               <button
-                className={`py-2 px-4 rounded  text-center font-medium ${
+                className={`py-2 px-4 rounded  text-center ${
                   filter === "all"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
@@ -178,7 +178,7 @@ function Timeline() {
                 All
               </button>
               <button
-                className={`py-2 px-4 rounded  text-center font-medium ${
+                className={`py-2 px-4 rounded  text-center ${
                   filter === "post"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
@@ -188,7 +188,7 @@ function Timeline() {
                 Community Posts
               </button>
               <button
-                className={`py-2 px-4 rounded  font-medium text-center ${
+                className={`py-2 px-4 rounded  text-center ${
                   filter === "review"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
@@ -198,7 +198,7 @@ function Timeline() {
                 Latest Reviews
               </button>
               <button
-                className={`py-2 px-4 rounded  text-center  font-medium ${
+                className={`py-2 px-4 rounded  text-center   ${
                   filter === "quote"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
