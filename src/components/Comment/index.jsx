@@ -37,7 +37,6 @@ export default function Comment({ comment, user, getPost, removeComment }) {
   useEffect(() => {
     setLike(comment.likes.some((like) => like === user?._id));
     setLikesNum(comment.likes.length);
-    console.log(user._id , comment._id)
   }, []);
   return (
     <div
@@ -46,15 +45,15 @@ export default function Comment({ comment, user, getPost, removeComment }) {
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
-        <div className="w-12 h-12 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
-           {comment.userId?.photo ? (
-                <img
-                  src={`http://localhost:9000${comment.userId.photo}`}
-                  className="object-cover  w-full h-full"
-                />
-              ) : (
-                <Avatar bg="teal.500" size="full" />
-              )}
+          <div className="w-12 h-12 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
+            {comment.userId?.photo ? (
+              <img
+                src={`http://localhost:9000${comment.userId.photo}`}
+                className="object-cover  w-full h-full"
+              />
+            ) : (
+              <Avatar bg="teal.500" size="full" />
+            )}
           </div>
           <div>
             <h4 className=" font-semibold text-sm">{comment?.userId?.name}</h4>

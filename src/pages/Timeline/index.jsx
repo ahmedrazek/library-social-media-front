@@ -27,7 +27,6 @@ function Timeline() {
     setLoading(false);
     setPage((prev) => prev + 1);
     if (res.data.posts.length >= res.data.totalPosts) setHasMore(false);
-    console.log(res.data, res.data.posts.length >= res.data.totalPosts);
   };
 
   const removePost = async (postId) => {
@@ -54,6 +53,7 @@ function Timeline() {
           });
           // Optionally, you can also handle state updates or re-fetching posts here
         }
+        getPosts();
       } else {
         // User clicked Cancel, do nothing or show a message
         Swal({
