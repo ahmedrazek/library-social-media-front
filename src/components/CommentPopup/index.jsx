@@ -21,7 +21,7 @@ export default function CommentPopup({
 
   return (
     <div className="absolute inset-0 min-h-full  ">
-      <div className="fixed top-0 right-0 left-0 flex justify-center items-center h-full bg-gray-700 bg-opacity-50">
+      <div className="fixed top-0 right-0 left-0 flex justify-center items-center h-full bg-gray-200 bg-opacity-50">
         <div className="bg-white rounded-lg h-4/6 w-10/12 md:w-4/12 flex flex-col ">
           <div className="flex justify-between border-b items-center px-8 py-4">
             <h1 className=" text-2xl text-primary ">Comments</h1>
