@@ -91,7 +91,7 @@ function Timeline() {
     if (filter === "all") return true;
     return post.type === filter;
   });
-  
+
   if (showPhotos) {
     return (
       <>
@@ -168,7 +168,7 @@ function Timeline() {
           <div className="flex flex-col gap-20">
             <div className="flex  items-center mx-auto gap-4 mb-4">
               <button
-                className={`py-2 px-auto rounded w-20 text-center font-medium ${
+                className={`py-2 px-4 rounded  text-center font-medium ${
                   filter === "all"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
@@ -178,34 +178,34 @@ function Timeline() {
                 All
               </button>
               <button
-                className={`py-2 px-auto rounded w-20 text-center font-medium ${
+                className={`py-2 px-4 rounded  text-center font-medium ${
                   filter === "post"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
                 }`}
                 onClick={() => setFilter("post")}
               >
-                Posts
+                Community Posts
               </button>
               <button
-                className={`py-2 px-auto w-20 rounded  font-medium text-center ${
+                className={`py-2 px-4 rounded  font-medium text-center ${
                   filter === "review"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
                 }`}
                 onClick={() => setFilter("review")}
               >
-                Reviews
+                Latest Reviews
               </button>
               <button
-                className={`py-2 px-auto w-20 rounded  text-center  font-medium ${
+                className={`py-2 px-4 rounded  text-center  font-medium ${
                   filter === "quote"
                     ? "bg-primary text-white"
                     : "bg-secondary text-black"
                 }`}
                 onClick={() => setFilter("quote")}
               >
-                Quotes
+                Latest Quotes
               </button>
             </div>
             <CreatePost updatePosts={updatePosts} className="" />

@@ -7,10 +7,8 @@ import CommentPopup from "../CommentPopup";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import { Avatar} from '@chakra-ui/react'
+import { Avatar } from "@chakra-ui/react";
 import { MdOutlineInsertComment } from "react-icons/md";
-
-
 
 // eslint-disable-next-line react/prop-types
 const QuoteCard = ({ postId, removePost }) => {
@@ -180,10 +178,7 @@ const QuoteCard = ({ postId, removePost }) => {
   }
   return (
     <>
-
       <div className="flex flex-col p-4 rounded-xl gap-3 w-11/12 lg:w-[40rem] shadow-xl bg-gray-50">
-
-
         <div className="flex justify-between  items-center">
           <div className="flex gap-2">
             <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
@@ -231,10 +226,12 @@ const QuoteCard = ({ postId, removePost }) => {
                 </svg>
               </button>
             ) : null}
-          
           </div>
         </div>
         {/* POST DESC  */}
+        <h1 className="text-center italic text-xl font-semibold">
+          Quoted Book : <q>{post.book}</q>
+        </h1>
         {/* <h1 className="text-center italic text-xl font-semibold">Quote : </h1> */}
         <div className="px-2 text-center italic text-lg font-semibold">
           <q>{post.description}</q>
@@ -253,7 +250,6 @@ const QuoteCard = ({ postId, removePost }) => {
 
         <div className="flex gap-4 px-2 items-center">
           <div className="flex gap-1">
-
             <button onClick={toggleLike}>
               {like && (
                 <svg
@@ -289,11 +285,11 @@ const QuoteCard = ({ postId, removePost }) => {
             onClick={() => setShowComments(true)}
             className=" flex items-center gap-1 cursor-pointer"
           >
-            <MdOutlineInsertComment className="w-5 h-5 text-primary"/>
-            <span className="text-xl">{post.comments.length}</span> 
+            <MdOutlineInsertComment className="w-5 h-5 text-primary" />
+            <span className="text-xl">{post.comments.length}</span>
           </div>
           <div>
-          <button
+            <button
               onClick={savePost}
               className="text-primary flex items-center gap-1"
             >
@@ -308,7 +304,6 @@ const QuoteCard = ({ postId, removePost }) => {
                   <span>Save</span>
                 </>
               )}
-
             </button>
           </div>
         </div>

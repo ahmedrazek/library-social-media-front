@@ -244,7 +244,7 @@ const ReviewCard = ({ postId, removePost }) => {
             ))}
           </div>
         </h3>
-        <div className="px-2 font-semibold">
+        <div className="px-2 ">
           <p>{post.description}</p>
         </div>
         {/* POST GALLERY  */}

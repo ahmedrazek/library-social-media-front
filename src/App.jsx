@@ -101,7 +101,7 @@ function App() {
     if (!user && status == "failed") {
       redirect("/login");
     }
-  }, [dispatch, user, status]);
+  }, []);
   if (status === "loading") {
     return (
       <div className="flex justify-center items-center h-screen">

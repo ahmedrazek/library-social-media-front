@@ -52,38 +52,7 @@ export const Followers = () => {
     <div>
       <div className="w-10/12 lg:w-6/12 mx-auto divide-y mt-10">
         {curUser?.followers.map((follow) => (
-          // <div className="py-6" key={follow._id}>
-          //   <div className="flex justify-between">
-          //     <div className="flex gap-4 items-center">
-          //       <div className="h-10 w-10 rounded-full bg-black"></div>
-          //       <h3>{follow.name}</h3>
-          //     </div>
-          //     {user?.following.find((follow) => follow._id == curUser?._id) ? (
-          //       <button
-          //         className="bg-primary text-white px-4 py-2 rounded-full"
-          //         onClick={unFollow}
-          //       >
-          //         Following
-          //       </button>
-          //     ) : (
-          //       <button
-          //         className="bg-white text-primary border border-primary px-4 py-2 rounded-full"
-          //         onClick={followUser}
-          //       >
-          //         Follow
-          //       </button>
-          //     )}
-          //   </div>
-          //   <div className="ml-10">
-          //     {follow.quote ? `<q>${follow.quote}</q>` : null}
-          //   </div>
-          // </div>
-          <FollowCard
-            key={follow._id}
-            user={user}
-            curUser={curUser}
-            follow={follow}
-          />
+          <FollowCard key={follow._id} user={user} follow={follow} />
         ))}
       </div>
     </div>

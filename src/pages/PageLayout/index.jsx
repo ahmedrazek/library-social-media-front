@@ -1,7 +1,9 @@
 import Navbar from "../../components/Navbar";
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchUserProfile } from "../../store/userSlice";
 
 const PageLayout = () => {
   const user = useSelector((state) => state.user.user);

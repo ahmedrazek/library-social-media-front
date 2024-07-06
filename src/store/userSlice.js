@@ -27,6 +27,15 @@ const userSlice = createSlice({
       state.userId = null;
       state.status = "idle";
     },
+    setNewFollowing: (state, action) => {
+      state.user.following.push(action.payload);
+      console.log(action.payload, "is followed");
+    },
+    setUnFollow: (state, action) => {
+      state.user.following = state.user.following.filter(
+        (follower) => follower._id !== action.payload._id
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -43,5 +52,6 @@ const userSlice = createSlice({
       });
   },
 });
-export const { setUser, logout } = userSlice.actions;
+export const { setUser, logout, setNewFollowing, setUnFollow } =
+  userSlice.actions;
 export default userSlice.reducer;

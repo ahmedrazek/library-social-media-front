@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setNewFollowing, setUnFollow } from "../../store/userSlice";
 
 const RightSideBar = () => {
   const [users, setUsers] = useState([]);
   const user = useSelector((state) => state.user.user);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -27,18 +28,24 @@ const RightSideBar = () => {
     fetchUsers();
   }, []);
 
-  const toggleFollow = async (toggleUserId, isCurrentlyFollowing) => {
+  const toggleFollow = async (curUser, isCurrentlyFollowing) => {
     try {
       if (isCurrentlyFollowing) {
-        await axios.post(`/users/unfollow/${user._id}/${toggleUserId}`);
+        await axios.post(`/users/unfollow/${user._id}/${curUser._id}`);
+        dispatch(setUnFollow(curUser));
+
+        console.log("first", curUser);
       } else {
-        await axios.post(`/users/follow/${user._id}/${toggleUserId}`);
+        await axios.post(`/users/follow/${user._id}/${curUser._id}`);
+        dispatch(setNewFollowing(curUser));
+
+        console.log("first");
       }
 
       // Update the follow status for the specific user
       setUsers((prevUsers) =>
         prevUsers.map((u) =>
-          u._id === toggleUserId
+          u._id === curUser._id
             ? { ...u, isFollowing: !isCurrentlyFollowing }
             : u
         )
@@ -92,7 +99,7 @@ const RightSideBar = () => {
                 //                   ? "bg-primary text-white"
                 //                   : "bg-white text-primary border border-primary"
               }`}
-              onClick={() => toggleFollow(user._id, user.isFollowing)}
+              onClick={() => toggleFollow(user, user.isFollowing)}
             >
               {user.isFollowing ? "Following" : "Follow"}
             </button>

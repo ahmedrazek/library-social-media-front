@@ -130,8 +130,7 @@
 
 // export default Profile;
 
-
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useState } from "react";
@@ -180,17 +179,13 @@ const Profile = () => {
     }
   }, [user._id]);
 
-  const fetchUser = useCallback(() => {
-    dispatch(fetchUserProfile());
-  }, []);
-  
   useEffect(() => {
     if (user) {
       setAvatar(user.photo);
       setCover(user.cover);
       setBio(user.bio || "");
     }
-  }, [user]);
+  }, []);
 
   if (!user && status === "failed") {
     return <Navigate to="/login" />;
@@ -267,7 +262,7 @@ const Profile = () => {
           Followers
         </NavLink>
       </div>
-      <Outlet context={[fetchUser]} />
+      <Outlet />
       {showEditProfilePopup && (
         <EditProfilePopup
           user={user}
@@ -280,24 +275,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

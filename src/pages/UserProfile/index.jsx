@@ -2,21 +2,26 @@ import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, Navigate, Outlet, useParams } from "react-router-dom";
-import { fetchUserProfile } from "../../store/userSlice";
+import {
+  fetchUserProfile,
+  setNewFollowing,
+  setUnFollow,
+} from "../../store/userSlice";
 
 export const UserProfile = () => {
   const [curUser, setCurUser] = useState(null);
   const [following, setFollow] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [followersCount, setFollowersCount] = useState(0);
   const { id } = useParams();
   const user = useSelector((state) => state.user.user);
-
-  const getUser = async () => {
+  const dispatch = useDispatch();
+  const getUser = async (userId) => {
     try {
       setLoading(true);
-      const res = await axios.get(`/users/${id}`);
+      const res = await axios.get(`/users/${userId}`);
       setCurUser(res.data);
-
+      setFollowersCount(res.data.followers.length);
       // Check if the current user is following the fetched user
       if (user?.following.find((follow) => follow._id === res.data._id)) {
         setFollow(true);
@@ -31,31 +36,30 @@ export const UserProfile = () => {
 
   const follow = async () => {
     try {
-      const res = await axios.post(`/users/follow/${user._id}/${id}`);
-      console.log(res);
       setFollow(true);
+      setFollowersCount(followersCount + 1);
+      await axios.post(`/users/follow/${user._id}/${id}`);
+      dispatch(setNewFollowing(curUser));
+      // fetchUser();
     } catch (error) {
       console.error("Error following user:", error);
     }
   };
 
   const unFollow = async () => {
-    const res = await axios.post(`/users/unfollow/${user._id}/${id}`);
-    console.log(res);
     setFollow(false);
+    setFollowersCount(followersCount - 1);
+    const res = await axios.post(`/users/unfollow/${user._id}/${id}`);
+    // fetchUser();
+    dispatch(setUnFollow(curUser));
+    console.log(res);
   };
-  const dispatch = useDispatch();
   const fetchUser = useCallback(() => {
     dispatch(fetchUserProfile());
   }, []);
   useEffect(() => {
-    getUser();
-    console.log(
-      user?.following.find((follow) => follow._id == curUser?._id),
-      curUser,
-      user
-    );
-  }, []);
+    getUser(id);
+  }, [id]);
 
   if (id === user?._id) {
     return <Navigate to={"/user/profile"} />;
@@ -148,7 +152,7 @@ export const UserProfile = () => {
           to={"following"}
         >
           <span className="text-xl italic font-bold">
-            {user?.following.length}
+            {curUser?.following.length}
           </span>{" "}
           Following
         </NavLink>
@@ -158,9 +162,7 @@ export const UserProfile = () => {
           }
           to={"followers"}
         >
-          <span className="text-xl italic font-bold">
-            {user?.followers.length}
-          </span>{" "}
+          <span className="text-xl italic font-bold">{followersCount}</span>{" "}
           Followers
         </NavLink>
       </div>
