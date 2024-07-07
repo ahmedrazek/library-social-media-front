@@ -103,7 +103,7 @@ export const UserProfile = () => {
           <div className="h-40 w-40 rounded-full bg-green-600">
             {curUser.photo ? (
               <img
-                src={`http://localhost:9000${curUser.photo}`}
+                src={`${curUser.photo}`}
                 alt="Profile Avatar"
                 className="h-40 w-40 rounded-full object-cover"
               />

@@ -1,8 +1,7 @@
-
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { FaSearch } from 'react-icons/fa'; // Import the search icon
-import SearchResultsList from '../SearchResultsList/SearchResultsList';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { FaSearch } from "react-icons/fa"; // Import the search icon
+import SearchResultsList from "../SearchResultsList/SearchResultsList";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = ({ setSearchResults, searchResults }) => {
@@ -13,10 +12,7 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
   const navigate = useNavigate();
 
   const fetchData = () => {
-    const endpoint =
-      searchType === "users"
-        ? "http://localhost:9000/users"
-        : "http://localhost:9000/books";
+    const endpoint = searchType === "users" ? "/users" : "/books";
 
     axios
       .get(endpoint)
@@ -26,9 +22,9 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
         if (Array.isArray(items)) {
           const formattedData = items.map((item) => ({
             id: item._id,
-            name: searchType === 'users' ? item.name : item.title,
-            photo: searchType === 'users' ? item.photo : null, // Add photo field for users
-            type: searchType === 'users' ? 'user' : 'book'
+            name: searchType === "users" ? item.name : item.title,
+            photo: searchType === "users" ? item.photo : null, // Add photo field for users
+            type: searchType === "users" ? "user" : "book",
           }));
           setAllData(formattedData);
         } else {
@@ -101,7 +97,10 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
 
       {showResults && (
         <>
-          <SearchResultsList searchResults={searchResults} setSearchResults={setSearchResults} />
+          <SearchResultsList
+            searchResults={searchResults}
+            setSearchResults={setSearchResults}
+          />
           <div className="results-list absolute w-full bg-secondary flex flex-col shadow-sm rounded-sm top-24 cursor-pointer max-h-64 overflow-y-scroll z-50">
             {Array.isArray(searchResults) &&
               searchResults.map((result, id) => (

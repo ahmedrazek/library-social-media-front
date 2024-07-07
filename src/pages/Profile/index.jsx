@@ -152,10 +152,7 @@ const Profile = () => {
     try {
       console.log("Sending update profile request...");
 
-      const response = await axios.put(
-        "http://localhost:9000/users/updateProfile",
-        formData
-      );
+      const response = await axios.put("/users/updateProfile", formData);
       console.log("Update profile response:", response.data);
       updateProfile();
       setShowEditProfilePopup(false);
@@ -167,9 +164,7 @@ const Profile = () => {
 
   const updateProfile = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:9000/users/${user._id}`
-      );
+      const response = await axios.get(`/users/${user._id}`);
       console.log("Updated user data:", response.data);
       setAvatar(response.data.photo);
       setCover(response.data.cover);
@@ -196,7 +191,7 @@ const Profile = () => {
       <div
         className="h-80 mx-2 lg:mx-20 rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
         style={{
-          backgroundImage: `url(http://localhost:9000${cover})`,
+          backgroundImage: `url(${cover})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 100%",
         }}
@@ -205,7 +200,7 @@ const Profile = () => {
           <div className="h-40 w-40 border border-green-900 rounded-full overflow-hidden ">
             {avatar ? (
               <img
-                src={`http://localhost:9000${avatar}`}
+                src={`https://library-social-media-one.vercel.app${avatar}`}
                 alt="Profile Avatar"
                 className="h-40 w-40 object-cover rounded-full"
               />

@@ -1,4 +1,3 @@
-
 // // bookSlice.js
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // import axios from 'axios';
@@ -58,29 +57,25 @@
 
 // export default bookSlice.reducer;
 
-
 // bookSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchBooks = createAsyncThunk(
-  "books/fetchBooks",
-  async () => {
-    const response = await axios.get("http://localhost:9000/books");
-    return response.data.Data;
-  }
-);
+export const fetchBooks = createAsyncThunk("books/fetchBooks", async () => {
+  const response = await axios.get("/books");
+  return response.data.Data;
+});
 
 export const fetchBookById = createAsyncThunk(
   "books/fetchBookById",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:9000/books/single/${id}`);
-      console.log('API Response:', response.data); // Log the API response
+      const response = await axios.get(`/books/single/${id}`);
+      console.log("API Response:", response.data); // Log the API response
       return response.data;
     } catch (error) {
-      console.error('Failed to fetch book by ID:', error);
-      return rejectWithValue('Failed to fetch book by ID');
+      console.error("Failed to fetch book by ID:", error);
+      return rejectWithValue("Failed to fetch book by ID");
     }
   }
 );
@@ -88,7 +83,7 @@ export const fetchBookById = createAsyncThunk(
 const initialState = {
   books: [],
   bookDetails: null,
-favoriteBooks: [],
+  favoriteBooks: [],
   status: "idle",
   error: null,
 };
@@ -125,12 +120,3 @@ const bookSlice = createSlice({
 });
 
 export default bookSlice.reducer;
-
-
-
-
-
-
-
-
-

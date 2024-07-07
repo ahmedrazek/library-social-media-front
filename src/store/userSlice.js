@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchUserProfile = createAsyncThunk(
   "user/fetchUserProfile",
   async () => {
-    const res = await axios.get("/users/profile");
+    const res = await axios.get("users/profile");
     return res.data;
   }
 );
@@ -36,6 +36,22 @@ const userSlice = createSlice({
         (follower) => follower._id !== action.payload._id
       );
     },
+    addSavePost: (state, action) => {
+      state.user.savedPosts.push(action.payload);
+    },
+    removeSavedPost: (state, action) => {
+      state.user.savedPosts = state.user.savedPosts.filter(
+        (post) => post !== action.payload
+      );
+    },
+    addFavBook: (state, action) => {
+      state.user.favouriteBooks.push(action.payload);
+    },
+    removeFavBook: (state, action) => {
+      state.user.favouriteBooks = state.user.favouriteBooks.filter(
+        (post) => post !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,6 +68,14 @@ const userSlice = createSlice({
       });
   },
 });
-export const { setUser, logout, setNewFollowing, setUnFollow } =
-  userSlice.actions;
+export const {
+  setUser,
+  logout,
+  setNewFollowing,
+  setUnFollow,
+  addSavePost,
+  removeSavedPost,
+  addFavBook,
+  removeFavBook,
+} = userSlice.actions;
 export default userSlice.reducer;

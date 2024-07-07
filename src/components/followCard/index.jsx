@@ -41,7 +41,7 @@ export const FollowCard = ({ follow, user }) => {
           <div className="h-10 w-10 rounded-full bg-black">
             {follow?.photo ? (
               <img
-                src={`http://localhost:9000${follow?.photo}`}
+                src={`${follow?.photo}`}
                 alt={follow?.name}
                 className="h-10 w-10 rounded-full object-cover"
               />

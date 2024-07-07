@@ -1,12 +1,9 @@
+.content-wrapper {
+  position: relative;
+}
 
-
-  .content-wrapper {
-    position: relative;
-  }
-  
-  
 .content-wrapper::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%; /* Center vertically */
   left: 0;

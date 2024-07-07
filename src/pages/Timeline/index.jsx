@@ -29,7 +29,6 @@ function Timeline() {
     if (res.data.posts.length >= res.data.totalPosts) setHasMore(false);
   };
 
- 
   const removePost = async (id) => {
     try {
       // Show confirmation dialog and await the user's response
@@ -40,11 +39,10 @@ function Timeline() {
         buttons: ["Cancel", "Delete"],
         dangerMode: true,
       });
-  
+
       if (confirmed) {
-        
         const res = await axios.delete(`/posts/${id}`);
-  
+
         if (res.status === 200) {
           Swal({
             title: "Deleted!",
@@ -52,12 +50,11 @@ function Timeline() {
             icon: "success",
             button: "OK",
           });
-          
+
           getPosts();
         }
         getPosts();
       } else {
-        
         Swal({
           title: "Cancelled",
           text: "Your post is safe :)",
@@ -93,7 +90,7 @@ function Timeline() {
         <div className="absolute inset-0 text-white min-h-screen z-50">
           <div className="bg-black w-full h-full">
             <div className="flex justify-center items-center h-full">
-              <img src={`${imageUrl}`} alt="" />
+              <img src={`http://localhost:9000${imageUrl}`} alt="" />
             </div>
             <button className="absolute left-10 top-1/2 text-5xl">
               <svg
@@ -295,7 +292,7 @@ function Timeline() {
         <div className="lg:col-span-1"></div>
       </div>
       {loading && (
-        <div className="bg-secondary min-h-screen flex justify-center items-center">
+        <div className="bg-white min-h-screen flex justify-center items-center">
           <div
             role="status"
             className="max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
