@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -7,29 +7,65 @@ const FavoriteBooks = () => {
   const favoriteBookIds = user?.favouriteBooks;
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const prevFavoriteBookIdsRef = useRef();
+  const cachedBooksRef = useRef({});
+  // useEffect(() => {
+  //   console.log(favoriteBookIds)
+  //   const fetchBooks = async () => {
+  //     try {
+  //       const bookDetailsPromises = favoriteBookIds.map(bookId => 
+  //          axios.get(`http://localhost:9000/books/${bookId}`) );
+  //          const booksResponses = await Promise.all(bookDetailsPromises);
+  //          const books = booksResponses.map(response => response.data);
+  //       setFavoriteBooks(books);
+       
+  //     } catch (error) {
+  //       console.error("Error fetching favorite books", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
+  //   if (favoriteBookIds && favoriteBookIds.length > 0) {
+  //     fetchBooks();
+  //   } else {
+  //     setLoading(false);
+  //   }
+  // }, [favoriteBookIds]);
   useEffect(() => {
-    console.log(favoriteBookIds)
     const fetchBooks = async () => {
       try {
-        const bookDetailsPromises = favoriteBookIds.map(bookId => 
-           axios.get(`http://localhost:9000/books/${bookId}`) );
-           const booksResponses = await Promise.all(bookDetailsPromises);
-           const books = booksResponses.map(response => response.data);
-        setFavoriteBooks(books);
+        const newBooksPromises = favoriteBookIds
+          .filter(bookId => !cachedBooksRef.current[bookId])
+          .map(bookId => 
+            axios.get(`http://localhost:9000/books/${bookId}`).then(response => {
+              cachedBooksRef.current[bookId] = response.data;
+              return response.data;
+            })
+          );
+
+        const newBooks = await Promise.all(newBooksPromises);
+        const allBooks = favoriteBookIds.map(bookId => cachedBooksRef.current[bookId]);
+
+        setFavoriteBooks(allBooks);
       } catch (error) {
-        console.error("Error fetching favorite books", error);
+        console.error('Error fetching favorite books', error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (favoriteBookIds && favoriteBookIds.length > 0) {
+    if (favoriteBookIds.length > 0) {
+      setLoading(true);
       fetchBooks();
     } else {
       setLoading(false);
+      setFavoriteBooks([]);
     }
+
+    prevFavoriteBookIdsRef.current = favoriteBookIds;
   }, [favoriteBookIds]);
+
 
   if (loading) {
     return <div>Loading...</div>;
