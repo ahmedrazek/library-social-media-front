@@ -49,7 +49,7 @@ const userSlice = createSlice({
     },
     removeFavBook: (state, action) => {
       state.user.favouriteBooks = state.user.favouriteBooks.filter(
-        (post) => post !== action.payload
+        (book) => book._id !== action.payload
       );
     },
   },

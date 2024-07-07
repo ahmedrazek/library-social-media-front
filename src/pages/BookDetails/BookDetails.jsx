@@ -65,7 +65,7 @@ const BookDetails = () => {
         dispatch(removeFavBook(id));
       } else {
         response = await axios.post(`/books/addFavoriteBook/${userId}/${id}`);
-        dispatch(addFavBook(id));
+        dispatch(addFavBook(bookDetails.data));
       }
 
       const newFavoriteState = !isFavorite;
@@ -183,7 +183,7 @@ const BookDetails = () => {
           <div className="flex space-x-3 m-3">
             <div>
               <img
-                src={`/image/${bookDetails.data.cover}`}
+                src={`http://localhost:9000/image/${bookDetails.data.cover}`}
                 alt="BookImage"
                 className="w-full h-50 object-cover mb-3"
               />
@@ -270,25 +270,25 @@ const BookDetails = () => {
                   key={review._id}
                 >
                   <div className="mr-4 flex-shrink-0">
-                    {review.user.photo ? (
+                    {review.user?.photo ? (
                       <img
                         src={`${review.user.photo}`}
                         alt={review.user.name}
                         className="w-10 h-10 rounded-full object-cover"
                       />
                     ) : (
-                      <Avatar name={review.user.name} />
+                      <Avatar name={review.user?.name} />
                     )}
                   </div>
                   <div className="flex-grow">
                     <div className="flex items-center justify-between mb-1">
                       <div className="space-x-2">
-                        <span className="font-bold">{review.user.name}</span>
+                        <span className="font-bold">{review.user?.name}</span>
                         <span className="text-sm text-gray-500">
                           {moment(review.createdAt).fromNow()}
                         </span>
                       </div>
-                      {review.user._id === userId && (
+                      {review.user?._id === userId && (
                         <FaTrash
                           className="text-red-500 cursor-pointer"
                           onClick={() => handleDeleteReview(review._id)}

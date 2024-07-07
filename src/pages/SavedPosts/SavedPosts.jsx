@@ -250,11 +250,7 @@ const SavedPosts = () => {
       }
     };
 
-    if (
-      savePosts.length > 0 ||
-      saveReviews.length > 0 ||
-      saveQuotes.length > 0
-    ) {
+    if (savePosts.length > 0) {
       fetchSavedItems();
     } else {
       setLoading(false);
@@ -315,7 +311,7 @@ const SavedPosts = () => {
           <h2 className="text-xl font-semibold mb-4 text-center">
             Saved Posts
           </h2>
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col gap-6 items-center justify-center">
             {savedPosts.map((post) => {
               if (post.type === "post") {
                 return (

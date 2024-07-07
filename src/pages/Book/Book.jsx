@@ -491,7 +491,7 @@ const Book = () => {
                     <Link to={`/user/details/${book._id}`} key={book._id}>
                       <div className="shadow-md rounded-md mx-auto pb-4">
                         <img
-                          src={`/image/${book.cover}`}
+                          src={`http://localhost:9000/image/${book.cover}`}
                           alt="BookImage"
                           className="w-full object-cover mb-3"
                         />

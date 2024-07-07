@@ -58,7 +58,7 @@ const FavoriteBooks = () => {
           >
             {book.cover && (
               <img
-                src={`/image/${book.cover}`}
+                src={`http://localhost:9000/image/${book.cover}`}
                 alt="Book Cover"
                 className="  w-full object-cover mb-2"
               />
