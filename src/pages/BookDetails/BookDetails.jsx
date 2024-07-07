@@ -29,6 +29,7 @@ const BookDetails = () => {
   const [reviewText, setReviewText] = useState("");
 
   useEffect(() => {
+    console.log("bokdeatils", bookDetails);
     dispatch(fetchBookById(id));
 
     const storedFavoriteState = localStorage.getItem(`favorite_${id}`);
@@ -69,7 +70,7 @@ const BookDetails = () => {
       }
 
       const newFavoriteState = !isFavorite;
-      setIsFavorite(newFavoriteState);
+
       localStorage.setItem(`favorite_${id}`, JSON.stringify(newFavoriteState));
 
       console.log(response.data);
@@ -78,12 +79,6 @@ const BookDetails = () => {
     }
   };
 
-  // const handleDownload = () => {
-  //   const downloadLink = document.createElement("a");
-  //   downloadLink.href = `http://localhost:9000/image/${bookDetails.data.Pdf}`;
-  //   downloadLink.download = `${bookDetails.data.title}.pdf`;
-  //   downloadLink.click();
-  // };
   const handleDownload = async () => {
     try {
       const response = await axios({
@@ -106,7 +101,10 @@ const BookDetails = () => {
 
   const handleRead = () => {
     if (bookDetails.data.Pdf) {
-      window.open(`/image/${bookDetails.data.Pdf}`, "_blank");
+      window.open(
+        `http://localhost:9000/image/${bookDetails.data.Pdf}`,
+        "_blank"
+      );
     } else {
       console.error("PDF URL not available");
     }
@@ -173,24 +171,39 @@ const BookDetails = () => {
                 className="text-2xl cursor-pointer text-red-500"
                 onClick={toggleFavorite}
               />
+              <FaHeart
+                className="text-2xl cursor-pointer text-red-500"
+                onClick={toggleFavorite}
+              />
             ) : (
+              <FaRegHeart
+                className="text-2xl cursor-pointer text-red-500"
+                onClick={toggleFavorite}
+              />
               <FaRegHeart
                 className="text-2xl cursor-pointer text-red-500"
                 onClick={toggleFavorite}
               />
             )}
           </div>
-          <div className="flex space-x-3 m-3">
+          <div className="flex space-x-8  m-3">
             <div>
               <img
                 src={`http://localhost:9000/image/${bookDetails.data.cover}`}
                 alt="BookImage"
-                className="w-full h-50 object-cover mb-3"
+                className="w-[18rem] h-[25rem] object-cover mb-3"
               />
             </div>
             <div>
-              <h1>{bookDetails.data.title}</h1>
-              <h1>{bookDetails.data.category}</h1>
+              <h1 className="font-bold text-2xl">
+                Title: {bookDetails.data.title}
+              </h1>
+              <h2 className="font-medium text-xl pt-4">
+                Category: {bookDetails.data.category}
+              </h2>
+              <h2 className="font-medium text-xl pt-4">
+                Author:{bookDetails.data.authorId.name}
+              </h2>
             </div>
           </div>
           <div className="flex justify-start space-x-3 m-3">
@@ -214,12 +227,19 @@ const BookDetails = () => {
             {bookDetails.data.description}
           </div>
           <div className="border-b border-gray-200"></div>
+          <div className="border-b border-gray-200"></div>
           <div className="mt-6 mb-10">
+            <h2 className="text-2xl mb-4 text-primary text-center font-bold">
+              Reviews
+            </h2>
             <h2 className="text-2xl mb-4 text-primary text-center font-bold">
               Reviews
             </h2>
             <form onSubmit={handleAddReview}>
               <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Rating
+                </label>
                 <label className="block text-sm font-medium text-gray-700">
                   Rating
                 </label>
@@ -235,6 +255,11 @@ const BookDetails = () => {
                             ? "text-yellow-500"
                             : "text-gray-300"
                         }`}
+                        className={`cursor-pointer ${
+                          ratingValue <= rating
+                            ? "text-yellow-500"
+                            : "text-gray-300"
+                        }`}
                         onClick={() => setRating(ratingValue)}
                       />
                     );
@@ -242,6 +267,9 @@ const BookDetails = () => {
                 </div>
               </div>
               <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Review
+                </label>
                 <label className="block text-sm font-medium text-gray-700">
                   Review
                 </label>
@@ -257,6 +285,10 @@ const BookDetails = () => {
                   type="submit"
                   className="bg-green-900 hover:bg-green-800 w-full text-white px-4 py-2 rounded-md"
                 >
+                <button
+                  type="submit"
+                  className="bg-green-900 hover:bg-green-800 w-full text-white px-4 py-2 rounded-md"
+                >
                   Add Review
                 </button>
               </div>
@@ -264,7 +296,12 @@ const BookDetails = () => {
           </div>
           <div className="reviews">
             {reviews.map((review, index) =>
+            {reviews.map((review, index) =>
               (!showAllReviews && index < 5) || showAllReviews ? (
+                <div
+                  className="flex items-start mb-4 p-4 border-b"
+                  key={review._id}
+                >
                 <div
                   className="flex items-start mb-4 p-4 border-b"
                   key={review._id}
@@ -272,7 +309,7 @@ const BookDetails = () => {
                   <div className="mr-4 flex-shrink-0">
                     {review.user?.photo ? (
                       <img
-                        src={`${review.user.photo}`}
+                        src={`http://localhost:9000${review.user.photo}`}
                         alt={review.user.name}
                         className="w-10 h-10 rounded-full object-cover"
                       />
@@ -284,6 +321,9 @@ const BookDetails = () => {
                     <div className="flex items-center justify-between mb-1">
                       <div className="space-x-2">
                         <span className="font-bold">{review.user?.name}</span>
+                        <span className="text-sm text-gray-500">
+                          {moment(review.createdAt).fromNow()}
+                        </span>
                         <span className="text-sm text-gray-500">
                           {moment(review.createdAt).fromNow()}
                         </span>
@@ -300,6 +340,11 @@ const BookDetails = () => {
                         <FaStar
                           key={index}
                           size={15}
+                          className={`${
+                            index < review.rating
+                              ? "text-yellow-500"
+                              : "text-gray-300"
+                          }`}
                           className={`${
                             index < review.rating
                               ? "text-yellow-500"

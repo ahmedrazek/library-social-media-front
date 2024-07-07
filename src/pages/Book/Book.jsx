@@ -493,12 +493,12 @@ const Book = () => {
                         <img
                           src={`http://localhost:9000/image/${book.cover}`}
                           alt="BookImage"
-                          className="w-full object-cover mb-3"
+                          className="w-full h-[20rem] object-cover mb-3"
                         />
                         <h2 className="text-center font-bold text-primary">
                           {book.title}
                         </h2>
-                        <div className="flex justify-center pt-3">
+                        {/* <div className="flex justify-center pt-3">
                           {[...Array(5)].map((star, index) => (
                             <FaStar
                               key={index}
@@ -507,7 +507,7 @@ const Book = () => {
                               }
                             />
                           ))}
-                        </div>
+                        </div> */}
                       </div>
                     </Link>
                   ))}
