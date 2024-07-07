@@ -314,7 +314,7 @@
 
 // export default PostCard;
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { differenceInMinutes } from "date-fns";
 import axios from "axios";
 import AddComment from "../AddComment";
@@ -324,6 +324,7 @@ import { Link } from "react-router-dom";
 
 import { Avatar } from "@chakra-ui/react";
 import { MdOutlineInsertComment } from "react-icons/md";
+import { addSavePost, removeSavedPost } from "../../store/userSlice";
 const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const [showComments, setShowComments] = useState(false);
   const [like, setLike] = useState(false);
@@ -333,7 +334,7 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
   const [comment, setComment] = useState("");
   const [saved, setSaved] = useState(false);
   const user = useSelector((state) => state.user.user);
-
+  const dispatch = useDispatch();
   const calculateDate = (createdAt) => {
     const postDate = differenceInMinutes(
       new Date(Date.now()),
@@ -403,11 +404,13 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
         const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(false));
         console.log("Post unsaved:", res.data);
+        dispatch(removeSavedPost(postId));
       } else {
         setSaved(true);
         const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         console.log("Post saved:", res.data);
+        dispatch(addSavePost(postId));
       }
     } catch (error) {
       console.error("Error saving or unsaving the post:", error);
@@ -478,7 +481,7 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
           <div
             className="w-full cursor-pointer"
             onClick={() => {
-              setImageUrl(`http://localhost:9000/postcard/${post.imageURL}`);
+              setImageUrl(`/postcard/${post.imageURL}`);
               setShowPhoto(true);
             }}
           >

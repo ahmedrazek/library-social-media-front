@@ -7,10 +7,7 @@ const AddComment = ({ addComment, setComment, comment, user }) => {
     <div className="flex justify-between py-2 gap-2 items-center">
       <div className="w-12 h-12 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
         {user?._id && user.photo ? (
-          <img
-            src={`http://localhost:9000${user.photo}`}
-            className="object-cover w-full h-full"
-          />
+          <img src={`${user.photo}`} className="object-cover w-full h-full" />
         ) : (
           <Avatar bg="teal.500" size="full" />
         )}

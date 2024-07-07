@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { Avatar } from "@chakra-ui/react";
 import moment from "moment";
+import { addFavBook, removeFavBook } from "../../store/userSlice";
 
 const BookDetails = () => {
   const dispatch = useDispatch();
@@ -40,9 +41,7 @@ const BookDetails = () => {
 
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:9000/ratings/${id}/reviews/first-five`
-        );
+        const response = await axios.get(`/ratings/${id}/reviews/first-five`);
         setReviews(response.data.reviews);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -61,16 +60,13 @@ const BookDetails = () => {
     try {
       let response;
       if (isFavorite) {
-        setIsFavorite(!isFavorite);
         response = await axios.post(
-          `http://localhost:9000/books/removeFavoriteBook/${userId}/${id}`
+          `/books/removeFavoriteBook/${userId}/${id}`
         );
+        dispatch(removeFavBook(id));
       } else {
-        setIsFavorite(!isFavorite);
-
-        response = await axios.post(
-          `http://localhost:9000/books/addFavoriteBook/${userId}/${id}`
-        );
+        response = await axios.post(`/books/addFavoriteBook/${userId}/${id}`);
+        dispatch(addFavBook(id));
       }
 
       const newFavoriteState = !isFavorite;
@@ -86,7 +82,7 @@ const BookDetails = () => {
   const handleDownload = async () => {
     try {
       const response = await axios({
-        url: `http://localhost:9000/image/${bookDetails.data.Pdf}`,
+        url: `/image/${bookDetails.data.Pdf}`,
         method: "GET",
         responseType: "blob", // important
       });
@@ -118,13 +114,10 @@ const BookDetails = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `http://localhost:9000/ratings/${userId}/${id}`,
-        {
-          rating,
-          review: reviewText,
-        }
-      );
+      const response = await axios.post(`/ratings/${userId}/${id}`, {
+        rating,
+        review: reviewText,
+      });
 
       const newReview = {
         user: {
@@ -147,7 +140,7 @@ const BookDetails = () => {
 
   const handleDeleteReview = async (reviewId) => {
     try {
-      await axios.delete(`http://localhost:9000/ratings/${userId}/${reviewId}`);
+      await axios.delete(`/ratings/${userId}/${reviewId}`);
       setReviews(reviews.filter((review) => review._id !== reviewId));
     } catch (error) {
       console.error("Error deleting review:", error);
@@ -156,9 +149,7 @@ const BookDetails = () => {
 
   const handleSeeAllReviews = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:9000/ratings/${id}/reviews/all`
-      );
+      const response = await axios.get(`/ratings/${id}/reviews/all`);
       setReviews(response.data.reviews);
       setShowAllReviews(true);
     } catch (error) {
@@ -180,7 +171,15 @@ const BookDetails = () => {
                 className="text-2xl cursor-pointer text-red-500"
                 onClick={toggleFavorite}
               />
+              <FaHeart
+                className="text-2xl cursor-pointer text-red-500"
+                onClick={toggleFavorite}
+              />
             ) : (
+              <FaRegHeart
+                className="text-2xl cursor-pointer text-red-500"
+                onClick={toggleFavorite}
+              />
               <FaRegHeart
                 className="text-2xl cursor-pointer text-red-500"
                 onClick={toggleFavorite}
@@ -228,12 +227,19 @@ const BookDetails = () => {
             {bookDetails.data.description}
           </div>
           <div className="border-b border-gray-200"></div>
+          <div className="border-b border-gray-200"></div>
           <div className="mt-6 mb-10">
+            <h2 className="text-2xl mb-4 text-primary text-center font-bold">
+              Reviews
+            </h2>
             <h2 className="text-2xl mb-4 text-primary text-center font-bold">
               Reviews
             </h2>
             <form onSubmit={handleAddReview}>
               <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Rating
+                </label>
                 <label className="block text-sm font-medium text-gray-700">
                   Rating
                 </label>
@@ -249,6 +255,11 @@ const BookDetails = () => {
                             ? "text-yellow-500"
                             : "text-gray-300"
                         }`}
+                        className={`cursor-pointer ${
+                          ratingValue <= rating
+                            ? "text-yellow-500"
+                            : "text-gray-300"
+                        }`}
                         onClick={() => setRating(ratingValue)}
                       />
                     );
@@ -256,6 +267,9 @@ const BookDetails = () => {
                 </div>
               </div>
               <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Review
+                </label>
                 <label className="block text-sm font-medium text-gray-700">
                   Review
                 </label>
@@ -271,6 +285,10 @@ const BookDetails = () => {
                   type="submit"
                   className="bg-green-900 hover:bg-green-800 w-full text-white px-4 py-2 rounded-md"
                 >
+                <button
+                  type="submit"
+                  className="bg-green-900 hover:bg-green-800 w-full text-white px-4 py-2 rounded-md"
+                >
                   Add Review
                 </button>
               </div>
@@ -278,7 +296,12 @@ const BookDetails = () => {
           </div>
           <div className="reviews">
             {reviews.map((review, index) =>
+            {reviews.map((review, index) =>
               (!showAllReviews && index < 5) || showAllReviews ? (
+                <div
+                  className="flex items-start mb-4 p-4 border-b"
+                  key={review._id}
+                >
                 <div
                   className="flex items-start mb-4 p-4 border-b"
                   key={review._id}
@@ -301,6 +324,9 @@ const BookDetails = () => {
                         <span className="text-sm text-gray-500">
                           {moment(review.createdAt).fromNow()}
                         </span>
+                        <span className="text-sm text-gray-500">
+                          {moment(review.createdAt).fromNow()}
+                        </span>
                       </div>
                       {review.user._id === userId && (
                         <FaTrash
@@ -314,6 +340,11 @@ const BookDetails = () => {
                         <FaStar
                           key={index}
                           size={15}
+                          className={`${
+                            index < review.rating
+                              ? "text-yellow-500"
+                              : "text-gray-300"
+                          }`}
                           className={`${
                             index < review.rating
                               ? "text-yellow-500"

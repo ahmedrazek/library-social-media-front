@@ -1,6 +1,3 @@
-
-
-
 // // import React, { useEffect, useState } from "react";
 // // import { useDispatch, useSelector } from "react-redux";
 // // import { fetchBooks } from "../../store/bookSlice";
@@ -172,7 +169,6 @@
 
 // // export default Book;
 
-
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { fetchBooks } from "../../store/bookSlice";
@@ -277,7 +273,7 @@
 //                 placeholder="Search"
 //                 value={searchInput}
 //                 onChange={handleSearchChange}
-//                 className="border border-gray-200 rounded-full w-full p-3 pl-8 pr-10 bg-secondary/30" 
+//                 className="border border-gray-200 rounded-full w-full p-3 pl-8 pr-10 bg-secondary/30"
 //               />
 //               <FaSearch className="absolute top-1/2 left-3 mr-4 transform -translate-y-1/2  text-gray-400" />
 //               {/* <FaSearch className="absolute top-1/2 transform -translate-y-1/2  right-1  text-center w-11 h-11  p-4 rounded-full bg-green-900 text-gray-100" /> */}
@@ -309,7 +305,7 @@
 //                           <h2 className="text-center font-bold text-primary">
 //                             {book.title}
 //                           </h2>
-                         
+
 //                           <div className="flex justify-center pt-3">
 //                             {[...Array(5)].map((star, index) => (
 //                               <FaStar
@@ -368,8 +364,6 @@
 // };
 
 // export default Book;
-
-
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -475,7 +469,7 @@ const Book = () => {
                 placeholder="Search"
                 value={searchInput}
                 onChange={handleSearchChange}
-                className="border border-gray-200 rounded-full w-full p-3 pl-8 pr-10 bg-secondary/30" 
+                className="border border-gray-200 rounded-full w-full p-3 pl-8 pr-10 bg-secondary/30"
               />
               <FaSearch className="absolute top-1/2 left-3 mr-4 transform -translate-y-1/2  text-gray-400" />
             </div>
@@ -497,7 +491,7 @@ const Book = () => {
                     <Link to={`/user/details/${book._id}`} key={book._id}>
                       <div className="shadow-md rounded-md mx-auto pb-4">
                         <img
-                          src={`http://localhost:9000/image/${book.cover}`}
+                          src={`/image/${book.cover}`}
                           alt="BookImage"
                           className="w-full h-[20rem] object-cover mb-3"
                         />
@@ -509,9 +503,7 @@ const Book = () => {
                             <FaStar
                               key={index}
                               className={
-                                index < 4
-                                  ? "text-yellow-500"
-                                  : "text-gray-300"
+                                index < 4 ? "text-yellow-500" : "text-gray-300"
                               }
                             />
                           ))}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { differenceInMinutes } from "date-fns";
 import axios from "axios";
 import AddComment from "../AddComment";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 import { Avatar } from "@chakra-ui/react";
 import { MdOutlineInsertComment } from "react-icons/md";
+import { addSavePost, removeSavedPost } from "../../store/userSlice";
 
 // eslint-disable-next-line react/prop-types
 const QuoteCard = ({ postId, removePost }) => {
@@ -21,6 +22,7 @@ const QuoteCard = ({ postId, removePost }) => {
   const [comment, setComment] = useState("");
   const [saved, setSaved] = useState(false);
   const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
 
   const calculateDate = (createdAt) => {
     const postDate = differenceInMinutes(
@@ -91,11 +93,13 @@ const QuoteCard = ({ postId, removePost }) => {
         setSaved(false);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(false));
         console.log("Post unsaved:", res.data);
+        dispatch(removeSavedPost(postId));
       } else {
         const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         setSaved(true);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         console.log("Post saved:", res.data);
+        dispatch(addSavePost(postId));
       }
     } catch (error) {
       console.error("Error saving or unsaving the post", error);
@@ -183,7 +187,7 @@ const QuoteCard = ({ postId, removePost }) => {
             <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
               {post.userId?.photo ? (
                 <img
-                  src={`http://localhost:9000${post.userId.photo}`}
+                  src={`https://library-social-media-one.vercel.app${post.userId.photo}`}
                   className="object-cover  w-full h-full"
                 />
               ) : (
@@ -240,7 +244,7 @@ const QuoteCard = ({ postId, removePost }) => {
         {post.imageURL && (
           <div className="h-[28rem]  w-full">
             <img
-              src={`http://localhost:9000/postcard/${post.imageURL}`}
+              src={`https://library-social-media-one.vercel.app/postcard/${post.imageURL}`}
               alt="Post"
               className=" object-contain rounded-2xl h-full w-full"
             />

@@ -12,7 +12,7 @@ const RightSideBar = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "users/random/user/whoToFollow/timeline"
+          "/users/random/user/whoToFollow/timeline"
         );
         // Initialize follow status for each user
         const usersWithFollowStatus = response.data.data.map((user) => ({
@@ -72,7 +72,7 @@ const RightSideBar = () => {
               <div className=" h-10 w-10 rounded-full bg-black">
                 {user?.photo ? (
                   <img
-                    src={`http://localhost:9000${user?.photo}`}
+                    src={`${user?.photo}`}
                     alt={user?.name}
                     className="h-10 w-10 rounded-full"
                   />
