@@ -89,14 +89,14 @@ const QuoteCard = ({ postId, removePost }) => {
   const savePost = async () => {
     try {
       if (saved) {
-        const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
         setSaved(false);
+        const res = await axios.post(`/posts/unsave/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(false));
         console.log("Post unsaved:", res.data);
         dispatch(removeSavedPost(postId));
       } else {
-        const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         setSaved(true);
+        const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         console.log("Post saved:", res.data);
         dispatch(addSavePost(postId));
@@ -117,7 +117,7 @@ const QuoteCard = ({ postId, removePost }) => {
         <div className="absolute inset-0 text-white min-h-screen">
           <div className="bg-black w-full h-full">
             <div>
-              <img src={post.photo} alt="" />
+              <img src={`http://localhost:9000${post.photo}`} alt="" />
             </div>
             <button className="absolute left-10 top-1/2 text-5xl">
               <svg
@@ -187,7 +187,7 @@ const QuoteCard = ({ postId, removePost }) => {
             <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
               {post.userId?.photo ? (
                 <img
-                  src={`https://library-social-media-one.vercel.app${post.userId.photo}`}
+                  src={`http://localhost:9000${post.userId.photo}`}
                   className="object-cover  w-full h-full"
                 />
               ) : (
@@ -244,7 +244,7 @@ const QuoteCard = ({ postId, removePost }) => {
         {post.imageURL && (
           <div className="h-[28rem]  w-full">
             <img
-              src={`https://library-social-media-one.vercel.app/postcard/${post.imageURL}`}
+              src={`http://localhost:9000/postcard/${post.imageURL}`}
               alt="Post"
               className=" object-contain rounded-2xl h-full w-full"
             />

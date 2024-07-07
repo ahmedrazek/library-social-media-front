@@ -32,13 +32,9 @@ const RightSideBar = () => {
       if (isCurrentlyFollowing) {
         await axios.post(`/users/unfollow/${user._id}/${curUser._id}`);
         dispatch(setUnFollow(curUser));
-
-        console.log("first", curUser);
       } else {
         await axios.post(`/users/follow/${user._id}/${curUser._id}`);
         dispatch(setNewFollowing(curUser));
-
-        console.log("first");
       }
 
       // Update the follow status for the specific user
@@ -72,7 +68,7 @@ const RightSideBar = () => {
               <div className=" h-10 w-10 rounded-full bg-black">
                 {user?.photo ? (
                   <img
-                    src={`${user?.photo}`}
+                    src={`http://localhost:9000${user?.photo}`}
                     alt={user?.name}
                     className="h-10 w-10 rounded-full"
                   />

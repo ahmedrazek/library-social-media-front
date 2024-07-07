@@ -9,8 +9,7 @@
 //   const [deleteConfirm, setDeleteConfirm] = useState(false);
 //   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 //   const [showNewPassword, setShowNewPassword] = useState(false);
-//   const [showConfirmPassword, setShowConfirmPassword] = useState(false);  
-    
+//   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 //   const user = useSelector((state) => state.user.user);
 //   const handleNameChange = async (e) => {
@@ -149,48 +148,53 @@
 // };
 
 // export default Settings;
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useSelector } from "react-redux";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import React, { useState } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { fetchUserProfile } from "../../store/userSlice";
 
 const Settings = () => {
-  const [name, setName] = useState('');
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const user = useSelector((state) => state.user.user);
-
+  const dispatch = useDispatch();
   const handleNameChange = async (e) => {
     e.preventDefault();
     try {
-      await axios.put('/users/updatename', { name });
-      alert('Name updated successfully');
-      setName('');
+      await axios.put("/users/updatename", { name });
+      alert("Name updated successfully");
+      setName("");
+      dispatch(fetchUserProfile());
     } catch (error) {
-      alert('Failed to update name');
+      alert("Failed to update name");
     }
   };
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
-      alert('Passwords do not match');
+      alert("Passwords do not match");
       return;
     }
     try {
-      await axios.put('/users/changepassword', { currentPassword, newPassword });
-      alert('Password updated successfully');
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
+      await axios.put("/users/changepassword", {
+        currentPassword,
+        newPassword,
+      });
+      alert("Password updated successfully");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
     } catch (error) {
-      alert('Failed to update password');
+      alert("Failed to update password");
     }
   };
 
@@ -198,19 +202,23 @@ const Settings = () => {
     e.preventDefault();
     try {
       await axios.delete(`/users/${user._id}`);
-      alert('Account deleted successfully');
-      window.location.href = '/account-deleted';
+      alert("Account deleted successfully");
+      window.location.href = "/account-deleted";
     } catch (error) {
-      alert('Failed to delete account');
+      alert("Failed to delete account");
     }
   };
 
   return (
     <div className="container mx-auto p-6 w-[90%] md:w-[60%] bg-gray-50 shadow-lg rounded-lg">
-      <h1 className="text-[2rem] font-bold mb-6 text-center text-primary">Settings</h1>
+      <h1 className="text-[2rem] font-bold mb-6 text-center text-primary">
+        Settings
+      </h1>
 
       <form onSubmit={handleNameChange} className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-700">Change Name</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+          Change Name
+        </h2>
         <div className="mb-4">
           <label className="block text-gray-600 mb-2">New Name</label>
           <input
@@ -221,11 +229,18 @@ const Settings = () => {
             required
           />
         </div>
-        <button type="submit" className="w-full bg-green-900 text-white p-3 rounded hover:bg-green-800 transition duration-300">Update Name</button>
+        <button
+          type="submit"
+          className="w-full bg-green-900 text-white p-3 rounded hover:bg-green-800 transition duration-300"
+        >
+          Update Name
+        </button>
       </form>
 
       <form onSubmit={handlePasswordChange} className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-700">Change Password</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+          Change Password
+        </h2>
         <div className="mb-4 relative">
           <label className="block text-gray-600 mb-2">Current Password</label>
           <input
@@ -261,7 +276,9 @@ const Settings = () => {
           </button>
         </div>
         <div className="mb-4 relative">
-          <label className="block text-gray-600 mb-2">Confirm New Password</label>
+          <label className="block text-gray-600 mb-2">
+            Confirm New Password
+          </label>
           <input
             type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
@@ -277,11 +294,18 @@ const Settings = () => {
             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-        <button type="submit" className="w-full bg-green-900 text-white p-3 rounded hover:bg-green-800 transition duration-300">Update Password</button>
+        <button
+          type="submit"
+          className="w-full bg-green-900 text-white p-3 rounded hover:bg-green-800 transition duration-300"
+        >
+          Update Password
+        </button>
       </form>
 
       <form onSubmit={handleAccountDeletion} className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-700">Delete Account</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+          Delete Account
+        </h2>
         <div className="mb-4 flex items-center">
           <input
             type="checkbox"
@@ -291,7 +315,11 @@ const Settings = () => {
           />
           <span className="text-gray-600">Yes, delete my account</span>
         </div>
-        <button type="submit" className="w-full bg-red-500 text-white p-3 rounded hover:bg-red-600 transition duration-300" disabled={!deleteConfirm}>
+        <button
+          type="submit"
+          className="w-full bg-red-500 text-white p-3 rounded hover:bg-red-600 transition duration-300"
+          disabled={!deleteConfirm}
+        >
           Delete Account
         </button>
       </form>

@@ -48,7 +48,7 @@ export default function Comment({ comment, user, getPost, removeComment }) {
           <div className="w-12 h-12 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
             {comment.userId?.photo ? (
               <img
-                src={`${comment.userId.photo}`}
+                src={`http://localhost:9000${comment.userId.photo}`}
                 className="object-cover  w-full h-full"
               />
             ) : (

@@ -1,39 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { FaHeart } from "react-icons/fa";
+import { removeFavBook } from "../../store/userSlice";
 
 const FavoriteBooks = () => {
   const user = useSelector((state) => state.user.user);
   const favoriteBookIds = user?.favouriteBooks;
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const prevFavoriteBookIdsRef = useRef();
-  const cachedBooksRef = useRef({});
-  // useEffect(() => {
-  //   console.log(favoriteBookIds)
-  //   const fetchBooks = async () => {
-  //     try {
-  //       const bookDetailsPromises = favoriteBookIds.map(bookId => 
-  //          axios.get(`http://localhost:9000/books/${bookId}`) );
-  //          const booksResponses = await Promise.all(bookDetailsPromises);
-  //          const books = booksResponses.map(response => response.data);
-  //       setFavoriteBooks(books);
-       
-  //     } catch (error) {
-  //       console.error("Error fetching favorite books", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   if (favoriteBookIds && favoriteBookIds.length > 0) {
-  //     fetchBooks();
-  //   } else {
-  //     setLoading(false);
-  //   }
-  // }, [favoriteBookIds]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    console.log(favoriteBookIds);
     const fetchBooks = async () => {
       try {
         const bookDetailsPromises = favoriteBookIds.map((bookId) =>
@@ -43,29 +20,49 @@ const FavoriteBooks = () => {
         const books = booksResponses.map((response) => response.data);
         setFavoriteBooks(books);
       } catch (error) {
-        console.error('Error fetching favorite books', error);
+        console.error("Error fetching favorite books", error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (favoriteBookIds.length > 0) {
+    if (favoriteBookIds?.length > 0) {
       setLoading(true);
       fetchBooks();
     } else {
       setLoading(false);
       setFavoriteBooks([]);
     }
-
-    prevFavoriteBookIdsRef.current = favoriteBookIds;
   }, [favoriteBookIds]);
-
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!favoriteBookIds || favoriteBookIds.length === 0) {
+  if (!favoriteBookIds || favoriteBookIds?.length === 0) {
+    return (
+      <div className="text-center">
+        <h2>Favorite Books</h2>
+        <p>No favorite books found.</p>
+      </div>
+    );
+  }
+  //
+  const toggleFavorite = async (bookId) => {
+    try {
+      setFavoriteBooks(favoriteBooks.filter((book) => book._id !== bookId));
+      await axios.post(`/books/removeFavoriteBook/${user._id}/${bookId}`);
+      dispatch(removeFavBook(bookId));
+    } catch (error) {
+      console.error("Error removing favorite book", error);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!favoriteBookIds?.length) {
     return (
       <div className="text-center">
         <h2>Favorite Books</h2>
@@ -75,7 +72,7 @@ const FavoriteBooks = () => {
   }
 
   return (
-    <div className="container  mt-2 px-4">
+    <div className="container  mt-2 px-4 ">
       <h1 className="text-2xl font-bold mb-4 text-center text-primary">
         My Favorite Books
       </h1>
@@ -83,7 +80,7 @@ const FavoriteBooks = () => {
         {favoriteBookIds.map((book) => (
           <div
             key={book._id}
-            className="w-[50%] md:w-full border border-gray-300 rounded-md pb-4 shadow-lg mx-auto "
+            className="w-[50%] md:w-full border border-gray-300 rounded-md pb-4 shadow-lg mx-auto relative"
           >
             {book.cover && (
               <img
@@ -93,6 +90,12 @@ const FavoriteBooks = () => {
               />
             )}
             <h2 className="text-center font-bold text-primary">{book.title}</h2>
+            <div className="absolute top-1 right-3">
+              <FaHeart
+                className="text-2xl cursor-pointer text-red-500"
+                onClick={() => toggleFavorite(book._id)}
+              />
+            </div>
           </div>
         ))}
       </div>

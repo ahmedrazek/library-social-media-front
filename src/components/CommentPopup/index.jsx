@@ -4,7 +4,6 @@ import axios from "axios";
 import AddComment from "../AddComment";
 import Comment from "../Comment";
 import { useEffect } from "react";
-
 export default function CommentPopup({
   setShowComments,
   post,
@@ -22,7 +21,7 @@ export default function CommentPopup({
   return (
     <div className="absolute inset-0 min-h-full  ">
       <div className="fixed top-0 right-0 left-0 flex justify-center items-center h-full bg-gray-200 bg-opacity-50">
-        <div className="bg-white rounded-lg h-4/6 w-10/12 md:w-4/12 flex flex-col ">
+        <div className="bg-white rounded-lg h-4/6 w-12/12 md:w-4/12 flex flex-col ">
           <div className="flex justify-between border-b items-center px-8 py-4">
             <h1 className=" text-2xl text-primary ">Comments</h1>
             <button onClick={() => setShowComments(false)}>
@@ -40,7 +39,7 @@ export default function CommentPopup({
               </svg>
             </button>
           </div>
-          <div className=" overflow-y-scroll h-5/6 border-b">
+          <div className="overflow-y-scroll h-5/6 border-b ">
             {post.comments &&
               post.comments.map((comment) => (
                 <Comment

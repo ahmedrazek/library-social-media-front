@@ -91,7 +91,7 @@ const CreatePost = ({ updatePosts }) => {
         <div className="w-14 h-14 rounded-full bg-green-600 overflow-hidden m-2 border-2 border-zinc-900">
           {user?.photo ? (
             <img
-              src={`https://library-social-media-one.vercel.app${user.photo}`}
+              src={`http://localhost:9000${user.photo}`}
               className="object-cover w-full h-full"
               alt="Profile"
             />

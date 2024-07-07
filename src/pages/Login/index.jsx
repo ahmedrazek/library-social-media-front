@@ -2,7 +2,7 @@ import { useState } from "react";
 import image from "../../assets/loginImage.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/userSlice";
 import { Navigate, Link } from "react-router-dom";
 import { GoogleAuth } from "../../components/GoogleAuth";
@@ -13,6 +13,7 @@ export default function Login() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const {
     register,
     handleSubmit,
@@ -42,6 +43,7 @@ export default function Login() {
     }
   };
   if (redirect) return <Navigate to={"/user/timeline"} />;
+  if (user) return <Navigate to={"/user/timeline"} />;
   return (
     <div className="relative h-screen w-full">
       <div className="absolute hidden md:block lg:block bg-primary w-1/2 -z-10 h-full"></div>
