@@ -41,7 +41,7 @@ const userSlice = createSlice({
     },
     removeSavedPost: (state, action) => {
       state.user.savedPosts = state.user.savedPosts.filter(
-        (post) => post !== action.payload
+        (post) => post._id !== action.payload
       );
     },
     addFavBook: (state, action) => {

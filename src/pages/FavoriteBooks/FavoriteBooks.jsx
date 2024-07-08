@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { FaHeart } from "react-icons/fa";
 import { removeFavBook } from "../../store/userSlice";
+import { Link } from "react-router-dom";
 
 const FavoriteBooks = () => {
   const user = useSelector((state) => state.user.user);
@@ -78,9 +79,10 @@ const FavoriteBooks = () => {
       </h1>
       <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-10  mx-20">
         {favoriteBookIds.map((book) => (
-          <div
+          <Link
             key={book._id}
             className="w-[50%] md:w-full border border-gray-300 rounded-md pb-4 shadow-lg mx-auto relative"
+            to={`/user/details/${book._id}`}
           >
             {book.cover && (
               <img
@@ -96,7 +98,7 @@ const FavoriteBooks = () => {
                 onClick={() => toggleFavorite(book._id)}
               />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

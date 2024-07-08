@@ -31,7 +31,7 @@ const AddComment = ({ addComment, setComment, comment, user }) => {
         onClick={addComment}
         className="bg-primary px-4 py-2 rounded text-white text-sm hidden md:block"
       >
-        add comment
+        Comment
       </button>
       <button
         onClick={addComment}

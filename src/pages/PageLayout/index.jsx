@@ -1,11 +1,16 @@
 import Navbar from "../../components/Navbar";
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserProfile } from "../../store/userSlice";
 
 const PageLayout = () => {
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
+  const dispatch = useDispatch();
+  if (!user && status === "idle") {
+    dispatch(fetchUserProfile());
+  }
   if (!user && status == "failed") {
     return <Navigate to="/login" />;
   }

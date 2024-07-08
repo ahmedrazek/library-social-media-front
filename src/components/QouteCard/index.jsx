@@ -231,14 +231,14 @@ const QuoteCard = ({ postId, removePost }) => {
           </div>
         </div>
         {/* POST DESC  */}
-        <h1 className="text-center italic text-xl font-semibold">
-          Quoted Book : <q>{post.book}</q>
-        </h1>
 
         {/* <h1 className="text-center italic text-xl font-semibold">Quote : </h1> */}
-        <div className="px-2 text-center italic text-lg font-semibold">
+        <div className="px-2 text-center italic text-md font-semibold">
           <q>{post.description}</q>
         </div>
+        <h1 className="text-center italic text-lg font-semibold">
+          Quoted Book : <q>{post.book}</q>
+        </h1>
         {/* POST GALLERY  */}
         {post.imageURL && (
           <div className="h-[28rem]  w-full">
