@@ -9,7 +9,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchResultsList from "../SearchResultsList/SearchResultsList";
 import { io } from "socket.io-client";
 import { Avatar } from "@chakra-ui/react";
-import logo from '../../assets/logo.jpg'
+import logo from "../../assets/logo.jpg";
 export default function Navbar() {
   const [showUser, setShowUser] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -33,40 +33,37 @@ export default function Navbar() {
       }
     });
 
-    socket.on("newNotification",
-      (notification) => {
-     console.log("New notification received:", notification);
-     setNotifications((prevNotifications) => [
-       notification,
-       ...prevNotifications,
-     ]);
-     setNewNotification(true);
-   });
+    socket.on("newNotification", (notification) => {
+      console.log("New notification received:", notification);
+      setNotifications((prevNotifications) => [
+        notification,
+        ...prevNotifications,
+      ]);
+      setNewNotification(true);
+    });
     return () => {
-
       socket.disconnect();
       console.log("disconnected from socket server");
     };
   }, [user]); // Ensure user is a dependency if it changes
-  useEffect(()=>{
-
-  const fetchNotifications = async () => {
-    if (user && user._id) {
-      try {
-        const response = await axios.get(
-          `http://localhost:9000/notifications/${user._id}`
-        );
-        setNotifications(response.data);
-        if (response.data.length > 0) {
-          setNewNotification(true);
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      if (user && user._id) {
+        try {
+          const response = await axios.get(
+            `http://localhost:9000/notifications/${user._id}`
+          );
+          setNotifications(response.data);
+          if (response.data.length > 0) {
+            setNewNotification(true);
+          }
+        } catch (error) {
+          console.error("error fetching notifications:", error);
         }
-      } catch (error) {
-        console.error("error fetching notifications:", error);
       }
-    }
-  };
-  fetchNotifications()
-  },[user,newNotification])
+    };
+    fetchNotifications();
+  }, [user, newNotification]);
 
   const handleNotificationClick = (id) => {
     setOpenedNotifications((prev) => ({ ...prev, [id]: true }));
@@ -91,7 +88,6 @@ export default function Navbar() {
       dispatch(logout());
       setRedirect("/login");
       localStorage.clear();
-
     } catch (error) {
       console.log(error);
     }
@@ -115,7 +111,7 @@ export default function Navbar() {
       };
       markNotificationsAsRead();
     }
-  }, [showNotifications, user,newNotification]);
+  }, [showNotifications, user, newNotification]);
 
   if (redirect) {
     return <Navigate to="/login" />;
@@ -125,11 +121,11 @@ export default function Navbar() {
     <>
       <nav className="bg-white border-gray-200 border-b-2 shadow-sm z-50 fixed top-0 start-0 w-full">
         <div className="flex items-center flex-wrap justify-between mx-auto p-4">
-        <Link to="/">
+          <Link to="/">
             <span className="text-xl font-semibold whitespace-nowrap dark:text-white">
-             <img src={logo}  className="w-60 h-12"/>
+              <img src={logo} className="w-60 h-12" />
             </span>
-        </Link>
+          </Link>
           <div className="flex items-center lg:order-2 space-x-3 rtl:space-x-reverse">
             <button
               type="button"
@@ -138,9 +134,7 @@ export default function Navbar() {
             >
               <FaBell className="text-2xl text-primary" />
               {newNotification && (
-                <span className="absolute w-[0.8rem] h-[0.8rem] top-0 right-0 inline-flex items-center justify-center  bg-red-500 text-white rounded-full text-xs">
-        
-                </span>
+                <span className="absolute w-[0.8rem] h-[0.8rem] top-0 right-0 inline-flex items-center justify-center  bg-red-500 text-white rounded-full text-xs"></span>
               )}
               <span className="sr-only">View notifications</span>
             </button>
@@ -150,16 +144,16 @@ export default function Navbar() {
               id="user-menu-button"
               onClick={() => setShowUser(!showUser)}
             >
-          <div className="w-10 h-10 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
-            {user?.photo ? (
-              <img
-                src={`http://localhost:9000${user?.photo}`}
-                className="object-cover w-full h-full"
-              />
-            ) : (
-              <Avatar bg="teal.500" size="full" />
-            )}
-          </div>
+              <div className="w-10 h-10 rounded-full bg-green-600 overflow-hidden  border-2 border-zinc-900">
+                {user?.photo ? (
+                  <img
+                    src={`http://localhost:9000${user?.photo}`}
+                    className="object-cover w-full h-full"
+                  />
+                ) : (
+                  <Avatar bg="teal.500" size="full" />
+                )}
+              </div>
               <span className="sr-only">Open user menu</span>
             </button>
 
@@ -243,7 +237,7 @@ export default function Navbar() {
               <li>
                 <Link
                   to="/"
-                  className="block lg:hidden py-2 px-3 text-white bg-blue-700 rounded lg:bg-transparent lg:text-blue-700 lg:p-0 lg:dark:text-blue-500"
+                  className="block lg:hidden py-2 px-3 text-black  rounded lg:bg-transparent lg:text-blue-700 lg:p-0 lg:dark:text-blue-500"
                   aria-current="page"
                 >
                   Home
@@ -359,7 +353,6 @@ export default function Navbar() {
       </nav>
     </>
   );
-
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -376,7 +369,6 @@ export default function Navbar() {
 // import { io } from "socket.io-client";
 // import { Avatar } from "@chakra-ui/react";
 // import logo from '../../assets/logo.jpg'
-
 
 // export default function Navbar() {
 //   const [showUser, setShowUser] = useState(false);
@@ -509,7 +501,7 @@ export default function Navbar() {
 //                 </li>
 //               </ul>
 //             </div>
-// {/* 
+// {/*
 //         <div className="flex items-center justify-between flex-wrap mx-auto p-4">
 //           <div className="flex gap-10">
 //             <Link to="/">

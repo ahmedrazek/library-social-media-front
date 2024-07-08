@@ -356,13 +356,6 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
       calculateDate(res.data.createdAt);
       setLike(res.data.likes.some((like) => like._id === user._id));
       setLikesNum(res.data.likes.length);
-
-      const savedState = localStorage.getItem(`saved-${postId}`);
-      if (savedState !== null) {
-        setSaved(JSON.parse(savedState));
-      } else {
-        setSaved(res.data.savedPosts?.includes(postId));
-      }
     } catch (error) {
       console.error("Error fetching post data:", error);
     }
@@ -410,7 +403,7 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
         const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         console.log("Post saved:", res.data);
-        dispatch(addSavePost(postId));
+        dispatch(addSavePost(post));
       }
     } catch (error) {
       console.error("Error saving or unsaving the post:", error);
@@ -419,6 +412,11 @@ const PostCard = ({ postId, removePost, setImageUrl, setShowPhoto }) => {
 
   useEffect(() => {
     getPost();
+    if (user?.savedPosts.find((post) => post._id == postId)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
   }, []);
 
   if (!post) return null;

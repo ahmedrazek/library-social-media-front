@@ -45,12 +45,11 @@ const ReviewCard = ({ postId, removePost }) => {
       calculateDate(res.data.createdAt);
       setLike(res.data.likes.some((like) => like._id === user._id));
       setLikesNum(res.data.likes.length);
-
-      const savedState = localStorage.getItem(`saved-${postId}`);
-      if (savedState !== null) {
-        setSaved(JSON.parse(savedState));
+      console.log(user.savedPosts.find((post) => post._id == postId));
+      if (user.savedPosts.find((post) => post._id == postId)) {
+        setSaved(true);
       } else {
-        setSaved(res.data.savedPosts?.includes(postId));
+        setSaved(false);
       }
     } catch (error) {
       console.error(error);
@@ -99,7 +98,7 @@ const ReviewCard = ({ postId, removePost }) => {
         const res = await axios.post(`/posts/save/${user._id}/${postId}`);
         localStorage.setItem(`saved-${postId}`, JSON.stringify(true));
         console.log("Post saved:", res.data);
-        dispatch(addSavePost(postId));
+        dispatch(addSavePost(post));
       }
     } catch (error) {
       console.error("Error saving or unsaving the post", error);

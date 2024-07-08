@@ -205,57 +205,21 @@ import ReviewCard from "../../components/ReviewCard"; // Assuming you have a Rev
 
 const SavedPosts = () => {
   const user = useSelector((state) => state.user.user);
-  const savePosts = user?.savedPosts || [];
-  const saveReviews = user?.savedReviews || [];
-  const saveQuotes = user?.savedQuotes || [];
-
   const [savedPosts, setSavedPosts] = useState([]);
-  const [savedReviews, setSavedReviews] = useState([]);
-  const [savedQuotes, setSavedQuotes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const getPosts = () => {
+    setLoading(true);
 
+    setSavedPosts(user?.savedPosts);
+    console.log(
+      savedPosts.map((post) => console.log(post._id)),
+      savedPosts
+    );
+    setLoading(false);
+  };
   useEffect(() => {
-    const fetchSavedItems = async () => {
-      try {
-        // Fetch saved posts
-        const postIds = savePosts.map((post) => post._id || post);
-        const postDetailsPromises = postIds.map((postId) =>
-          axios.get(`/posts/single/${postId}`)
-        );
-        const postsResponses = await Promise.all(postDetailsPromises);
-        const posts = postsResponses.map((response) => response.data);
-        setSavedPosts(posts);
-
-        // Fetch saved reviews
-        const reviewIds = saveReviews.map((review) => review._id || review);
-        const reviewDetailsPromises = reviewIds.map((reviewId) =>
-          axios.get(`/reviews/single/${reviewId}`)
-        );
-        const reviewsResponses = await Promise.all(reviewDetailsPromises);
-        const reviews = reviewsResponses.map((response) => response.data);
-        setSavedReviews(reviews);
-
-        // Fetch saved quotes
-        const quoteIds = saveQuotes.map((quote) => quote._id || quote);
-        const quoteDetailsPromises = quoteIds.map((quoteId) =>
-          axios.get(`/quotes/single/${quoteId}`)
-        );
-        const quotesResponses = await Promise.all(quoteDetailsPromises);
-        const quotes = quotesResponses.map((response) => response.data);
-        setSavedQuotes(quotes);
-      } catch (error) {
-        console.error("Error fetching saved items:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (savePosts.length > 0) {
-      fetchSavedItems();
-    } else {
-      setLoading(false);
-    }
-  }, [savePosts, saveReviews, saveQuotes]);
+    getPosts();
+  }, []);
 
   const removePost = async (postId) => {
     try {
@@ -267,31 +231,11 @@ const SavedPosts = () => {
     }
   };
 
-  const removeReview = async (reviewId) => {
-    try {
-      const res = await axios.delete(`/reviews/${reviewId}`);
-      console.log("Review removed:", res.data);
-      setSavedReviews(savedReviews.filter((review) => review._id !== reviewId));
-    } catch (error) {
-      console.error("Error removing review:", error);
-    }
-  };
-
-  const removeQuote = async (quoteId) => {
-    try {
-      const res = await axios.delete(`/quotes/${quoteId}`);
-      console.log("Quote removed:", res.data);
-      setSavedQuotes(savedQuotes.filter((quote) => quote._id !== quoteId));
-    } catch (error) {
-      console.error("Error removing quote:", error);
-    }
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!savePosts.length && !saveReviews.length && !saveQuotes.length) {
+  if (!savedPosts.length) {
     return (
       <div className="text-center">
         <h2>Saved Items</h2>

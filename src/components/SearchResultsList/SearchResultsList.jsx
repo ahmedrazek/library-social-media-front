@@ -79,7 +79,7 @@ const SearchResultsList = ({ searchResults, setSearchResults }) => {
             <>
               {result.photo ? (
                 <img
-                  src={`${result.photo}`}
+                  src={`http://localhost:9000${result.photo}`}
                   alt="Profile"
                   className="h-10 w-10 rounded-full mr-2"
                 />

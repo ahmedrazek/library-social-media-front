@@ -61,7 +61,8 @@ const Profile = () => {
         style={{
           backgroundImage: `url(http://localhost:9000${cover})`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "100% 100%",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="flex flex-col items-center gap-4 absolute -bottom-28">
@@ -90,13 +91,13 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <div className="text-center mt-20 border-b-2 pb-10">
+      <div className="text-center mt-32 lg:mt-20 border-b-2 pb-10">
         <q className="italic font-semibold text-xl">{bio}</q>
       </div>
-      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-primary border-b pb-4 border-gray-400 w-[30rem]">
+      <div className="mx-auto flex justify-center text-xl divide-x divide-gray-500 mt-10 text-primary border-b pb-4 border-gray-400 w-[20rem] lg:w-[30rem]">
         <NavLink
           className={({ isActive }) =>
-            isActive ? "px-12 font-semibold text-red-500" : "px-12"
+            isActive ? "ml-8 px-8 font-semibold text-red-500" : "ml-8 px-8"
           }
           to={"posts"}
         >
@@ -104,7 +105,7 @@ const Profile = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "px-12 text-red-500 flex gap-2" : "px-12 flex gap-2"
+            isActive ? "px-8 text-red-500 flex gap-2" : "px-8 flex gap-2"
           }
           to={"following"}
         >
@@ -115,7 +116,7 @@ const Profile = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "px-12 text-red-500 flex gap-2" : "px-12 flex gap-2"
+            isActive ? "px-8 text-red-500 flex gap-2" : "px-8 flex gap-2"
           }
           to={"followers"}
         >

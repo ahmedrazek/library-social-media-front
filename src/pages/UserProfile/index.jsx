@@ -96,14 +96,19 @@ export const UserProfile = () => {
       <div
         className="h-80 mx-2 lg:mx-20  rounded-3xl bg-black flex items-end justify-between px-8 py-4 text-white relative"
         style={{
-          backgroundImage: `url(${curUser?.cover ? curUser.cover : ""})`,
+          backgroundImage: `url(http://localhost:9000${
+            curUser?.cover ? curUser.cover : ""
+          })`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="flex flex-col items-center gap-4 absolute -bottom-28">
           <div className="h-40 w-40 rounded-full bg-green-600">
             {curUser.photo ? (
               <img
-                src={`${curUser.photo}`}
+                src={`http://localhost:9000${curUser.photo}`}
                 alt="Profile Avatar"
                 className="h-40 w-40 rounded-full object-cover"
               />

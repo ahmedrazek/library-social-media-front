@@ -78,12 +78,12 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
         <select
           value={searchType}
           onChange={handleSearchTypeChange}
-          className="bg-secondary text-green-700 border-none outline-none rounded-l-md"
+          className="bg-secondary text-green-700 border-none  outline-none rounded-l-full"
         >
           <option value="users">Users</option>
           <option value="books">Books</option>
         </select>
-        <div className="input-wrapper bg-secondary rounded-r-md h-[2.5rem] px-6 text-center my-auto flex items-center">
+        <div className="input-wrapper bg-secondary rounded-r-full h-[2.5rem] px-6 text-center my-auto flex items-center">
           <FaSearch id="search-icon" className="text-primary" />
           <input
             type="text"
